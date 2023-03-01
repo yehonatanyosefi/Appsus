@@ -1,8 +1,9 @@
 export default {
      props: ['note'],
      template: `
+     me just a text
      <p>
-          me just a text
+           {{note.info.txt}}
      </p>
 `,
      data() {
