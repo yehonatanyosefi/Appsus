@@ -1,7 +1,13 @@
 'use strict'
-export const i18 = {
+export const i18Service = {
     formatCurrency,
     currMultiplier,
+    doTrans,
+    formatDateFull,
+    formatTime,
+    formatDate,
+
+
 }
 
 var gTrans = {
@@ -65,11 +71,31 @@ function currMultiplier(currency, num) {
     return num
 }
 
-function formatDate(time) {
+function formatDateFull(time) {
 
     const options = {
         year: 'numeric', month: 'short', day: 'numeric',
         hour: 'numeric', minute: 'numeric',
+        hour12: true,
+    }
+
+    return new Intl.DateTimeFormat(gCurrLang, options).format(time)
+}
+
+function formatTime(time) {
+
+    const options = {
+        hour: 'numeric', minute: 'numeric',
+        hour12: true,
+    }
+
+    return new Intl.DateTimeFormat(gCurrLang, options).format(time)
+}
+
+function formatDate(time) {
+
+    const options = {
+        year: 'numeric', month: 'short', day: 'numeric',
         hour12: true,
     }
 
