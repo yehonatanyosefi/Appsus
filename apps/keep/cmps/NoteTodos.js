@@ -3,13 +3,13 @@ export default {
      template: `
           <ul class="clean-list">
                <li v-for="todo,idx in note.info.todos" key="idx" class="flex">
-                         <button @click="toggleTodoCheck(idx)">
+                         <button @click="toggleTodoCheck(idx)"  title="Check Todo">
                               <i class="fa-regular fa-square-check" v-if="todo.doneAt"></i>
                               <i class="fa-regular fa-square" v-else></i>
                          </button>
                          <input v-model="todo.txt" @input="updateNote" placeholder="text"
                          class="{'striked':todo.doneAt}">
-          <button @click="deleteTodo(idx)" title = "Delete Todo" >
+          <button @click="deleteTodo(idx)" title="Delete Todo">
                <i class="fa-solid fa-xmark"></i>
                          </button >
                </li >
@@ -19,7 +19,7 @@ export default {
      </button>
                </li >
           </ul >
-     `, //TODO: ask does each todo need id?
+     `,
      data() {
           return {
           }

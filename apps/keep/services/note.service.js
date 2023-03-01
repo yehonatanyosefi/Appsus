@@ -133,7 +133,7 @@ He guides them to the finish line, fair and square.` }
                },
                {
                     id: 'n103', createdAt: 1112552, type: 'NoteTodos', isPinned: false, style: { backgroundColor: '#fffff1' }, info: {
-                         title: 'Remember to laugh', todos: [{ txt: 'Call Islam', doneAt: null },
+                         title: 'TODO: Laugh', todos: [{ txt: 'Call Islam', doneAt: null },
                          { txt: 'Say Aloo', doneAt: 187111111 }]
                     }
                },

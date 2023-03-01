@@ -3,7 +3,11 @@ import NotePreview from "./NotePreview.js"
 export default {
      props: [],
      template: `
-          <button @click="addNote">+</button>
+          <div class="flex justify-center align-center add-note">
+               <button @click="addNote">
+                    <i class="fa-solid fa-circle-plus add-note"></i>
+               </button>
+          </div>
           <div class="notes-container">
                <div class="main-notes">
                     <template v-for="note,idx in notes" :key="idx">
@@ -39,6 +43,13 @@ export default {
           }
      },
      methods: {
+          addTodo(noteId) {
+               noteService.addTodo(noteId)
+                    .then(newNote => {
+                         const noteIdx = this.notes.findIndex(note => note.id === noteId)
+                         this.notes[noteIdx] = newNote
+                    })
+          },
           updateNote(updatedNote) {
                // console.log(`updatedNote:`, updatedNote)
                // const currNote = this.notes.find(note => note.id === updatedNote.id)
@@ -64,13 +75,6 @@ export default {
           },
           deleteTodo(noteId, idx) {
                noteService.deleteTodo(noteId, idx)
-                    .then(newNote => {
-                         const noteIdx = this.notes.findIndex(note => note.id === noteId)
-                         this.notes[noteIdx] = newNote
-                    })
-          },
-          addTodo(noteId) {
-               noteService.addTodo(noteId)
                     .then(newNote => {
                          const noteIdx = this.notes.findIndex(note => note.id === noteId)
                          this.notes[noteIdx] = newNote

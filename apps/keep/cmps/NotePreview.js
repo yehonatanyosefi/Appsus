@@ -12,7 +12,7 @@ export default {
           @mouseleave="isHover = false">
           <div class="flex justify-between align-center">
                <input v-model="note.info.title" @input="updateInternal" class="note-title" placeholder="Title">
-               <button @click="togglePin">
+               <button @click="togglePin" title="Toggle Pinned Items">
                     <i class="fa-solid fa-thumbtack"></i>
                </button>
           </div>
@@ -22,9 +22,7 @@ export default {
                @addTodo="addTodo"
                @toggleTodoCheck="toggleTodoCheck" />
           <div class="button-container" :class="isHidden">
-               <button @click="deleteNote" title="Delete Note" class="note-btn">
-                    <i class="fa-solid fa-trash note-btn"></i>
-               </button>
+               
                <div class="color-wrapper">
                     <input type="color" v-model="note.style.backgroundColor" @input="updateInternal"  title="Change Background Color">
                </div>
@@ -43,6 +41,9 @@ export default {
                </button>
                <button @click="duplicateNote" title="Duplicate Note">
                     <i class="fa-regular fa-clone"></i>
+               </button>
+               <button @click="deleteNote" title="Delete Note" class="note-btn">
+                    <i class="fa-solid fa-trash note-btn"></i>
                </button>
           </div>
      </div>
