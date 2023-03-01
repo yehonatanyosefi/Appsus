@@ -1,4 +1,6 @@
 import MailList from "../cmps/MailList.js"
+import { mailService } from "../services/mail.service.js"
+
 export default {
      props: [],
      template: `
@@ -12,10 +14,13 @@ export default {
                <button class="user">User</button>
           </div>
      </header>
-     <MailList />
+     <MailList 
+     :mails="mails"
+     v-if="mails"/>
      `,
      data() {
           return {
+               mails:null,
           }
      },
      methods: {
@@ -25,6 +30,8 @@ export default {
 
      },
      created() {
+          mailService.query()
+            .then(mails => this.mails = mails)
      },
      components: {
           MailList,

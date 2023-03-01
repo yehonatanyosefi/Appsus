@@ -1,7 +1,7 @@
 export default {
      props: [],
      template: `
-
+     {{mail}}
 `,
      data() {
           return {
