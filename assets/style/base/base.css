@@ -48,10 +48,11 @@ button {
 	cursor: pointer;
 	background-color: inherit;
 	border: none;
-	font: inherit
+	font: inherit;
 	color: var(--clr5);
 	transition: filter 250ms;
 }
+
 nav a:hover,
 button:hover {
 	filter: drop-shadow(0.5px 0.5px 1px #000);
