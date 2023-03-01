@@ -4,10 +4,11 @@
 	border: 1px solid var(--clr3);
 	transition: box-shadow 250ms opacity 100ms;
 	break-inside: avoid;
+	margin-block-end: 2rem;
 }
 
 .note-card:hover {
-	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
 }
 
 .note-title {

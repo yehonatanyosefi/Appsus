@@ -6,7 +6,7 @@ export default {
           <button @click="addNote">+</button>
           <div class="main-notes">
           <template v-for="note,idx in notes" :key="idx" class="main-notes">
-               <NotePreview :note="note" @updateNote="updateNote" @deleteNote="deleteNote" />
+               <NotePreview :note="note" @updateNote="updateNote" @deleteNote="deleteNote" @duplicateNote="duplicateNote" />
           </template>
      </div>
      `,
@@ -16,7 +16,7 @@ export default {
           }
      },
      methods: {
-          updateNote(updatedNote) { //TODO: ask if i want to send copy up instead
+          updateNote(updatedNote) {
                // console.log(`updatedNote:`, updatedNote)
                // const currNote = this.notes.find(note => note.id === updatedNote.id)
                // console.log(`currNote:`, currNote)
@@ -30,6 +30,10 @@ export default {
                          const idx = this.notes.findIndex(note => note.id === noteId)
                          this.notes.splice(idx, 1)
                     })
+          },
+          duplicateNote(noteId) {
+               noteService.duplicateNote(noteId)
+                    .then(newNotes => this.notes = newNotes)
           },
           addNote() {
                noteService.addNote()

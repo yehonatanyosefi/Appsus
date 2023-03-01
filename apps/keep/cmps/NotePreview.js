@@ -19,10 +19,11 @@ export default {
                <input 
                     type="file"
                     id="upload"
-                    name="image"
-                    @change="upload"
+                    :name="note.id"
+                    @change="upload($event, note.id)"
                     hidden />
                <label for="upload" class="upload-btn"><i class="fa-solid fa-file-arrow-up"></i></label>
+               <button @click="duplicateNote">duplicate</button>
           </div>
      </div>
      `,
@@ -46,6 +47,9 @@ export default {
           },
           updateNote(updatedNote) {
                this.$emit('updateNote', updatedNote)
+          },
+          duplicateNote() {
+               this.$emit('duplicateNote', this.note.id)
           },
           deleteNote() {
                this.$emit('deleteNote', this.note.id)

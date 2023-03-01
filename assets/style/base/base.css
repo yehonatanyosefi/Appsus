@@ -58,8 +58,18 @@ input[type='color'] {
 }
 
 textarea {
-	all: unset;
-	overflow: hidden;
+	font: inherit;
+	color: inherit;
+	background-color: inherit;
+	border: none;
+	overflow: auto;
+	outline: none;
+
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+
+	resize: none;
 }
 
 .hide {
