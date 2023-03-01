@@ -3,6 +3,7 @@ export default {
      props: [],
      template: `
           <noteList />
+          me a conflict
      `,
      data() {
           return {
