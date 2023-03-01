@@ -22,6 +22,7 @@
 @import 'apps/mail/MailIndex.css';
 @import 'apps/mail/MailList.css';
 @import 'apps/mail/MailPreview.css';
+@import 'apps/mail/ComposeMail.css';
 
 /* note */
 @import 'apps/note/NoteIndex.css';
