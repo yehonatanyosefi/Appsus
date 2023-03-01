@@ -3,13 +3,13 @@ import { i18Service } from "../../../services/i18n.service.js"
 export default {
      props: ['mail'],
      template: `
-     <section className="mail-preview ">
-          <input type="checkbox" />
-          <i class="fa-regular fa-star"></i>
-          <h2>{{formatUsername}}</h2>
-          <p>{{mail.body}}</p>
-          <!-- <p>{{mail.sentAt}}</p> -->
-          <p>{{formatTime}}</p>
+     <section class="mail-preview" :class="formatReadMail">
+          <!-- <div :class="formatReadMail"> -->
+               <input type="checkbox" />
+               <i class="fa-regular fa-star"></i>
+               <p>{{formatUsername}}</p>
+               <p>{{mail.body}}</p>
+               <p>{{formatTime}}</p>
      </section>
      <!-- <pre>{{mail}}</pre> -->
 `,
@@ -24,12 +24,13 @@ export default {
      computed: {
           formatUsername(){
                const username = this.mail.from.split("@")[0]
-               console.log('username',username)
-               console.log('this.username',this.username)
                return this.username=username
           },
           formatTime(){
                return i18Service.formatTime(this.mail.sentAt)
+          },
+          formatReadMail(){
+               return {'read': this.mail.isRead }
           }
      },
      created() {

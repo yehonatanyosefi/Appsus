@@ -1,7 +1,9 @@
 export default {
-     props: [],
      template: `
-     {{mail}}
+     <section className="mail-details">
+          {{mail}}
+
+     </section>
 `,
      data() {
           return {

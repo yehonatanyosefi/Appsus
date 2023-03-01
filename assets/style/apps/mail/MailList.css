@@ -1,0 +1,8 @@
+
+.mail-list li{
+    box-shadow: inset 0 -1px 0 0 rgb(100 121 143 / 12%);
+}
+
+.mail-list li:first-child{
+    box-shadow: inset 0 -1px 0 0 rgb(100 121 143 / 12%) , 0 -1px 0 0 rgb(100 121 143 / 12%);
+}
