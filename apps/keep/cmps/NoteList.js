@@ -3,9 +3,12 @@ import NotePreview from "./NotePreview.js"
 export default {
      props: [],
      template: `
-          <div v-for="note,idx in notes" :key="idx" class="main-notes">
-               <NotePreview :note="note" @updateTxt="updateTxt"/>
-          </div>
+     <div class="main-notes">
+          <button @click="addNote">+</button>
+          <template v-for="note,idx in notes" :key="idx" class="main-notes">
+               <NotePreview :note="note" @updateNote="updateNote" @deleteNote="deleteNote" />
+          </template>
+     </div>
      `,
      data() {
           return {
@@ -13,13 +16,24 @@ export default {
           }
      },
      methods: {
-          updateTxt(updatedNote) { //TODO: ask if i want to send copy instead
+          updateNote(updatedNote) { //TODO: ask if i want to send copy up instead
                // console.log(`updatedNote:`, updatedNote)
                // const currNote = this.notes.find(note => note.id === updatedNote.id)
                // console.log(`currNote:`, currNote)
                // if (currNote === updatedNote) return
                noteService.save(updatedNote) //TODO: refactor with event bus
-                    .then(res => console.log(`res:`, res))
+               // .then(res => console.log(`res:`, res))
+          },
+          deleteNote(noteId) {
+               noteService.remove(noteId)
+                    .then(res => {
+                         const idx = this.notes.findIndex(note => note.id === noteId)
+                         this.notes.splice(idx, 1)
+                    })
+          },
+          addNote() {
+               noteService.addNote()
+                    .then(newNote => this.notes.push(newNote))
           },
      },
      computed: {

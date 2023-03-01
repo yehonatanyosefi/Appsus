@@ -9,6 +9,7 @@ export const noteService = {
      get,
      remove,
      save,
+     addNote,
 }
 
 function query(filterBy = {}) {
@@ -42,13 +43,18 @@ function save(note) {
      }
 }
 
+function addNote() {
+     const newNote = { id: null, createdAt: Date.now(), type: 'NoteTxt', isPinned: true, style: { backgroundColor: '#00d' }, info: { title: '', txt: 'text' } }
+     return save(newNote)
+}
+
 function _createDemo() {
      let notes = utilService.loadFromStorage(NOTES_KEY)
      if (!notes || !notes.length) {
           notes = [
-               { id: 'n101', createdAt: 1112222, type: 'NoteTxt', isPinned: true, style: { backgroundColor: '#00d' }, info: { txt: 'Fullstack Me Baby!' } },
-               { id: 'n102', type: 'NoteImg', isPinned: false, info: { url: 'https://m.media-amazon.com/images/M/MV5BNmQ0ODBhMjUtNDRhOC00MGQzLTk5MTAtZDliODg5NmU5MjZhXkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_FMjpg_UX1000_.jpg', title: 'Bobi and Me' }, style: { backgroundColor: '#00d' } },
-               { id: 'n103', type: 'NoteTodos', isPinned: false, info: { title: 'Get my stuff together', todos: [{ txt: 'Driving license', doneAt: null }, { txt: 'Coding power', doneAt: 187111111 }] } }
+               { id: 'n101', createdAt: 1112222, type: 'NoteTxt', isPinned: true, style: { backgroundColor: '#ff2' }, info: { title: 'My lovely Text', txt: 'Fullstack Me Baby!' } },
+               { id: 'n102', createdAt: 1112434, type: 'NoteImg', isPinned: false, style: { backgroundColor: '#4ff' }, info: { title: 'Favorite Image', url: 'https://m.media-amazon.com/images/M/MV5BNmQ0ODBhMjUtNDRhOC00MGQzLTk5MTAtZDliODg5NmU5MjZhXkEyXkFqcGdeQXVyNDUyOTg3Njg@._V1_FMjpg_UX1000_.jpg', title: 'Bobi and Me' } },
+               { id: 'n103', createdAt: 1112552, type: 'NoteTodos', isPinned: false, style: { backgroundColor: '#fff' }, info: { title: 'To do', todos: [{ txt: 'Driving license', doneAt: null }, { txt: 'Coding power', doneAt: 187111111 }] } }
           ]
           utilService.saveToStorage(NOTES_KEY, notes)
      }

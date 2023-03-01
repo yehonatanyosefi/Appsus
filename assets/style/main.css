@@ -13,8 +13,12 @@
 @import 'cmps/AppHeader.css';
 @import 'cmps/UserMsg.css';
 
+/* SWATCHES */
+@import 'swatches/vue-swatches.css';
+
 /* Apps */
 @import 'apps/mail/MailIndex.css';
 @import 'apps/mail/MailList.css';
 @import 'apps/note/NoteIndex.css';
+@import 'apps/note/NoteList.css';
 @import 'apps/note/NotePreview.css';
