@@ -1,3 +1,4 @@
+import MailList from "../cmps/MailList.js"
 export default {
      props: [],
      template: `
@@ -5,10 +6,10 @@ export default {
           <button class="toggle-menu"></button>
           <div className="logo"></div>
      </header>
+     <MailList />
      `,
      data() {
           return {
-
           }
      },
      methods: {
@@ -18,9 +19,8 @@ export default {
 
      },
      created() {
-
      },
      components: {
-
+          MailList,
      },
 }
