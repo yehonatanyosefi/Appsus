@@ -6,7 +6,7 @@ export default {
      props: ['note'],
      template: `
      <div class="note-card">
-          <component :is="note.type" :note="note" />
+          <component :is="note.type" :note="note" @updateTxt="updateTxt" />
      </div>
      `,
      data() {
@@ -15,7 +15,9 @@ export default {
           }
      },
      methods: {
-
+          updateTxt(updatedNote) {
+               this.$emit('updateTxt', updatedNote)
+          },
      },
      computed: {
 
