@@ -11,7 +11,8 @@ export default {
           @mouseover="isHover = true"
           @mouseleave="isHover = false">
           <div class="flex justify-between align-center">
-               <input v-model="note.info.title" @input="updateInternal" class="note-title" placeholder="Title">
+               <textarea v-model="note.info.title" @input="updateTitle" class="note-title"
+               placeholder="Title" ref="textAreaTitle"></textarea>
                <button @click="togglePin" title="Toggle Pinned Items">
                     <i class="fa-solid fa-thumbtack"></i>
                </button>
@@ -63,6 +64,10 @@ export default {
                     this.updateInternal()
                }, 100);
           },
+          updateTitle() { //TODO: if can chain, refactor
+               this.resizeTA()
+               this.updateInternal()
+          },
           updateInternal() {
                this.updateNote(this.note)
           },
@@ -90,6 +95,11 @@ export default {
           toggleTodoCheck(noteId, idx) {
                this.$emit('toggleTodoCheck', noteId, idx)
           },
+          resizeTA() {
+               let element = this.$refs.textAreaTitle
+               element.style.height = '20px'
+               element.style.height = element.scrollHeight + 10 + 'px'
+          },
      },
      watch: {
           bgColor() {
@@ -101,8 +111,8 @@ export default {
                return { 'hide': !this.isHover }
           },
      },
-     created() {
-
+     mounted() {
+          this.resizeTA()
      },
      components: {
           NoteTodos,

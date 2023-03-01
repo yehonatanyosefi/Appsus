@@ -21,7 +21,7 @@ export default {
                let element = this.$refs.textArea
                element.style.height = '20px'
                element.style.height = element.scrollHeight + 10 + 'px'
-          }
+          },
      },
      computed: {
 
