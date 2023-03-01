@@ -21,7 +21,8 @@ export default {
           <button @click="openModal" ><i class="fa-regular fa-pen-to-square" ></i> Compose</button>
           <ComposeMail 
           v-if="isOpen"
-          @closeCompose="closeModal"/>
+          @closeCompose="closeModal"
+          />
      </section>
 
      <MailList 
@@ -37,14 +38,14 @@ export default {
      },
      methods: {
           openModal(){
-                this.isOpen=true
+               this.isOpen=true
           },
           closeModal(){
                 this.isOpen=false
           }
      },
      computed: {
-
+        
      },
      created() {
           mailService.query()

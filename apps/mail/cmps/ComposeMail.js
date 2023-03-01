@@ -37,6 +37,11 @@ export default {
     components:{
         mailService,
         eventBus,
+    },
+    created(){
+        //   open(){
+        //        return {'open': this.isOpen}
+        //   }
     }
 }
     
