@@ -1,6 +1,4 @@
 .main-notes {
-	width: 100%;
-	column-width: 300px;
-	column-count: auto;
-	column-gap: 40px;
+	columns: auto 220px;
+	column-gap: 2rem;
 }

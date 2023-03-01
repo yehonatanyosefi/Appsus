@@ -46,6 +46,16 @@ button {
 	min-width: 48px;
 	min-height: 48px;
 	cursor: pointer;
+	background-color: inherit;
+	border: none;
+	font: inherit;
+	color: var(--clr5);
+	transition: filter 250ms;
+}
+
+nav a:hover,
+button:hover {
+	filter: drop-shadow(0.5px 0.5px 1px #000);
 }
 
 input[type='color'] {
@@ -57,9 +67,21 @@ input[type='color'] {
 	outline: 1px solid gold;
 }
 
-textarea {
-	all: unset;
-	overflow: hidden;
+textarea,
+input {
+	padding: 0;
+	font: inherit;
+	color: inherit;
+	background-color: inherit;
+	border: none;
+	overflow: auto;
+	outline: none;
+
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+
+	resize: none;
 }
 
 .hide {

@@ -10,19 +10,24 @@ export default {
      <div class="note-card" :style="'backgroundColor:'+note.style.backgroundColor+';'"
           @mouseover="isHover = true"
           @mouseleave="isHover = false">
-          <h3 class="note-title"><textarea v-model="note.info.title" @input="updateInternal"></textarea></h3>
+          <input v-model="note.info.title" @input="updateInternal" class="note-title">
           <hr/>
-          <component :is="note.type" :note="note" @updateNote="updateNote"/>
+          <component :is="note.type" :note="note"
+               @updateNote="updateNote"
+               @deleteTodo="deleteTodo"
+               @addTodo="addTodo"
+               />
           <div class="buttons" :class="isHidden">
                <button @click="deleteNote">delete me</button>
                <input type="color" v-model="note.style.backgroundColor" @input="updateInternal">
                <input 
                     type="file"
                     id="upload"
-                    name="image"
-                    @change="upload"
+                    :name="note.id"
+                    @change="upload($event, note.id)"
                     hidden />
                <label for="upload" class="upload-btn"><i class="fa-solid fa-file-arrow-up"></i></label>
+               <button @click="duplicateNote">duplicate</button>
           </div>
      </div>
      `,
@@ -47,8 +52,17 @@ export default {
           updateNote(updatedNote) {
                this.$emit('updateNote', updatedNote)
           },
+          duplicateNote() {
+               this.$emit('duplicateNote', this.note.id)
+          },
           deleteNote() {
                this.$emit('deleteNote', this.note.id)
+          },
+          deleteTodo(noteId, idx) {
+               this.$emit('deleteTodo', noteId, idx)
+          },
+          addTodo(noteId) {
+               this.$emit('addTodo', noteId)
           },
      },
      watch: {
