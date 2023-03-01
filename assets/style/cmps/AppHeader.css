@@ -1,7 +1,35 @@
+
 .app-header {
   background-color: var(--clr5);
   color: var(--secondary-clr1);
   padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  justify-content: space-between;
+  
+  height: 10vh;
+  
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.035);
+
+  font-weight: 800;
+  font-size: larger;
+  color: var(--gray1);
+}
+.app-header h1 {
+  margin: 0;
+  /* font-family: Yellowtail; */
+  font-size: 2em;
+}
+.app-header nav {
+  display: flex;
+  gap: 5em;
+}
+
+.app-header nav a:hover{
+  color: rgba(255, 0, 0, 0.517);
 }
 
 @media(max-width: 720px) {
