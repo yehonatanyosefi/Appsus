@@ -3,7 +3,6 @@ export default {
      props: [],
      template: `
           <noteList />
-          ghasifsad
      `,
      data() {
           return {
