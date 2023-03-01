@@ -25,8 +25,8 @@ const routerOptions = {
 			component: AboutUs,
 		},
 		// {
-		// 	path: '/book',
-		// 	component: BookIndex
+		// 	path: '/note',
+		// 	component: NoteIndex
 		// },
 	],
 }

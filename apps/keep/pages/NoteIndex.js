@@ -6,7 +6,7 @@ export default {
      `,
      data() {
           return {
-               notes: noteService.gNotes,
+               notes: null,
           }
      },
      methods: {
@@ -16,7 +16,8 @@ export default {
 
      },
      created() {
-
+          noteService.query()
+               .then(notes => this.notes = notes)
      },
      components: {
 

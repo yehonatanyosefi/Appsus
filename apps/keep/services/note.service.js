@@ -1,27 +1,27 @@
 import { utilService } from '../../../services/util.service.js'
+import { storageService } from '../../../services/async-storage.service.js'
 
 const NOTES_KEY = 'notesDB'
-const gNotes = _createDemo()
+_createDemo()
 
 export const noteService = {
      query,
      get,
      remove,
      save,
-     gNotes,
 }
 
 function query(filterBy = {}) {
      return storageService.query(NOTES_KEY)
-          .then(books => {
-               if (filterBy.txt) {
-                    const regex = new RegExp(filterBy.title, 'i')
-                    books = books.filter(book => regex.test(book.title))
-               }
-               if (filterBy.price) {
-                    books = books.filter(book => book.listPrice.amount >= filterBy.price)
-               }
-               return books
+          .then(notes => {
+               // if (filterBy.txt) {
+               //      const regex = new RegExp(filterBy.title, 'i')
+               //      notes = notes.filter(note => regex.test(note.title))
+               // }
+               // if (filterBy.price) {
+               //      notes = notes.filter(note => note.listPrice.amount >= filterBy.price)
+               // }
+               return notes
           })
 }
 
@@ -34,18 +34,18 @@ function remove(noteId) {
      return storageService.remove(NOTES_KEY, noteId)
 }
 
-function save(book) {
-     if (book.id) {
-          return storageService.put(NOTES_KEY, book)
+function save(note) {
+     if (note.id) {
+          return storageService.put(NOTES_KEY, note)
      } else {
-          return storageService.post(NOTES_KEY, book)
+          return storageService.post(NOTES_KEY, note)
      }
 }
 
 function _createDemo() {
      let notes = utilService.loadFromStorage(NOTES_KEY)
      if (!notes || !notes.length) {
-          notes = 'hi'
+          notes = 'notes n stuff'
           utilService.saveToStorage(NOTES_KEY, notes)
      }
      return notes
