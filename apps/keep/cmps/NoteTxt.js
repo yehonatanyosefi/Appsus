@@ -1,14 +1,12 @@
 export default {
      props: ['note'],
      template: `
-     me just a text
-     <p>
-           {{note.info.txt}}
-     </p>
+     <textarea v-model="text">
+     </textarea>
 `,
      data() {
           return {
-
+               text: null,
           }
      },
      methods: {
@@ -18,9 +16,14 @@ export default {
 
      },
      created() {
-
+          this.text = this.note.info.txt
      },
      components: {
 
      },
+     watch: {
+          text() {
+               // this.$emit('updateText', this.text)
+          }
+     }
 }

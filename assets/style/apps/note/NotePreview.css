@@ -2,4 +2,10 @@
 	max-width: 300px;
 	border-radius: 0.5em;
 	border: 1px solid var(--clr3);
+	transition: box-shadow 250ms;
+	break-inside: avoid;
+}
+
+.note-card:hover {
+	box-shadow: inset 1px 1px 0 rgb(0 0 0 / 10%), inset 0 -1px 0 rgb(0 0 0 / 7%);
 }

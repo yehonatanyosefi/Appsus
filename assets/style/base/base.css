@@ -49,3 +49,8 @@ button {
 .debug * {
 	outline: 1px solid gold;
 }
+
+textarea {
+	all: unset;
+	overflow: hidden;
+}

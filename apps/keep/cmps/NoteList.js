@@ -3,9 +3,9 @@ import NotePreview from "./NotePreview.js"
 export default {
      props: [],
      template: `
-          <template v-for="note,idx in notes" :key="idx">
+          <div v-for="note,idx in notes" :key="idx" class="main-notes">
                <NotePreview :note="note"/>
-          </template>
+          </div>
      `,
      data() {
           return {
