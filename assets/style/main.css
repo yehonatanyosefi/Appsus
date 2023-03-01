@@ -17,8 +17,13 @@
 @import 'swatches/vue-swatches.css';
 
 /* Apps */
+
+/* mail */
 @import 'apps/mail/MailIndex.css';
 @import 'apps/mail/MailList.css';
+@import 'apps/mail/MailPreview.css';
+
+/* note */
 @import 'apps/note/NoteIndex.css';
 @import 'apps/note/NoteList.css';
 @import 'apps/note/NotePreview.css';

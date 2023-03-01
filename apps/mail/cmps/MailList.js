@@ -8,9 +8,9 @@ export default {
      <section className="mail-list">
           <ul>
                <li v-for="mail in mails" :key="mail.id">
-               <RouterLink :to="'/mail/details/'+mail.id">
+               <!-- <RouterLink :to="'/mail/details/'+mail.id"> -->
                     <MailPreview :mail="mail"/>
-               </RouterLink> 
+               <!-- </RouterLink>  -->
 
                </li>
           </ul>
