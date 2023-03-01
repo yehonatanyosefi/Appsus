@@ -8,7 +8,7 @@ export default {
             <header class="flex justify-between">
                 <h3>New Message</h3>
                 <div className="window-buttons">
-                    <button class="minize"><i class="fa-regular fa-window-minimize"></i></button>
+                    <button class="minimize"><i class="fa-regular fa-window-minimize"></i></button>
                     <button class="full-screen"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></button>
                     <button class="close" @click="close"><i class="fa-solid fa-xmark"></i></button>
                 </div>

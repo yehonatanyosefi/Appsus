@@ -16,10 +16,11 @@
 	transform: translate(0, -100vh);
 }
 
-.compose-mail header {
-	align-items: baseline;
-	background-color: var(--secondary-clr2);
-	/* border-radius: 10px; */
+.compose-mail header{
+    align-items: baseline;
+    background-color: var(--secondary-clr2);
+    /* border-radius: 10px; */
+
 }
 
 .compose-mail button {
@@ -52,4 +53,12 @@
 	border-top-left-radius: 18px;
 	border-top-right-radius: 18px;
 	background-color: var(--secondary-clr0);
+}
+
+.compose-mail .send-mail button {
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    background-color: var(--secondary-clr0);
 }

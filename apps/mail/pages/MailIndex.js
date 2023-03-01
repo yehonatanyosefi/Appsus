@@ -6,7 +6,7 @@ import { mailService } from "../services/mail.service.js"
 export default {
      props: [],
      template: `
-     <header class="flex justify-between">
+     <header class="mail-header flex justify-between">
           <button class="toggle-menu x fa-solid fa-bars"> </button>
           <div className="logo fa-duotone fa-m">SusMail</div>
           <!-- <button class="logo fa-duotone fa-m">SusMail</button> -->
