@@ -6,7 +6,7 @@ export default {
      props: ['mails'],
      template: `
      <section className="mail-list">
-          <ul>
+          <ul class="clean-list">
                <li v-for="mail in mails" :key="mail.id">
                <!-- <RouterLink :to="'/mail/details/'+mail.id"> -->
                     <MailPreview :mail="mail"/>

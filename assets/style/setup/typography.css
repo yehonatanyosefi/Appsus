@@ -8,3 +8,8 @@
 	font-family: ROBOTO;
 	src: url(../../fonts/Roboto-Regular.ttf);
 }
+
+@font-face {
+	font-family: ROBOTO-bold;
+	src: url(../../fonts/Roboto-Bold.ttf);
+}

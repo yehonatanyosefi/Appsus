@@ -18,7 +18,7 @@ const routerOptions = {
 			component: MailIndex
 		},
 		{
-			path: '/mail/details',
+			path: '/mail/:mailId',
 			component: MailDetails
 		},
 		{
