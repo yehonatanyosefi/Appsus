@@ -11,6 +11,8 @@ export const noteService = {
      save,
      addNote,
      duplicateNote,
+     deleteTodo,
+     addTodo,
 }
 
 function query(filterBy = {}) {
@@ -55,6 +57,21 @@ function duplicateNote(noteId) {
                note.id = ''
                return save(note)
                     .then(savedNote => query())
+          })
+}
+
+function deleteTodo(noteId, idx) {
+     return get(noteId)
+          .then(note => {
+               note.info.todos.splice(idx, 1)
+               return save(note)
+          })
+}
+function addTodo(noteId) {
+     return get(noteId)
+          .then(note => {
+               note.info.todos.push({ txt: '', doneAt: null })
+               return save(note)
           })
 }
 

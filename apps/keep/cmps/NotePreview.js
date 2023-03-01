@@ -10,9 +10,13 @@ export default {
      <div class="note-card" :style="'backgroundColor:'+note.style.backgroundColor+';'"
           @mouseover="isHover = true"
           @mouseleave="isHover = false">
-          <h3 class="note-title"><textarea v-model="note.info.title" @input="updateInternal"></textarea></h3>
+          <input v-model="note.info.title" @input="updateInternal" class="note-title">
           <hr/>
-          <component :is="note.type" :note="note" @updateNote="updateNote"/>
+          <component :is="note.type" :note="note"
+               @updateNote="updateNote"
+               @deleteTodo="deleteTodo"
+               @addTodo="addTodo"
+               />
           <div class="buttons" :class="isHidden">
                <button @click="deleteNote">delete me</button>
                <input type="color" v-model="note.style.backgroundColor" @input="updateInternal">
@@ -53,6 +57,12 @@ export default {
           },
           deleteNote() {
                this.$emit('deleteNote', this.note.id)
+          },
+          deleteTodo(noteId, idx) {
+               this.$emit('deleteTodo', noteId, idx)
+          },
+          addTodo(noteId) {
+               this.$emit('addTodo', noteId)
           },
      },
      watch: {
