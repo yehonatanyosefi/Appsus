@@ -19,6 +19,7 @@
 .compose-mail header{
     align-items: baseline;
     background-color: var(--secondary-clr2);
+	padding-inline: 1em;
     /* border-radius: 10px; */
 
 }
