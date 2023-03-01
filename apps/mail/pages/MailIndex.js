@@ -6,6 +6,7 @@ export default {
           <button class="toggle-menu"></button>
           <div className="logo"></div>
      </header>
+     Sagarno ta pina
      <MailList />
      `,
      data() {
