@@ -1,8 +1,12 @@
 import { mailService } from "../services/mail.service.js"
 export default {
-     props: [],
+     props: ['mails'],
      template: `
-
+     <section className="mail-list">
+          <ul>
+               <li></li>
+          </ul>
+     </section>
      {{mail}}
 `,
      data() {
