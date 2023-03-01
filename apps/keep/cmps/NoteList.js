@@ -1,23 +1,25 @@
+import { noteService } from "../services/note.service.js"
 export default {
-props: [],
-template: `
+     props: [],
+     template: `
+          {{notes}}
+     `,
+     data() {
+          return {
+               notes: null,
+          }
+     },
+     methods: {
 
-`,
-data() {
-return {
+     },
+     computed: {
 
-}
-},
-methods: {
+     },
+     created() {
+          noteService.query()
+               .then(notes => this.notes = notes)
+     },
+     components: {
 
-},
-computed: {
-
-},
-created() {
-
-},
-components: {
-
-},
+     },
 }

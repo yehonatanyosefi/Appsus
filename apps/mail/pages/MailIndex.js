@@ -1,12 +1,11 @@
-import { mailService } from "../services/mail.service.js"
+import MailList from "../cmps/MailList.js"
 export default {
      props: [],
      template: `
-     {{mail}}
+     <MailList />
      `,
      data() {
           return {
-               mail: null,
           }
      },
      methods: {
@@ -16,10 +15,8 @@ export default {
 
      },
      created() {
-          mailService.query()
-               .then(mail => this.mail = mail)
      },
      components: {
-
+          MailList,
      },
 }
