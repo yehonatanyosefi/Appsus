@@ -11,15 +11,16 @@ export default {
           @mouseover="isHover = true"
           @mouseleave="isHover = false">
           <input v-model="note.info.title" @input="updateInternal" class="note-title">
-          <hr/>
           <component :is="note.type" :note="note"
                @updateNote="updateNote"
                @deleteTodo="deleteTodo"
                @addTodo="addTodo"
                />
-          <div class="buttons" :class="isHidden">
+          <div class="button-container flex" :class="isHidden">
                <button @click="deleteNote">delete me</button>
-               <input type="color" v-model="note.style.backgroundColor" @input="updateInternal">
+               <div class="color-wrapper">
+                    <input type="color" v-model="note.style.backgroundColor" @input="updateInternal">
+               </div>
                <input 
                     type="file"
                     id="upload"
