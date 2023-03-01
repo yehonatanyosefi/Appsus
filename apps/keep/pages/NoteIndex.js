@@ -3,6 +3,7 @@ export default {
      props: [],
      template: `
           <noteList />
+          {{hello yehonatan}}
      `,
      data() {
           return {
