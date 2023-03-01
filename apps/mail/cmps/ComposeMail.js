@@ -1,10 +1,10 @@
-import {mailService} from '../services/mail.service.js'
-import {eventBus} from '../../../services/event-bus.service.js'
+import { mailService } from '../services/mail.service.js'
+import { eventBus } from '../../../services/event-bus.service.js'
 
 export default {
     props: [''],
     template: `
-        <section class="compose-mail ">
+        <section class="compose-mail" :class="open">
             <header class="flex justify-between">
                 <h3>New Message</h3>
                 <div className="window-buttons">
@@ -26,22 +26,26 @@ export default {
             </section>
         </section>
         `,
-    computed:{
-       
+    computed: {
+        open() {
+            return { 'open': this.isOpen }
+        },
     },
     methods: {
-        close(){
+        close() {
             this.$emit('closeCompose')
         }
     },
-    components:{
+    components: {
         mailService,
         eventBus,
     },
-    created(){
-        //   open(){
-        //        return {'open': this.isOpen}
-        //   }
+    created() {
+        setTimeout(() => this.isOpen = true, 0)
+    },
+    data() {
+        return {
+            isOpen: false,
+        }
     }
 }
-    

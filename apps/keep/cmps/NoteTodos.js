@@ -3,7 +3,7 @@ export default {
      template: `
           <ul class="clean-list">
                <li v-for="todo,idx in note.info.todos" key="idx" class="flex">
-                         <input v-model="todo.txt" @input="updateNote" placeholder="text"></input>
+                         <input v-model="todo.txt" @input="updateNote" placeholder="text">
                          <button @click="deleteTodo(idx)">X</button>
                </li>
                <li><button @click="addTodo">add</button></li>
