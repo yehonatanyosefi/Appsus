@@ -1,7 +1,7 @@
 export default {
      props: [],
      template: `
-
+     hello EMAIL
 `,
      data() {
           return {

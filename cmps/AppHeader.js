@@ -2,9 +2,9 @@ export default {
     template: `
         <header class="app-header">
             <h1>AppSus</h1>
-                                <nav>
+                <nav>
                     <RouterLink v-for="({path, title}, idx) in routes" :to="path" :title="title"
-                    class="animate__animated animate__zoomIn">{{title}}</RouterLink>
+                    class="">{{title}}</RouterLink>
                 </nav>
         </header>
     `,
@@ -12,7 +12,7 @@ export default {
         return {
             routes: [
                 { path: '/', title: 'Home' },
-                { path: '/email', title: 'EmailIndex' },
+                { path: '/mail', title: 'MailIndex' },
                 { path: '/note', title: 'NoteIndex' },
                 { path: '/about', title: 'About' },
             ]
