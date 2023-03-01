@@ -11,9 +11,21 @@ const routerOptions = {
 			component: HomePage,
 		},
 		{
+			path: '/email',
+			component: EmailIndex
+		},
+		{
+			path: '/notes',
+			component: NotesIndex
+		},
+		{
 			path: '/about',
 			component: AboutUs,
 		},
+		// {
+		// 	path: '/book',
+		// 	component: BookIndex
+		// },
 	],
 }
 
