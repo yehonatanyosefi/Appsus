@@ -1,11 +1,12 @@
+import { noteService } from "../services/note.service.js"
 export default {
      props: [],
      template: `
-     Hello notes
-`,
+          {{notes}}
+     `,
      data() {
           return {
-
+               notes: noteService.gNotes,
           }
      },
      methods: {
