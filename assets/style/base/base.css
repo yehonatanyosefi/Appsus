@@ -61,3 +61,7 @@ textarea {
 	all: unset;
 	overflow: hidden;
 }
+
+.hide {
+	opacity: 0;
+}

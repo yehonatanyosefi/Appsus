@@ -2,7 +2,7 @@
 	max-width: 300px;
 	border-radius: 0.5em;
 	border: 1px solid var(--clr3);
-	transition: box-shadow 250ms;
+	transition: box-shadow 250ms opacity 100ms;
 	break-inside: avoid;
 }
 

@@ -13,7 +13,7 @@ export default {
           <h3 class="note-title"><textarea v-model="note.info.title" @input="updateInternal"></textarea></h3>
           <hr/>
           <component :is="note.type" :note="note" @updateNote="updateNote"/>
-          <div class="buttons">
+          <div class="buttons" :class="isHidden">
                <button @click="deleteNote">delete me</button>
                <input type="color" v-model="note.style.backgroundColor" @input="updateInternal">
                <input 
@@ -25,7 +25,7 @@ export default {
                <label for="upload" class="upload-btn"><i class="fa-solid fa-file-arrow-up"></i></label>
           </div>
      </div>
-     `, //:class=""
+     `,
      data() {
           return {
                isHover: false,
@@ -58,7 +58,7 @@ export default {
      },
      computed: {
           isHidden() {
-               // return { hide: isHover }
+               return { 'hide': !this.isHover }
           },
      },
      created() {
