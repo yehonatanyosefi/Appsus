@@ -1,4 +1,10 @@
+.notes-container {
+	display: grid;
+}
 .main-notes {
+	padding-left: 3rem;
+	padding-right: 3rem;
 	columns: auto 220px;
 	column-gap: 2rem;
+	margin-bottom: 3rem;
 }

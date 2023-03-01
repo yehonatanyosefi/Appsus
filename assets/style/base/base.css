@@ -8,6 +8,7 @@ html {
 body {
 	margin: 0;
 	color: var(--clr4);
+	background-color: var(--clr1);
 	font-family: ROBOTO, sans-serif;
 }
 

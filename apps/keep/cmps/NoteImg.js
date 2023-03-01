@@ -1,7 +1,9 @@
 export default {
      props: ['note'],
      template: `
-     <img :src="note.info.url" style="max-width:150px;">
+     <div class="flex justify-center align-center">
+          <img :src="note.info.url" style="max-width:150px;">
+     </div>
 `,
      data() {
           return {

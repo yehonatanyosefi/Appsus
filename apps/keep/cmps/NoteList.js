@@ -4,16 +4,34 @@ export default {
      props: [],
      template: `
           <button @click="addNote">+</button>
-          <div class="main-notes">
-          <template v-for="note,idx in notes" :key="idx" class="main-notes">
-               <NotePreview :note="note"
-                    @updateNote="updateNote"
-                    @deleteNote="deleteNote"
-                    @duplicateNote="duplicateNote"
-                    @deleteTodo="deleteTodo"
-                    @addTodo="addTodo" />
-          </template>
-     </div>
+          <div class="notes-container">
+               <div class="main-notes">
+                    <template v-for="note,idx in notes" :key="idx">
+                         <NotePreview v-if="note.isPinned" :note="note"
+                              @updateNote="updateNote"
+                              @deleteNote="deleteNote"
+                              @duplicateNote="duplicateNote"
+                              @deleteTodo="deleteTodo"
+                              @addTodo="addTodo"
+                              @toggleTodos="toggleTodos"
+                              @togglePin="togglePin"
+                              @toggleTodoCheck="toggleTodoCheck" />
+                    </template>
+               </div>
+               <div class="main-notes">
+                    <template v-for="note,idx in notes" :key="idx">
+                         <NotePreview v-if="!note.isPinned" :note="note"
+                              @updateNote="updateNote"
+                              @deleteNote="deleteNote"
+                              @duplicateNote="duplicateNote"
+                              @deleteTodo="deleteTodo"
+                              @addTodo="addTodo"
+                              @toggleTodos="toggleTodos"
+                              @togglePin="togglePin"
+                              @toggleTodoCheck="toggleTodoCheck" />
+                    </template>
+               </div>
+          </div>
      `,
      data() {
           return {
@@ -53,6 +71,27 @@ export default {
           },
           addTodo(noteId) {
                noteService.addTodo(noteId)
+                    .then(newNote => {
+                         const noteIdx = this.notes.findIndex(note => note.id === noteId)
+                         this.notes[noteIdx] = newNote
+                    })
+          },
+          toggleTodos(noteId) {
+               noteService.toggleTodos(noteId)
+                    .then(newNote => {
+                         const noteIdx = this.notes.findIndex(note => note.id === noteId)
+                         this.notes[noteIdx] = newNote
+                    })
+          },
+          togglePin(noteId) {
+               noteService.togglePin(noteId)
+                    .then(newNote => {
+                         const noteIdx = this.notes.findIndex(note => note.id === noteId)
+                         this.notes[noteIdx] = newNote
+                    })
+          },
+          toggleTodoCheck(noteId, idx) {
+               noteService.toggleTodoCheck(noteId, idx)
                     .then(newNote => {
                          const noteIdx = this.notes.findIndex(note => note.id === noteId)
                          this.notes[noteIdx] = newNote

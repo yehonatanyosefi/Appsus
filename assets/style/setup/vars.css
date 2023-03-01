@@ -1,5 +1,5 @@
 :root {
-	--clr1: rgb(255, 255, 255);
+	--clr1: rgb(252, 252, 252);
 	--clr2: rgb(240, 240, 240);
 	--clr3: rgb(155, 155, 155);
 	--clr4: rgb(96, 96, 96);
@@ -11,4 +11,6 @@
 	--secondary-clr2: #f2f6fc;
 
 	--clr-star: orange;
+	--note-btn-size: 1.2rem;
+	--note-card-pad: 0.8rem;
 }

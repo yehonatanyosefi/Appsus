@@ -10,27 +10,40 @@ export default {
      <div class="note-card" :style="'backgroundColor:'+note.style.backgroundColor+';'"
           @mouseover="isHover = true"
           @mouseleave="isHover = false">
-          <input v-model="note.info.title" @input="updateInternal" class="note-title">
+          <div class="flex justify-between align-center">
+               <input v-model="note.info.title" @input="updateInternal" class="note-title" placeholder="Title">
+               <button @click="togglePin">
+                    <i class="fa-solid fa-thumbtack"></i>
+               </button>
+          </div>
           <component :is="note.type" :note="note"
                @updateNote="updateNote"
                @deleteTodo="deleteTodo"
                @addTodo="addTodo"
-               />
-          <div class="button-container flex" :class="isHidden">
-               <button @click="deleteNote">delete me</button>
+               @toggleTodoCheck="toggleTodoCheck" />
+          <div class="button-container" :class="isHidden">
+               <button @click="deleteNote" title="Delete Note" class="note-btn">
+                    <i class="fa-solid fa-trash note-btn"></i>
+               </button>
                <div class="color-wrapper">
-                    <input type="color" v-model="note.style.backgroundColor" @input="updateInternal">
+                    <input type="color" v-model="note.style.backgroundColor" @input="updateInternal"  title="Change Background Color">
                </div>
-               <label :for="note.id" class="upload-btn">
-                    <input 
+               <label :for="note.id" class="upload-btn" title="Upload Image">
+                    <input
+                         class="upload-btn"
                          type="file"
                          :id="note.id"
                          :name="note.id"
                          @change="upload($event, note.id)"
                          hidden />
-                    <i class="fa-solid fa-file-arrow-up"></i>
-          </label>
-               <button @click="duplicateNote">duplicate</button>
+                    <i class="fa-regular fa-image upload-btn"></i>
+               </label>
+               <button class="" v-if="note.type !== 'NoteImg'" @click="toggleTodos" title="Checklist Toggle">
+                    <i class="fa-regular fa-square-check note-btn"></i>
+               </button>
+               <button @click="duplicateNote" title="Duplicate Note">
+                    <i class="fa-regular fa-clone"></i>
+               </button>
           </div>
      </div>
      `,
@@ -66,6 +79,15 @@ export default {
           },
           addTodo(noteId) {
                this.$emit('addTodo', noteId)
+          },
+          toggleTodos() {
+               this.$emit('toggleTodos', this.note.id)
+          },
+          togglePin() {
+               this.$emit('togglePin', this.note.id)
+          },
+          toggleTodoCheck(noteId, idx) {
+               this.$emit('toggleTodoCheck', noteId, idx)
           },
      },
      watch: {
