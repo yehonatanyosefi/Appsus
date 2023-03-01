@@ -6,6 +6,26 @@
 	break-inside: avoid;
 	margin-block-end: 2rem;
 }
+.note-card input {
+	padding: 0.8rem;
+	width: 100%;
+}
+.note-card input[type='color'] {
+	width: 1.5rem;
+	height: 1.5rem;
+	opacity: 0;
+	overflow: hidden;
+	cursor: pointer;
+}
+.color-wrapper {
+	height: 1.5rem;
+	width: 1.5rem;
+	background-image: url(../../../svg/color-picker.svg);
+	background-repeat: no-repeat;
+	background-size: contain;
+	margin: 0;
+	padding: 0;
+}
 
 .note-card:hover {
 	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
