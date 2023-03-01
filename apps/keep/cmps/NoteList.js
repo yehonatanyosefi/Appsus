@@ -3,8 +3,8 @@ import NotePreview from "./NotePreview.js"
 export default {
      props: [],
      template: `
-     <div class="main-notes">
           <button @click="addNote">+</button>
+          <div class="main-notes">
           <template v-for="note,idx in notes" :key="idx" class="main-notes">
                <NotePreview :note="note" @updateNote="updateNote" @deleteNote="deleteNote" />
           </template>
