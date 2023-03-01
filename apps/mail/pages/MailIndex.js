@@ -1,8 +1,11 @@
 export default {
      props: [],
      template: `
-     hello EMAIL
-`,
+     <header>
+          <button class="toggle-menu"></button>
+          <div className="logo"></div>
+     </header>
+     `,
      data() {
           return {
 
