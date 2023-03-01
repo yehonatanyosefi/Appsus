@@ -1,8 +1,11 @@
 import { noteService } from "../services/note.service.js"
+import NotePreview from "./NotePreview.js"
 export default {
      props: [],
      template: `
-          {{notes}}
+          <template v-for="note,idx in notes" :key="idx">
+               <NotePreview :note="note"/>
+          </template>
      `,
      data() {
           return {
@@ -20,6 +23,6 @@ export default {
                .then(notes => this.notes = notes)
      },
      components: {
-
+          NotePreview,
      },
 }

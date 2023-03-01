@@ -1,8 +1,12 @@
-export default {
-     props: [],
-     template: `
+import NoteTodos from "./NoteTodos.js"
+import NoteTxt from "./NoteTxt.js"
+import NoteImg from "./NoteImg.js"
 
-`,
+export default {
+     props: ['note'],
+     template: `
+     <component :is="note.type" :note="note" />
+     `,
      data() {
           return {
 
@@ -18,6 +22,8 @@ export default {
 
      },
      components: {
-
+          NoteTodos,
+          NoteTxt,
+          NoteImg,
      },
 }
