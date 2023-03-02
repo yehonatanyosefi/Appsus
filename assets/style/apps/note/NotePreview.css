@@ -1,25 +1,58 @@
 .note-card {
-	max-width: 300px;
+	max-width: 500px;
+	min-width: 240px;
+	min-height: 125px;
 	border-radius: 0.5em;
 	border: 1px solid var(--clr3);
 	transition: box-shadow 250ms opacity 100ms;
 	break-inside: avoid;
 	margin-block-end: 2rem;
 }
-.note-card input {
-	padding: 0.8rem;
+.note-card input,
+.note-card textarea {
+	padding: var(--note-card-pad);
 	width: 100%;
 }
+.button-container {
+	opacity: 0;
+	display: grid;
+	grid-auto-flow: column;
+	grid-template-columns: repeat(auto-fit, var(--note-btn-size));
+	margin-left: var(--note-card-pad);
+	margin-right: var(--note-card-pad);
+	justify-content: space-between;
+	align-content: center;
+}
+.button-container * {
+	align-self: center;
+	justify-self: center;
+	width: var(--note-btn-size);
+	height: var(--note-btn-size);
+	font-size: var(--note-btn-size);
+}
+.note-card:hover .button-container {
+	opacity: 1;
+}
 .note-card input[type='color'] {
-	width: 1.5rem;
-	height: 1.5rem;
+	width: var(--note-btn-size);
+	height: var(--note-btn-size);
 	opacity: 0;
 	overflow: hidden;
 	cursor: pointer;
 }
+.upload-btn {
+	color: var(--clr5);
+	height: var(--note-btn-size);
+	width: var(--note-btn-size);
+	font-size: var(--note-btn-size);
+	cursor: pointer;
+}
+.upload-btn:hover {
+	color: var(--clr3);
+}
 .color-wrapper {
-	height: 1.5rem;
-	width: 1.5rem;
+	height: var(--note-btn-size);
+	width: var(--note-btn-size);
 	background-image: url(../../../svg/color-picker.svg);
 	background-repeat: no-repeat;
 	background-size: contain;
@@ -34,4 +67,7 @@
 .note-title {
 	font-size: 1.25rem;
 	color: var(--clr5);
+}
+.striked {
+	text-decoration: line-through;
 }

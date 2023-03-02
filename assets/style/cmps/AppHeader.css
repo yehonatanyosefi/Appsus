@@ -1,5 +1,6 @@
 .app-header {
-	background-color: var(--clr5);
+	background-color: var(--clr2);
+	/* background-color: rgba(0, 0, 0, 0.035); */
 	color: var(--secondary-clr1);
 	padding: 1em;
 	display: flex;
@@ -11,11 +12,10 @@
 	/* height: 10vh; */
 
 	padding: 10px;
-	background-color: rgba(0, 0, 0, 0.035);
 
-	font-weight: 800;
-	font-size: larger;
-	color: var(--gray1);
+  font-weight: 800;
+  font-size: larger;
+  color: var(--gray1);
 }
 .app-header h1 {
 	margin: 0;
@@ -31,9 +31,9 @@
 	color: rgba(255, 0, 0, 0.517);
 }
 
-@media (max-width: 720px) {
-	.app-header {
-		background-color: var(--clr3);
-		color: var(--secondary-clr2);
-	}
+@media(max-width: 720px) {
+  .app-header {
+    background-color: var(--clr3);
+    color: var(--secondary-clr2);
+  }
 }

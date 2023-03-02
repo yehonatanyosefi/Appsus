@@ -1,4 +1,5 @@
 import NoteList from "../cmps/NoteList.js"
+import { noteService } from "../services/note.service.js"
 export default {
      props: [],
      template: `
@@ -9,7 +10,6 @@ export default {
           }
      },
      methods: {
-
      },
      computed: {
 
