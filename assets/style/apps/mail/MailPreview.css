@@ -31,3 +31,11 @@
     background-color: white;
     height: 90%;
 }
+
+.mail-preview .mail-body{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+
+}

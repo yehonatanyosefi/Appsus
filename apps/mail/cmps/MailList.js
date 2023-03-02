@@ -9,7 +9,7 @@ export default {
           <ul class="clean-list">
                <li v-for="mail in mails" :key="mail.id">
                <RouterLink :to="'/mail/'+mail.id" @click="changeIsRead(true,mail.id)">
-                    <MailPreview :mail="mail" @removeMail="remove" />
+                    <MailPreview :mail="mail" @removeMail="remove" @click.stop @changeIsRead="changeIsRead"/>
                </RouterLink> 
                </li>
           </ul>
