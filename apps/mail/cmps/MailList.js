@@ -9,7 +9,7 @@ export default {
           <ul class="clean-list">
                <li v-for="mail in mails" :key="mail.id">
                <!-- <RouterLink :to="'/mail/details/'+mail.id"> -->
-                    <MailPreview :mail="mail"/>
+                    <MailPreview :mail="mail" @removeMail="remove"/>
                <!-- </RouterLink>  -->
 
                </li>
@@ -21,8 +21,10 @@ export default {
                mail: null,
           }
      },
-     methods: {
-
+     methods: { 
+          remove(mailId) {
+               this.$emit('removeMail', mailId)
+           },
      },
      computed: {
 

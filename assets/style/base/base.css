@@ -2,8 +2,8 @@
 	box-sizing: border-box;
 }
 
-html {
-}
+/* html {
+} */
 
 body {
 	margin: 0;
@@ -42,14 +42,18 @@ object {
 
 /* tap targets: */
 nav a,
-button {
+button{
 	min-width: 48px;
-	min-height: 48px;
+	/* min-height: 48px; */
 	cursor: pointer;
 	background-color: inherit;
 	border: none;
 	font: inherit;
 	color: var(--clr5);
+}
+
+button:not(.hover-buttons button) {
+	min-height: 48px;
 }
 
 nav a:hover,
@@ -67,7 +71,7 @@ input[type='color'] {
 }
 
 textarea,
-input {
+input:not(.mail-header input) {
 	padding: 0;
 	font: inherit;
 	color: inherit;

@@ -21,13 +21,15 @@ export default {
                <div class="color-wrapper">
                     <input type="color" v-model="note.style.backgroundColor" @input="updateInternal">
                </div>
-               <input 
-                    type="file"
-                    id="upload"
-                    :name="note.id"
-                    @change="upload($event, note.id)"
-                    hidden />
-               <label for="upload" class="upload-btn"><i class="fa-solid fa-file-arrow-up"></i></label>
+               <label :for="note.id" class="upload-btn">
+                    <input 
+                         type="file"
+                         :id="note.id"
+                         :name="note.id"
+                         @change="upload($event, note.id)"
+                         hidden />
+                    <i class="fa-solid fa-file-arrow-up"></i>
+          </label>
                <button @click="duplicateNote">duplicate</button>
           </div>
      </div>

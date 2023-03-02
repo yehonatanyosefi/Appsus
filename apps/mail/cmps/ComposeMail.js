@@ -8,20 +8,22 @@ export default {
             <header class="flex justify-between">
                 <h3>New Message</h3>
                 <div className="window-buttons">
-                    <button class="minimize"><i class="fa-regular fa-window-minimize"></i></button>
-                    <button class="full-screen"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></button>
-                    <button class="close" @click="close"><i class="fa-solid fa-xmark"></i></button>
+                    <button class="minimize" title="Minimize"><i class="fa-regular fa-window-minimize"></i></button>
+                    <button class="full-screen" title="Full screen"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></button>
+                    <button class="close" @click="close" title="Save & close"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </header>
 
             <main class="mail-text">
-                <input class="recipient" type="text" placeholder="Recipient"/>
-                <input class="mail-subject" type="text" placeholder="Subject"/>
-                <textarea name="" id="" cols="30" rows="10"></textarea>
+                <!-- why does the email pattern doesnt work?? -->
+                <input v-model="recipient" class="recipient" type="email" placeholder="Recipient" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+
+                <input v-model="subject" class="mail-subject" type="text" placeholder="Subject"/>
+                <textarea v-model="body" name="" id="" cols="30" rows="10"></textarea>
             </main>
 
             <section class="send-mail flex justify-between">
-                <button className="send">send</button>
+                <button className="send" @click="send">send</button>
                 <button className="delete"><i class="fa-regular fa-trash-can"></i></button>
             </section>
         </section>
@@ -33,8 +35,20 @@ export default {
     },
     methods: {
         close() {
-            this.$emit('closeCompose')
-        }
+            this.isOpen = false
+            setTimeout(()=> {
+                this.$emit('closeCompose')
+            },1500)
+        },
+        send() {
+                this.$emit('addMail', this.subject,this.body ,this.recipient)
+                this.close()
+          },
+          resetVars(){
+            this.recipient=''
+            this.subject=''
+            this.body=''
+          }
     },
     components: {
         mailService,
@@ -46,6 +60,10 @@ export default {
     data() {
         return {
             isOpen: false,
+            recipient:'',
+            subject:'',
+            body:'',
+
         }
     }
 }

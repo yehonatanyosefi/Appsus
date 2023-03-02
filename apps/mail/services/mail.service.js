@@ -8,6 +8,7 @@ export const mailService = {
   get,
   remove,
   save,
+  addMail
 }
 
 function query(filterBy = {}) {
@@ -35,9 +36,23 @@ function remove(mailId) {
 function save(mail) {
   if (mail.id) {
     return storageService.put(MAIL_KEY, mail)
-  } else {
+  } else { 
     return storageService.post(MAIL_KEY, mail)
   }
+}
+
+function addMail(newSubject,newBody,newTo){
+  const newMail = {
+    id: null,
+    subject: newSubject,
+    body: newBody,
+    isRead: false,
+    sentAt: Date.now(),
+    removedAt: null,
+    from: 'user@appsus.com',
+    to: newTo,
+  }
+  return save(newMail)
 }
 
 function _createDemo() {
@@ -49,7 +64,7 @@ function _createDemo() {
         subject: 'Group meeting 5:30 pm!',
         body: 'Would love to catch up sometimes',
         isRead: true,
-        sentAt: 1551133930594,
+        sentAt: Date.now(),
         removedAt: null,
         from: 'JohnD@momo.com',
         to: 'user@appsus.com',
@@ -59,7 +74,7 @@ function _createDemo() {
         subject: 'Madatech - National Museum of Science Technology and Space, Haifa is hiring: Student',
         body: 'Would love to catch up sometimes',
         isRead: false,
-        sentAt: 1551133930594,
+        sentAt: Date.now(),
         removedAt: null,
         from: 'LinkedIn@momo.com',
         to: 'user@appsus.com',
@@ -69,7 +84,7 @@ function _createDemo() {
         subject: 'כנס ליידי טק 9 💪 לעשות את זה נכון!',
         body: 'Would love to catch up sometimes',
         isRead: true,
-        sentAt: 1551133930594,
+        sentAt: Date.now(),
         removedAt: null,
         from: 'bogrim@technion-alumni.org.il',
         to: 'user@appsus.com',
@@ -79,7 +94,7 @@ function _createDemo() {
         subject: 'Your invoice from Apple.',
         body: 'Would love to catch up sometimes',
         isRead: false,
-        sentAt: 1551133930594,
+        sentAt: Date.now(),
         removedAt: null,
         from: 'Apple@momo.com',
         to: 'user@appsus.com',
@@ -89,7 +104,7 @@ function _createDemo() {
         subject: "New Year’s Special! 🎉 Start for just $1 down!",
         body: 'Would love to catch up sometimes',
         isRead: true,
-        sentAt: 1551133930594,
+        sentAt: Date.now(),
         removedAt: null,
         from: '24-Hour-Fitness@momo.com',
         to: 'user@appsus.com',
