@@ -1,19 +1,21 @@
 import { i18Service } from "../../../services/i18n.service.js"
+import LongText from '../cmps/LongText.js'
 
 export default {
      props: ['mail'],
      template: `
-     <section @click.stop class="mail-preview" :class="formatReadMail">
+     <section  class="mail-preview" :class="formatReadMail">
           <!-- <div :class="formatReadMail"> -->
                <input type="checkbox" />
                <i class="fa-regular fa-star"></i>
                <p>{{formatUsername}}</p>
-               <p>{{mail.body}}</p>
+               <!-- <p>{{mail.body}}</p> -->
+               <LongTxt :txt="mail.body" :length="length"/>
                <p>{{formatTime}}</p>
                <div class="hover-buttons flex"> 
-                    <button @click.stop="remove(mail.id)"><i class="fa-regular fa-trash-can"></i></button>
-                    <button v-if="read"><i class="fa-regular fa-envelope"></i></button>
-                    <button v-if="unread"><i class="fa-regular fa-envelope-open"></i></button>
+                    <button @click.prevent="remove(mail.id)"><i class="fa-regular fa-trash-can"></i></button>
+                    <button v-if="mail.isRead" @click.prevent="changeIsRead(false,mail.id)"><i class="fa-regular fa-envelope"></i></button>
+                    <button v-else><i class="fa-regular fa-envelope-open" @click.prevent="changeIsRead(true,mail.id)"></i></button>
                </div>
      </section>
      <!-- <pre>{{mail}}</pre> -->
@@ -29,6 +31,9 @@ export default {
           remove(mailId) {
                this.$emit('removeMail', mailId)
            },
+           changeIsRead(isRead,mailId){
+               this.$emit('changeIsRead',isRead, mailId)
+           }
      },
      computed: {
           formatUsername(){
@@ -46,6 +51,7 @@ export default {
 
      },
      components: {
-          i18Service
+          i18Service,
+          LongText
      },
 }

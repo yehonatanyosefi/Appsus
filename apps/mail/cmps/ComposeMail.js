@@ -14,18 +14,21 @@ export default {
                 </div>
             </header>
 
+            <form action="" @submit="send">
             <main class="mail-text">
                 <!-- why does the email pattern doesnt work?? -->
-                <input v-model="recipient" class="recipient" type="email" placeholder="Recipient" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                <input v-model="recipient" class="recipient" type="email" placeholder="Recipient"  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
 
                 <input v-model="subject" class="mail-subject" type="text" placeholder="Subject"/>
                 <textarea v-model="body" name="" id="" cols="30" rows="10"></textarea>
             </main>
 
             <section class="send-mail flex justify-between">
-                <button className="send" @click="send">send</button>
-                <button className="delete"><i class="fa-regular fa-trash-can"></i></button>
+                <button type="submit" className="send" >send</button>
+                <button type="button" className="delete"><i class="fa-regular fa-trash-can"></i></button>
             </section>
+            </form>
+            
         </section>
         `,
     computed: {

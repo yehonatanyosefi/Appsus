@@ -1,6 +1,7 @@
 import MailList from "../cmps/MailList.js"
 import MailDetails from "../pages/MailDetails.js"
 import ComposeMail from "../cmps/ComposeMail.js"
+import MailFilter from "../cmps/MailFilter.js"
 import { mailService } from "../services/mail.service.js"
 import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.service.js'
 
@@ -12,7 +13,8 @@ export default {
           <button class="toggle-menu x fa-solid fa-bars"> </button>
           <div className="logo fa-duotone fa-m">SusMail</div>
           <!-- <button class="logo fa-duotone fa-m">SusMail</button> -->
-          <input type="text" placeholder="🔎 Search Mail"/>
+          <!-- <input type="text" placeholder="🔎 Search Mail"/> -->
+          <MailFilter @filter="setFilterBy" />
           <div className="menu-buttons">
                <button class="apps-menu">apps menu</button>
                <button class="user">User</button>
@@ -49,7 +51,8 @@ export default {
                mails:null,
                isOpen:false,
                unread:0,
-               filterBy: {read:true , unread:true},
+               // filterBy: {read:true , unread:true},
+               filterBy: {},
                setFilter:'inbox',
           }
      },
@@ -65,14 +68,15 @@ export default {
               .addMail(subject,body ,recipient)
               .then((updatedMail) => {
                 this.mails.push(updatedMail)
-                this.unread=0
                 showSuccessMsg('Mail sent')
               })
               .catch((err) => {
                showErrorMsg('Could not send mail')
               })
           },
-          removeMail(mailId) {
+          removeMail(mailId) { 
+
+               //when deleting fix unread count
                mailService.remove(mailId)
                    .then(() => {
                     console.log('hi');
@@ -84,17 +88,16 @@ export default {
                     showErrorMsg('Could not delete mail')
                    })
            },
-          //  setFilterBy(filterBy) {
-          //      this.filterBy = filterBy
-          //  },
+           setFilterBy(filterBy) {
+               this.filterBy = filterBy
+           },
           changeIsRead(isRead,mailId){
                mailService.changeIsRead(isRead,mailId)
-               //   .then(updatedMail=> {
-               //      console.log('isRead',isRead)
-               //      console.log('updatedMail',updatedMail)
-               //        const idx= this.mails.findIdx(mail===updatedMail)
-               //        this.mails[idx].splice(idx,1,updatedMail)
-               // })
+                 .then(updatedMail=> {
+
+                    const idx= this.mails.findIndex(mail=>mail.id===updatedMail.id)
+                    this.mails[idx]=updatedMail
+               })
 
                // const currMail= this.mails.find(mail=> mail.id===mailId)
                // console.log('currMail',currMail)
@@ -107,25 +110,31 @@ export default {
      },
      computed: {
         UnreadCount(){
+          this.unread = 0
           if (this.mails) this.mails.map(mail => {
                if (!mail.isRead) this.unread++
           })
           return this.unread
         },
         filteredMails() {
-          if (this.setFilter==='inbox') return this.mails.filter(mail => mail.from !== 'user@appsus.com')
+          let filteredMails= this.mails
+          if (this.setFilter==='inbox') filteredMails= filteredMails.filter(mail => mail.from !== 'user@appsus.com')
           else if (this.setFilter === 'read'){
                const isRead = true
-               return this.mails.filter(mail => mail.isRead === isRead)
+               filteredMails= filteredMails.filter(mail => mail.isRead === isRead)
           }
           else if (this.setFilter === 'unread'){
                const isRead = false
-               return this.mails.filter(mail => mail.isRead === isRead)
+               filteredMails= filteredMails.filter(mail => mail.isRead === isRead)
           } else if (this.setFilter==='sent'){
-               return this.mails.filter(mail => mail.from === 'user@appsus.com')
+               filteredMails= filteredMails.filter(mail => mail.from === 'user@appsus.com')
           }
-          // const regexByName = new RegExp(this.filterBy.title, 'i')
-          // return this.books.filter(book => (regexByName.test(book.title) && this.filterBy.price>=book.listPrice.amount))
+          console.log('this.filterBy.mailTxt',this.filterBy)
+          if (!this.filterBy.mailTxt) {
+               this.filterBy={mailTxt:''}
+           }
+          const regexByName = new RegExp(this.filterBy.mailTxt, 'i')
+          return filteredMails.filter(mail => (regexByName.test(mail.from.split("@")[0]) || regexByName.test(mail.body)))
      
           // console.log('this.setFilter',this.setFilter)
           // console.log('mails[0][this.setFilter]',this.mails[0][this.setFilter])
@@ -145,6 +154,7 @@ export default {
      components: {
           MailList,
           ComposeMail,
-          MailDetails
+          MailDetails,
+          MailFilter
      },
 }

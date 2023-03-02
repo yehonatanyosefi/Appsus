@@ -4,13 +4,15 @@
 	box-shadow: 0px 8px 10px 1px rgb(0 0 0 / 14%), 0px 3px 14px 2px rgb(0 0 0 / 12%),
 		0px 5px 5px -3px rgb(0 0 0 / 20%);
 	display: grid;
-	grid-template-rows: 1fr 9fr 1fr;
+	grid-template-rows: 1fr 9fr ;
 
 	background-color: var(--clr1);
 	position: fixed;
 	bottom: -100vh;
 	right: 0;
 	transition: transform 1.5s;
+	border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
 }
 .compose-mail.open {
 	transform: translate(0, -100vh);
@@ -21,6 +23,8 @@
     background-color: var(--secondary-clr2);
 	padding-inline: 1em;
     /* border-radius: 10px; */
+	border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
 
 }
 
@@ -31,7 +35,7 @@
 
 .compose-mail .mail-text {
 	display: grid;
-	grid-template-rows: 1fr 1fr 7fr;
+	grid-template-rows: 1fr 1fr 7fr ;
 	padding-inline: 1em;
 }
 
@@ -40,11 +44,11 @@
 	box-shadow: inset 0 -1px 0 0 rgb(100 121 143 / 12%);
 }
 .compose-mail .mail-text textarea {
-	padding: 1em;
+	padding-block: .5em;
 }
 
 .compose-mail .send-mail {
-	padding: 12px 0 16px;
+	/* padding: 12px 0 16px; */
 	padding: 1em;
 }
 
@@ -62,4 +66,11 @@
     border-top-left-radius: 18px;
     border-top-right-radius: 18px;
     background-color: var(--secondary-clr0);
+}
+
+.compose-mail form {
+	display: grid;
+	/* grid-template-rows: auto 1fr; */
+	grid-template-rows: auto 70px;
+	align-items: baseline;
 }
