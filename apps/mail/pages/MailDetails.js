@@ -1,4 +1,5 @@
 import { mailService } from "../services/mail.service.js"
+import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.service.js'
 
 
 export default {
@@ -9,7 +10,7 @@ export default {
           <div className="mail-details-buttons">
                <button class="star" ><i class="fa-regular fa-star"></i></button>
                <button title="save as a note"><i class="fa-solid fa-paper-plane"></i></button>
-               <button title="delete"><i class="fa-regular fa-trash-can"></i></button>
+               <button title="delete" @click="removeMail(mail.id)"><i class="fa-regular fa-trash-can"></i></button>
           </div>
           <p class="mail-from">&lt;{{mail.from}}></p>
           <p class="mail-body">{{mail.body}}</p>
@@ -23,10 +24,17 @@ export default {
           }
      },
      methods: {
-          // remove(mailId){
-          //      this.$emit('remove', mailId)
-
-          // }
+          removeMail(mailId) {
+               mailService.remove(mailId)
+                   .then(() => {
+                    console.log('removing');
+                       
+                       showSuccessMsg('Mail deleted successfully')
+                   })
+                   .catch(err=>{
+                    showErrorMsg('Could not delete mail')
+                   })
+           },
      },
      computed: {
           formatUsername(){

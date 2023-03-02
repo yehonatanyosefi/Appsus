@@ -24,8 +24,16 @@
 
 .mail-index .filter-bar{
     grid-area: filter;
+    padding-inline: 1em;
 }
 
 .mail-index .mail-list-comp{
     grid-area: list;
+}
+
+.mail-index .compose-btn{
+    background-color: var(--secondary-clr1);
+    border-radius: 10px;
+    padding: 1em;
+    margin-block-end: 1em;
 }
