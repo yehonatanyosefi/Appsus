@@ -48,7 +48,16 @@ export default {
      computed: {
      },
      mounted() {
-          this.note.info.todos.forEach((todo, idx) => this.resizeTA(idx))
+          this.note.info.todos.forEach((todo, idx) => {
+               this.resizeTA(idx)
+               window.addEventListener("resize", this.resizeTA(idx))
+          })
+
+     },
+     unmounted() {
+          this.note.info.todos.forEach((todo, idx) => {
+               window.removeEventListener('resize', this.resizeTA(idx))
+          })
      },
      components: {
 

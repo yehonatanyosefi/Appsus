@@ -123,7 +123,7 @@ function _createDemo() {
      let notes = utilService.loadFromStorage(NOTES_KEY)
      if (!notes || !notes.length) {
           notes = [
-               { id: 'n101', createdAt: 1112222, type: 'NoteTxt', isPinned: true, style: { backgroundColor: '#ffff6b' }, info: { title: 'Notes from Yaron', txt: 'Throw away my code' } },
+               { id: 'n101', createdAt: 1112325, type: 'NoteTxt', isPinned: true, style: { backgroundColor: '#ffff6b' }, info: { title: 'Notes from Yaron', txt: 'Throw away my code' } },
                {
                     id: 'n102', createdAt: 1112222, type: 'NoteTxt', isPinned: false, style: { backgroundColor: '#ccffd9' }, info: {
                          title: `Poem`, txt: `Eran leads with patience and care,
@@ -132,7 +132,7 @@ Through lines of code and tech despair,
 He guides them to the finish line, fair and square.` }
                },
                {
-                    id: 'n103', createdAt: 1112552, type: 'NoteTodos', isPinned: false, style: { backgroundColor: '#fffff1' }, info: {
+                    id: 'n103', createdAt: 1112567, type: 'NoteTodos', isPinned: false, style: { backgroundColor: '#fffff1' }, info: {
                          title: 'TODO: Laugh', todos: [{ txt: 'Call Islam', doneAt: null },
                          { txt: 'Say Aloo', doneAt: 187111111 }]
                     }

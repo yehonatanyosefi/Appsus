@@ -113,6 +113,10 @@ export default {
      },
      mounted() {
           this.resizeTA()
+          window.addEventListener("resize", this.resizeTA)
+     },
+     unmounted() {
+          window.removeEventListener('resize', this.resizeTA)
      },
      components: {
           NoteTodos,
