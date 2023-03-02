@@ -1,5 +1,6 @@
 .note-card {
-	max-width: 300px;
+	max-width: 500px;
+	min-width: 240px;
 	min-height: 125px;
 	border-radius: 0.5em;
 	border: 1px solid var(--clr3);

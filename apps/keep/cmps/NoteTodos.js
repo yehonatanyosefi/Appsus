@@ -56,7 +56,9 @@ export default {
      },
      unmounted() {
           this.note.info.todos.forEach((todo, idx) => {
-               window.removeEventListener('resize', this.resizeTA(idx))
+               const elName = 'textArea' + idx
+               const element = this.$refs[elName]
+               if (element[0]) window.removeEventListener('resize', this.resizeTA(idx))
           })
      },
      components: {
