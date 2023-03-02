@@ -37,3 +37,7 @@
     padding: 1em;
     margin-block-end: 1em;
 }
+
+.mail-index .inbox-btn span{
+    font-family: ROBOTO-bold;
+}
