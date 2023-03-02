@@ -1,0 +1,67 @@
+.note-details {
+	z-index: 3;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	translate: -50% -50%;
+	width: 50vw;
+	max-height: 50vh;
+	border-radius: 0.5em;
+	border: 1px solid var(--clr3);
+	transition: box-shadow 250ms opacity 100ms;
+	break-inside: avoid;
+	margin-block-end: 2rem;
+	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+}
+
+.note-details input,
+.note-details textarea {
+	padding: var(--note-card-pad);
+	width: 100%;
+}
+.note-details .note-title {
+	max-height: 3.5rem;
+	overflow: auto;
+	overflow-x: hidden;
+}
+.note-details .note-component {
+	max-height: 34vh;
+	overflow: auto;
+	overflow-x: hidden;
+}
+.note-details .button-container {
+	opacity: 1;
+	display: grid;
+	grid-auto-flow: column;
+	grid-template-columns: repeat(auto-fit, var(--note-btn-size));
+	margin-left: var(--note-card-pad);
+	margin-right: var(--note-card-pad);
+	justify-content: space-between;
+	align-content: center;
+}
+.note-details input[type='color'] {
+	width: var(--note-btn-size);
+	height: var(--note-btn-size);
+	opacity: 0;
+	overflow: hidden;
+	cursor: pointer;
+}
+
+.note-screen {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgb(0 0 0 / 60%);
+	cursor: pointer;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.6s;
+}
+
+.note-screen {
+	pointer-events: auto;
+	opacity: 1;
+	user-select: none;
+}

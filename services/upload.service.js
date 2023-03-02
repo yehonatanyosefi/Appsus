@@ -6,11 +6,11 @@ export const uploadService = {
 
 // The next 2 functions handle IMAGE UPLOADING to img tag from file system:
 function onImgInput(ev, note) {
-    loadImageFromInput(ev, uploadImg, note)
+    loadImageFromInput(ev, note)
 }
 
 // CallBack func will run on success load of the img
-function loadImageFromInput(ev, onImageReady, note) {
+function loadImageFromInput(ev, note) {
     const reader = new FileReader()
     // After we read the file
     reader.onload = function (event) {
@@ -24,9 +24,4 @@ function loadImageFromInput(ev, onImageReady, note) {
         }
     }
     reader.readAsDataURL(ev.target.files[0]) // Read the file we picked
-}
-
-
-function uploadImg(img, note) {
-    return noteService.addImg(img, note)
 }

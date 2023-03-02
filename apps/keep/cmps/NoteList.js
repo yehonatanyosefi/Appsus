@@ -2,6 +2,7 @@ import { noteService } from "../services/note.service.js"
 import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 import NotePreview from "./NotePreview.js"
 import NoteAdd from "./NoteAdd.js"
+import NoteDetails from "./NoteDetails.js"
 export default {
      props: [],
      template: `
@@ -17,7 +18,8 @@ export default {
                               @addTodo="addTodo"
                               @toggleTodos="toggleTodos"
                               @togglePin="togglePin"
-                              @toggleTodoCheck="toggleTodoCheck" />
+                              @toggleTodoCheck="toggleTodoCheck"
+                              @openNote="openNote" />
                     </template>
                </div>
                <div class="main-notes">
@@ -30,14 +32,27 @@ export default {
                               @addTodo="addTodo"
                               @toggleTodos="toggleTodos"
                               @togglePin="togglePin"
-                              @toggleTodoCheck="toggleTodoCheck" />
+                              @toggleTodoCheck="toggleTodoCheck"
+                              @openNote="openNote" />
                     </template>
                </div>
           </div>
+          <NoteDetails v-if="showDetails" :note="showNote"
+                    @updateNote="updateNote"
+                    @deleteNote="deleteNote"
+                    @duplicateNote="duplicateNote"
+                    @deleteTodo="deleteTodo"
+                    @addTodo="addTodo"
+                    @toggleTodos="toggleTodos"
+                    @togglePin="togglePin"
+                    @toggleTodoCheck="toggleTodoCheck" />
+          <div class="note-screen" @click="toggleScreen" v-if="showDetails"></div>
      `,
      data() {
           return {
                notes: null,
+               showDetails: false,
+               showId: null,
           }
      },
      methods: {
@@ -57,6 +72,7 @@ export default {
                // .then(res => console.log(`res:`, res))
           },
           deleteNote(noteId) {
+               this.showDetails = false
                noteService.remove(noteId)
                     .then(res => {
                          const idx = this.notes.findIndex(note => note.id === noteId)
@@ -110,9 +126,18 @@ export default {
                          this.notes[noteIdx] = newNote
                     })
           },
+          toggleScreen() {
+               this.showDetails = !this.showDetails
+          },
+          openNote(noteId) {
+               this.showDetails = true
+               this.showId = noteId
+          },
      },
      computed: {
-
+          showNote() {
+               return this.notes.filter(note => note.id === this.showId)[0]
+          },
      },
      created() {
           noteService.query()
@@ -121,5 +146,6 @@ export default {
      components: {
           NotePreview,
           NoteAdd,
+          NoteDetails,
      },
 }

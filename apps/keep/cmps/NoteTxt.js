@@ -1,8 +1,10 @@
 import { utilService } from "../../../services/util.service.js"
 export default {
-     props: ['note'],
+     props: ['note', 'isPreview'],
      template: `
+     <p v-if="isPreview" class="preview-text">{{note.info.txt}}</p>
      <textarea
+          v-else
           v-model="note.info.txt"
           @input="updateNote"
           ref="textArea"
@@ -30,11 +32,13 @@ export default {
           },
      },
      mounted() {
-          window.addEventListener("resize", this.debouncedResizeTA)
-          setTimeout(() => this.resizeTA(), 0)
+          if (!this.isPreview) {
+               window.addEventListener("resize", this.debouncedResizeTA)
+               setTimeout(() => this.resizeTA(), 0)
+          }
      },
      unmounted() {
-          window.removeEventListener('resize', this.debouncedResizeTA)
+          if (!this.isPreview) window.removeEventListener('resize', this.debouncedResizeTA)
      },
      components: {
 

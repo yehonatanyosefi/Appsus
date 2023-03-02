@@ -3,7 +3,10 @@ import { noteService } from "../services/note.service.js"
 export default {
      props: [],
      template: `
-          <NoteList />
+          <div class="notes-container">
+
+               <NoteList />
+          </div>
      `,
      data() {
           return {

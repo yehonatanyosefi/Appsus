@@ -1,5 +1,5 @@
 export default {
-     props: ['note'],
+     props: ['note', 'isPreview'],
      template: `
      <div class="flex justify-center align-center">
           <img :src="note.info.url" style="max-width:150px;">

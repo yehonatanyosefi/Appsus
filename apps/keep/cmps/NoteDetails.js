@@ -7,45 +7,42 @@ import { utilService } from "../../../services/util.service.js"
 export default {
      props: ['note'],
      template: `
-     <div class="note-card" :style="'backgroundColor:'+note.style.backgroundColor+';'"
+     <div class="note-details" :style="'backgroundColor:'+note.style.backgroundColor+';'"
           @mouseover="isHover = true"
-          @mouseleave="isHover = false"
-          @click="openNote">
+          @mouseleave="isHover = false">
           <div class="flex justify-between align-center">
-               <p class="note-title">
-                    {{note.info.title}}
-                    <span v-if="!note.info.title">Title</span>
-               </p>
-               <button @click.stop="togglePin" title="Toggle Pinned Items" :class="isHidden">
+               <textarea v-model="note.info.title" @input="updateTitle" class="note-title"
+               placeholder="Title" ref="textAreaTitle"></textarea>
+               <button @click="togglePin" title="Toggle Pinned Items" :class="isHidden">
                     <i class="fa-solid fa-thumbtack"></i>
                </button>
           </div>
-          <component :is="note.type" :note="note" isPreview="true"
+          <component  class="note-component" :is="note.type" :note="note" :isPreview="false"
                @updateNote="updateNote"
                @deleteTodo="deleteTodo"
                @addTodo="addTodo"
                @toggleTodoCheck="toggleTodoCheck" />
           <div class="button-container">
                <div class="color-wrapper">
-                    <input @click.stop type="color" v-model="note.style.backgroundColor" @input="updateInternal"  title="Change Background Color">
+                    <input type="color" v-model="note.style.backgroundColor" @input="updateInternal"  title="Change Background Color">
                </div>
-               <label :for="note.id" class="upload-btn" title="Upload Image" @click.stop>
-                    <input @click.stop
+               <label :for="note.id" class="upload-btn" title="Upload Image">
+                    <input
                          class="upload-btn"
                          type="file"
                          :id="note.id"
                          :name="note.id"
-                         @change="upload"
+                         @change="upload($event, note.id)"
                          hidden />
                     <i class="fa-regular fa-image upload-btn"></i>
                </label>
-               <button class="" v-if="note.type !== 'NoteImg'" @click.stop="toggleTodos" title="Checklist Toggle">
+               <button class="" v-if="note.type !== 'NoteImg'" @click="toggleTodos" title="Checklist Toggle">
                     <i class="fa-regular fa-square-check note-btn"></i>
                </button>
-               <button @click.stop="duplicateNote" title="Duplicate Note">
+               <button @click="duplicateNote" title="Duplicate Note">
                     <i class="fa-regular fa-clone"></i>
                </button>
-               <button @click.stop="deleteNote" title="Delete Note" class="note-btn">
+               <button @click="deleteNote" title="Delete Note" class="note-btn">
                     <i class="fa-solid fa-trash note-btn"></i>
                </button>
           </div>
@@ -68,6 +65,7 @@ export default {
                // }, 100);
           },
           updateTitle() {
+               this.resizeTA()
                this.updateInternal()
           },
           updateInternal() {
@@ -97,8 +95,10 @@ export default {
           toggleTodoCheck(noteId, idx) {
                this.$emit('toggleTodoCheck', noteId, idx)
           },
-          openNote() {
-               this.$emit('openNote', this.note.id)
+          resizeTA() {
+               const element = this.$refs.textAreaTitle
+               element.style.height = '20px'
+               element.style.height = element.scrollHeight + 12 + 'px'
           },
      },
      watch: {
@@ -107,10 +107,18 @@ export default {
           isHidden() {
                return { 'hide': !this.isHover && !this.note.isPinned }
           },
+          debouncedResizeTA() {
+               return utilService.debounce(this.resizeTA, 250)
+          },
      },
      mounted() {
+          if (!this.isPreview) {
+               window.addEventListener("resize", this.debouncedResizeTA)
+               setTimeout(() => this.resizeTA(), 0)
+          }
      },
      unmounted() {
+          if (!this.isPreview) window.removeEventListener('resize', this.debouncedResizeTA)
      },
      components: {
           NoteTodos,
