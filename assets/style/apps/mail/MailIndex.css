@@ -1,5 +1,18 @@
-.mail-header{
+.mail-index{
+    display: grid;
+    grid-template-areas: 
+    "header header"
+    "filter list"
+    ;
+    grid-template-columns: auto 1fr;
+    column-gap: 1em;
+    /* padding-block-start: 1em; */
+}
+
+.mail-index .mail-header{
     align-items: center;
+    grid-area: header;
+    padding: 1em;
 }
 
 .mail-header input{
@@ -7,4 +20,20 @@
     padding: .5em;
     /* border: gray 2; */
     border: 1px solid rgba(128, 128, 128, 0.403);
+}
+
+.mail-index .filter-bar{
+    grid-area: filter;
+    padding-inline: 1em;
+}
+
+.mail-index .mail-list-comp{
+    grid-area: list;
+}
+
+.mail-index .compose-btn{
+    background-color: var(--secondary-clr1);
+    border-radius: 10px;
+    padding: 1em;
+    margin-block-end: 1em;
 }

@@ -1,0 +1,35 @@
+.mail-details{
+    display: grid;
+    grid-template-areas: 
+    "subject btns"
+    "username from"
+    "body body"
+    ;
+    grid-template-columns: auto 1fr ;
+    align-items: center;
+    /* width: fit-content; */
+    column-gap: 1em;
+    padding: 2em;
+}
+
+.mail-details h1.subject{
+    grid-area: subject;
+    margin: 0;
+}
+
+.mail-details h3.username{
+    grid-area: username;
+}
+
+.mail-details .mail-from{
+    grid-area: from;
+}
+
+.mail-details .mail-body{
+    grid-area: body;
+}
+
+.mail-details .mail-details-buttons{
+    grid-area: btns;
+    margin-inline-start: auto;
+}
