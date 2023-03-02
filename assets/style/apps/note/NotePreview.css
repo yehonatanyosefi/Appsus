@@ -65,12 +65,22 @@
 }
 
 .note-title {
+	padding: var(--note-card-pad);
 	font-size: 1.25rem;
 	color: var(--clr5);
+}
+
+.note-card .note-title {
+	user-select: none;
 }
 .striked {
 	text-decoration: line-through;
 }
 .todo-item {
 	height: fit-content;
+}
+.preview-text {
+	padding: var(--note-card-pad);
+	width: 100%;
+	user-select: none;
 }
