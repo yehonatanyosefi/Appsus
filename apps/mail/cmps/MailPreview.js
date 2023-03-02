@@ -20,7 +20,7 @@ export default {
 `,
      data() {
           return {
-               username:null,
+               // username:null,
                read:true,
                unread:true,
                length:10,
@@ -37,9 +37,7 @@ export default {
      },
      computed: {
           formatUsername(){
-               const username = this.mail.from.split("@")[0]
-               return this.username=username
-               
+               return (this.mail.from !== 'user@appsus.com') ? this.mail.from.split("@")[0]:this.mail.to.split("@")[0]  
           },
           formatTime(){
                return i18Service.formatTime(this.mail.sentAt)

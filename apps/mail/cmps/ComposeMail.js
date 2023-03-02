@@ -10,7 +10,7 @@ export default {
                 <div className="window-buttons">
                     <button class="minimize" title="Minimize"><i class="fa-regular fa-window-minimize"></i></button>
                     <button class="full-screen" title="Full screen"><i class="fa-solid fa-up-right-and-down-left-from-center"></i></button>
-                    <button class="close" @click="close" title="Save & close"><i class="fa-solid fa-xmark"></i></button>
+                    <button class="close" @click="closeAndSave" title="Save & close"><i class="fa-solid fa-xmark"></i></button>
                 </div>
             </header>
 
@@ -36,7 +36,7 @@ export default {
         },
     },
     methods: {
-        close() {
+        closeAndSave() {
             this.isOpen = false
             setTimeout(()=> {
                 this.$emit('closeCompose')
@@ -45,7 +45,9 @@ export default {
         },
         send() {
                 this.$emit('addMail', this.subject,this.body ,this.recipient)
-                this.close()
+                // this.close()
+                this.$emit('closeCompose')
+
           },
           resetVars(){
             this.recipient=''

@@ -122,15 +122,15 @@ export default {
           if (this.setFilter==='inbox') filteredMails= filteredMails.filter(mail => mail.from !== 'user@appsus.com')
           else if (this.setFilter === 'read'){
                const isRead = true
-               filteredMails= filteredMails.filter(mail => mail.isRead === isRead)
+               filteredMails= filteredMails.filter(mail => (mail.isRead === isRead && mail.from !== 'user@appsus.com'))
           }
           else if (this.setFilter === 'unread'){
                const isRead = false
                filteredMails= filteredMails.filter(mail => mail.isRead === isRead)
           } else if (this.setFilter==='sent' ){
-               filteredMails= filteredMails.filter(mail => mail.from === 'user@appsus.com' &&  mail.isSent !== null)
+               filteredMails= filteredMails.filter(mail => mail.from === 'user@appsus.com' &&  mail.sentAt !== null)
           }else if (this.setFilter==='drafts'){
-               filteredMails= filteredMails.filter(mail => mail.isSent === null)
+               filteredMails= filteredMails.filter(mail => mail.sentAt === null)
           }
           console.log('this.filterBy.mailTxt',this.filterBy)
           if (!this.filterBy.mailTxt) {
