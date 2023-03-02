@@ -3,7 +3,6 @@ import NoteTxt from "./NoteTxt.js"
 import NoteImg from "./NoteImg.js"
 import { uploadService } from "../../../services/upload.service.js"
 import { utilService } from "../../../services/util.service.js"
-// import vueSwatches from "../../../assets/style/swatches/vueSwatches.js" //TODO: ask about swatches
 
 export default {
      props: ['note'],
@@ -126,6 +125,5 @@ export default {
           NoteTodos,
           NoteTxt,
           NoteImg,
-          // VSwatches: window['vue-swatches'],
      },
 }
