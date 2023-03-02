@@ -1,13 +1,11 @@
 import { noteService } from "../services/note.service.js"
+import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 import NotePreview from "./NotePreview.js"
+import NoteAdd from "./NoteAdd.js"
 export default {
      props: [],
      template: `
-          <div class="flex justify-center align-center add-note">
-               <button @click="addNote">
-                    <i class="fa-solid fa-circle-plus add-note"></i>
-               </button>
-          </div>
+          <NoteAdd @addNote="addNote" />
           <div class="notes-container">
                <div class="main-notes">
                     <template v-for="note,idx in notes" :key="idx">
@@ -63,15 +61,21 @@ export default {
                     .then(res => {
                          const idx = this.notes.findIndex(note => note.id === noteId)
                          this.notes.splice(idx, 1)
+                         showSuccessMsg('Note deleted')
                     })
+                    .catch(err => showErrorMsg('Note delete failed'))
           },
           duplicateNote(noteId) {
                noteService.duplicateNote(noteId)
                     .then(newNotes => this.notes = newNotes)
           },
-          addNote() {
-               noteService.addNote()
-                    .then(newNote => this.notes.push(newNote))
+          addNote(txt) {
+               noteService.addNote(txt)
+                    .then(newNote => {
+                         this.notes.push(newNote)
+                         showSuccessMsg('Note added')
+                    })
+                    .catch(err => showErrorMsg('Note add failed'))
           },
           deleteTodo(noteId, idx) {
                noteService.deleteTodo(noteId, idx)
@@ -92,7 +96,12 @@ export default {
                     .then(newNote => {
                          const noteIdx = this.notes.findIndex(note => note.id === noteId)
                          this.notes[noteIdx] = newNote
+                         let msg = 'Note '
+                         if (!newNote.isPinned) msg = msg + 'unpinned'
+                         else msg = msg + 'pinned'
+                         showSuccessMsg(msg)
                     })
+                    .catch(err => showErrorMsg('Note pin failed'))
           },
           toggleTodoCheck(noteId, idx) {
                noteService.toggleTodoCheck(noteId, idx)
@@ -111,5 +120,6 @@ export default {
      },
      components: {
           NotePreview,
+          NoteAdd,
      },
 }

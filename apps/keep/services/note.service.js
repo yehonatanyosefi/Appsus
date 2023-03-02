@@ -16,6 +16,7 @@ export const noteService = {
      toggleTodos,
      togglePin,
      toggleTodoCheck,
+     addImg,
 }
 
 function query(filterBy = {}) {
@@ -49,8 +50,8 @@ function save(note) {
      }
 }
 
-function addNote() {
-     const newNote = { id: null, createdAt: Date.now(), type: 'NoteTxt', isPinned: false, style: { backgroundColor: '#ffffff' }, info: { title: '', txt: '' } }
+function addNote(txt) {
+     const newNote = { id: null, createdAt: Date.now(), type: 'NoteTxt', isPinned: false, style: { backgroundColor: '#ffffff' }, info: { title: '', txt: txt || '' } }
      return save(newNote)
 }
 
@@ -117,6 +118,11 @@ function toggleTodoCheck(noteId, idx) {
                else currTodo[idx].doneAt = Date.now()
                return save(note)
           })
+}
+function addImg(img, note) {
+     note.type = 'NoteImg'
+     note.info.url = img.src
+     return save(note)
 }
 
 function _createDemo() {
