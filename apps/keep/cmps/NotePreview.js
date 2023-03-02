@@ -13,7 +13,7 @@ export default {
           <div class="flex justify-between align-center">
                <textarea v-model="note.info.title" @input="updateTitle" class="note-title"
                placeholder="Title" ref="textAreaTitle"></textarea>
-               <button @click="togglePin" title="Toggle Pinned Items">
+               <button @click="togglePin" title="Toggle Pinned Items" :class="isHidden">
                     <i class="fa-solid fa-thumbtack"></i>
                </button>
           </div>
@@ -22,8 +22,7 @@ export default {
                @deleteTodo="deleteTodo"
                @addTodo="addTodo"
                @toggleTodoCheck="toggleTodoCheck" />
-          <div class="button-container" :class="isHidden">
-               
+          <div class="button-container">
                <div class="color-wrapper">
                     <input type="color" v-model="note.style.backgroundColor" @input="updateInternal"  title="Change Background Color">
                </div>
@@ -108,7 +107,7 @@ export default {
      },
      computed: {
           isHidden() {
-               return { 'hide': !this.isHover }
+               return { 'hide': !this.isHover && !this.note.isPinned }
           },
      },
      mounted() {
