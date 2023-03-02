@@ -31,7 +31,7 @@ export default {
                const element = this.$refs[elName]
                if (!element || !element[0]) return
                element[0].style.height = '45px'
-               element[0].style.height = element[0].scrollHeight + 15 + 'px'
+               element[0].style.height = element[0].scrollHeight + 12 + 'px'
           },
           resizeAllTA() {
                this.note.info.todos.forEach((todo, idx) => {

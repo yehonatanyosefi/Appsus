@@ -13,9 +13,6 @@
 @import 'cmps/AppHeader.css';
 @import 'cmps/UserMsg.css';
 
-/* SWATCHES */
-@import 'swatches/vue-swatches.css';
-
 /* Apps */
 
 /* mail */
@@ -26,6 +23,7 @@
 @import 'apps/mail/MailDetails.css';
 
 /* note */
+@import 'apps/note/NoteAdd.css';
 @import 'apps/note/NoteIndex.css';
 @import 'apps/note/NoteList.css';
 @import 'apps/note/NotePreview.css';

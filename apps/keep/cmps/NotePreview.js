@@ -2,7 +2,7 @@ import NoteTodos from "./NoteTodos.js"
 import NoteTxt from "./NoteTxt.js"
 import NoteImg from "./NoteImg.js"
 import { uploadService } from "../../../services/upload.service.js"
-// import vueSwatches from "../../../assets/style/swatches/vueSwatches.js" //TODO: ask about swatches
+import { utilService } from "../../../services/util.service.js"
 
 export default {
      props: ['note'],
@@ -54,14 +54,15 @@ export default {
           }
      },
      methods: {
-          upload(ev) { //TODO: fix bug it shows only on first note
-               uploadService.onImgInput(ev)
-               setTimeout(() => {
-                    const img = uploadService.getImg()
-                    this.note.type = 'NoteImg'
-                    this.note.info.url = img.src
-                    this.updateInternal()
-               }, 100);
+          upload(ev) {
+               uploadService.onImgInput(ev, this.note)
+               // .then(res => console.log(`res:`, res))
+               // setTimeout(() => {
+               //      const img = uploadService.getImg()
+               //      this.note.type = 'NoteImg'
+               //      this.note.info.url = img.src
+               //      this.updateInternal()
+               // }, 100);
           },
           updateTitle() { //TODO: if can chain, refactor
                this.resizeTA()
@@ -97,7 +98,7 @@ export default {
           resizeTA() {
                let element = this.$refs.textAreaTitle
                element.style.height = '20px'
-               element.style.height = element.scrollHeight + 10 + 'px'
+               element.style.height = element.scrollHeight + 12 + 'px'
           },
      },
      watch: {
@@ -109,18 +110,20 @@ export default {
           isHidden() {
                return { 'hide': !this.isHover && !this.note.isPinned }
           },
+          debouncedResizeTA() {
+               return utilService.debounce(this.resizeTA, 250)
+          },
      },
      mounted() {
-          this.resizeTA()
-          window.addEventListener("resize", this.resizeTA)
+          window.addEventListener("resize", this.debouncedResizeTA)
+          setTimeout(() => this.resizeTA(), 0)
      },
      unmounted() {
-          window.removeEventListener('resize', this.resizeTA)
+          window.removeEventListener('resize', this.debouncedResizeTA)
      },
      components: {
           NoteTodos,
           NoteTxt,
           NoteImg,
-          // VSwatches: window['vue-swatches'],
      },
 }

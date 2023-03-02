@@ -1,3 +1,4 @@
+import { utilService } from "../../../services/util.service.js"
 export default {
      props: ['note'],
      template: `
@@ -20,18 +21,20 @@ export default {
           resizeTA() {
                let element = this.$refs.textArea
                element.style.height = '20px'
-               element.style.height = element.scrollHeight + 10 + 'px'
+               element.style.height = element.scrollHeight + 12 + 'px'
           },
      },
      computed: {
-
+          debouncedResizeTA() {
+               return utilService.debounce(this.resizeTA, 250)
+          },
      },
      mounted() {
-          this.resizeTA()
-          window.addEventListener("resize", this.resizeTA)
+          window.addEventListener("resize", this.debouncedResizeTA)
+          setTimeout(() => this.resizeTA(), 0)
      },
      unmounted() {
-          window.removeEventListener('resize', this.resizeTA)
+          window.removeEventListener('resize', this.debouncedResizeTA)
      },
      components: {
 
