@@ -6,8 +6,9 @@ import NoteDetails from "./NoteDetails.js"
 export default {
      props: [],
      template: `
-          <NoteAdd @addNote="addNote" />
-          <div class="notes-container">
+          <NoteAdd @addNote="addNote"/>
+          <div class="notes-list">
+               <div class="notes-container-title">PINNED</div>
                <div class="main-notes">
                     <template v-for="note,idx in notes" :key="idx">
                          <NotePreview v-if="note.isPinned" :note="note"
@@ -22,6 +23,7 @@ export default {
                               @openNote="openNote" />
                     </template>
                </div>
+               <div class="notes-container-title">OTHERS</div>
                <div class="main-notes">
                     <template v-for="note,idx in notes" :key="idx">
                          <NotePreview v-if="!note.isPinned" :note="note"

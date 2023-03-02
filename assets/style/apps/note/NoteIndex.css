@@ -1,3 +1,29 @@
+/* .notes-index button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: var(--clr4);
+	transition: filter 100ms;
+	background-blend-mode: overlay;
+	border-radius: 50%;
+}
+.notes-index button:hover {
+	color: var(--clr5);
+	filter: drop-shadow(0 0 0.75rem rgb(172, 172, 172));
+} */
+/* .notes-index {
+	display: grid;
+	grid-template-columns: 'sidebar main main';
+}
+.notes-container {
+	grid-area: main;
+}
+.notes-sidebar-container {
+	grid-area: sidebar;
+} */
+
+/* 'search search' */
+
 .notes-container p {
 	margin: 0;
 }

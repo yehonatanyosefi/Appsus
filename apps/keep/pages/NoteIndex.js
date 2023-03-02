@@ -1,12 +1,17 @@
 import NoteList from "../cmps/NoteList.js"
+import NoteSideBar from "../cmps/NoteSideBar.js"
 import { noteService } from "../services/note.service.js"
 export default {
      props: [],
      template: `
-          <div class="notes-container">
-
+     <main class="notes-index">
+          <!-- <section class="notes-sidebar-container">
+               <NoteSideBar />
+          </section> -->
+          <section class="notes-container">
                <NoteList />
-          </div>
+          </section>
+     </main>
      `,
      data() {
           return {
@@ -21,5 +26,6 @@ export default {
      },
      components: {
           NoteList,
+          NoteSideBar,
      },
 }

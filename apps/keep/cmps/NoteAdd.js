@@ -1,8 +1,7 @@
 export default {
      props: [],
      template: `
-     <div class="flex justify-center align-center">
-
+     <div class="flex justify-center align-center note-add">
           <div class="flex justify-center align-center note-add-container">
                <textarea placeholder="Take a note..." v-model="currText"></textarea>
                <button @click="addNote">

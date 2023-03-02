@@ -13,3 +13,7 @@
 	font-family: ROBOTO-bold;
 	src: url(../../fonts/Roboto-Bold.ttf);
 }
+@font-face {
+	font-family: ROBOTO-medium;
+	src: url(../../fonts/Roboto-Medium.ttf);
+}

@@ -1,5 +1,4 @@
-.notes-container {
-	display: grid;
+.notes-list {
 }
 
 .main-notes {
@@ -8,4 +7,11 @@
 	columns: auto 220px;
 	column-gap: 1.5rem;
 	margin-bottom: 3rem;
+}
+.notes-container .notes-container-title {
+	padding-left: 3.75rem;
+	font-size: 0.6875rem;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+	letter-spacing: 0.07272727em;
 }

@@ -12,6 +12,11 @@
 	break-inside: avoid;
 	margin-block-end: 2rem;
 	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+	scale: 0.5;
+	transition: scale 250ms;
+}
+.note-details.show {
+	scale: 1;
 }
 
 .note-details input,
@@ -55,13 +60,10 @@
 	height: 100%;
 	background-color: rgb(0 0 0 / 60%);
 	cursor: pointer;
-	pointer-events: none;
+	/* pointer-events: none;
 	opacity: 0;
-	transition: opacity 0.6s;
-}
-
-.note-screen {
-	pointer-events: auto;
+	pointer-events: auto; */
 	opacity: 1;
 	user-select: none;
+	transition: opacity 1s;
 }

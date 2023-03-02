@@ -8,6 +8,7 @@ export default {
      props: ['note'],
      template: `
      <div class="note-details" :style="'backgroundColor:'+note.style.backgroundColor+';'"
+          :class="isShow"
           @mouseover="isHover = true"
           @mouseleave="isHover = false">
           <div class="flex justify-between align-center">
@@ -51,6 +52,7 @@ export default {
      data() {
           return {
                isHover: false,
+               isShow: '',
           }
      },
      methods: {
@@ -112,13 +114,12 @@ export default {
           },
      },
      mounted() {
-          if (!this.isPreview) {
-               window.addEventListener("resize", this.debouncedResizeTA)
-               setTimeout(() => this.resizeTA(), 0)
-          }
+          window.addEventListener("resize", this.debouncedResizeTA)
+          setTimeout(() => this.resizeTA(), 0)
+          setTimeout(() => this.isShow = 'show', 10)
      },
      unmounted() {
-          if (!this.isPreview) window.removeEventListener('resize', this.debouncedResizeTA)
+          window.removeEventListener('resize', this.debouncedResizeTA)
      },
      components: {
           NoteTodos,
