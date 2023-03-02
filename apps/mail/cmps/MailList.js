@@ -8,10 +8,9 @@ export default {
      <section className="mail-list">
           <ul class="clean-list">
                <li v-for="mail in mails" :key="mail.id">
-               <!-- <RouterLink :to="'/mail/details/'+mail.id"> -->
-                    <MailPreview :mail="mail" @removeMail="remove"/>
-               <!-- </RouterLink>  -->
-
+               <RouterLink :to="'/mail/'+mail.id" @click="changeIsRead(true,mail.id)">
+                    <MailPreview :mail="mail" @removeMail="remove" />
+               </RouterLink> 
                </li>
           </ul>
      </section>
@@ -25,6 +24,9 @@ export default {
           remove(mailId) {
                this.$emit('removeMail', mailId)
            },
+           changeIsRead(isRead,mailId){
+               this.$emit('changeIsRead',isRead, mailId)
+           }
      },
      computed: {
 

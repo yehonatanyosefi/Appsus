@@ -8,7 +8,8 @@ export const mailService = {
   get,
   remove,
   save,
-  addMail
+  addMail,
+  changeIsRead
 }
 
 function query(filterBy = {}) {
@@ -39,6 +40,14 @@ function save(mail) {
   } else { 
     return storageService.post(MAIL_KEY, mail)
   }
+}
+
+function changeIsRead(isRead,mailId){
+  return get(mailId)
+          .then(mail=>{
+            mail.isRead=isRead
+            return save(mail)
+          })
 }
 
 function addMail(newSubject,newBody,newTo){

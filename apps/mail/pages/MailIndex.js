@@ -7,6 +7,7 @@ import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.servic
 export default {
      props: [],
      template: `
+     <section className="mail-index">
      <header class="mail-header flex justify-between">
           <button class="toggle-menu x fa-solid fa-bars"> </button>
           <div className="logo fa-duotone fa-m">SusMail</div>
@@ -28,10 +29,13 @@ export default {
           <p>Unread: {{UnreadCount}}</p>
      </section>
 
-     <MailList 
+     <MailList class="mail-list-comp"
      :mails="mails"
      v-if="mails"
-     @removeMail="removeMail" />
+     @removeMail="removeMail" 
+     @changeIsRead="changeIsRead"/>
+     </section>
+     
 
      `,
      data() {
@@ -74,12 +78,28 @@ export default {
            },
            setFilterBy(filterBy) {
                this.filterBy = filterBy
+           },
+          changeIsRead(isRead,mailId){
+               mailService.changeIsRead(isRead,mailId)
+               //   .then(updatedMail=> {
+               //      console.log('isRead',isRead)
+               //      console.log('updatedMail',updatedMail)
+               //        const idx= this.mails.findIdx(mail===updatedMail)
+               //        this.mails[idx].splice(idx,1,updatedMail)
+               // })
+
+               // const currMail= this.mails.find(mail=> mail.id===mailId)
+               // console.log('currMail',currMail)
+               // mailService.save(currMail)
+               // .then(updatedMail=>{
+               //      const idx= this.mails.findIdx(mail===updatedMail)
+               //      this.mails[idx].splice(idx,1,updatedMail)
+               // })  
            }
      },
      computed: {
         UnreadCount(){
           if (this.mails) this.mails.map(mail => {
-               console.log(mail.isRead);
                if (!mail.isRead) this.unread++
           })
           return this.unread
