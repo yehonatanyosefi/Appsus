@@ -3,7 +3,7 @@ import { i18Service } from "../../../services/i18n.service.js"
 export default {
      props: ['mail'],
      template: `
-     <section class="mail-preview" :class="formatReadMail">
+     <section @click.stop class="mail-preview" :class="formatReadMail">
           <!-- <div :class="formatReadMail"> -->
                <input type="checkbox" />
                <i class="fa-regular fa-star"></i>
@@ -11,7 +11,7 @@ export default {
                <p>{{mail.body}}</p>
                <p>{{formatTime}}</p>
                <div class="hover-buttons flex"> 
-                    <button @click="remove(mail.id)"><i class="fa-regular fa-trash-can"></i></button>
+                    <button @click.stop="remove(mail.id)"><i class="fa-regular fa-trash-can"></i></button>
                     <button v-if="read"><i class="fa-regular fa-envelope"></i></button>
                     <button v-if="unread"><i class="fa-regular fa-envelope-open"></i></button>
                </div>

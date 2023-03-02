@@ -26,8 +26,8 @@ export default {
           @closeCompose="closeModal"
           @addMail="addMail"
           />
-          <p>Unread: {{UnreadCount}}</p>
-          <button @click="setFilter='inbox'">Inbox</button>
+          <!-- <p>Unread: {{UnreadCount}}</p> -->
+          <button class ="inbox-btn" @click="setFilter='inbox'">Inbox <span>({{UnreadCount}})</span></button>
           <button @click="setFilter='unread'">Unread</button>
           <button @click="setFilter='read'">read</button>
           <button @click="setFilter='sent'">sent</button>
