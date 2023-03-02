@@ -27,6 +27,10 @@
     padding-inline: 1em;
 }
 
+.mail-index .filter-bar > *{
+    align-self: baseline;
+}
+
 .mail-index .mail-list-comp{
     grid-area: list;
 }

@@ -33,6 +33,7 @@ export default {
           <button @click="setFilter='unread'">Unread</button>
           <button @click="setFilter='read'">read</button>
           <button @click="setFilter='sent'">sent</button>
+          <button @click="setFilter='drafts'">drafts</button>
      </section>
 
      <MailList class="mail-list-comp"
@@ -63,12 +64,12 @@ export default {
           closeModal(){
                 this.isOpen=false
           },
-          addMail(subject,body ,recipient){
+          addMail(subject,body ,recipient,isSent){
                mailService
-              .addMail(subject,body ,recipient)
+              .addMail(subject,body ,recipient,isSent)
               .then((updatedMail) => {
                 this.mails.push(updatedMail)
-                showSuccessMsg('Mail sent')
+                isSent ? showSuccessMsg('Mail sent') : showSuccessMsg('Saved to drafts')
               })
               .catch((err) => {
                showErrorMsg('Could not send mail')
@@ -126,8 +127,10 @@ export default {
           else if (this.setFilter === 'unread'){
                const isRead = false
                filteredMails= filteredMails.filter(mail => mail.isRead === isRead)
-          } else if (this.setFilter==='sent'){
-               filteredMails= filteredMails.filter(mail => mail.from === 'user@appsus.com')
+          } else if (this.setFilter==='sent' ){
+               filteredMails= filteredMails.filter(mail => mail.from === 'user@appsus.com' &&  mail.isSent !== null)
+          }else if (this.setFilter==='drafts'){
+               filteredMails= filteredMails.filter(mail => mail.isSent === null)
           }
           console.log('this.filterBy.mailTxt',this.filterBy)
           if (!this.filterBy.mailTxt) {

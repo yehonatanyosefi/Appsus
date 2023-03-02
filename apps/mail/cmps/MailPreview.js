@@ -1,5 +1,4 @@
 import { i18Service } from "../../../services/i18n.service.js"
-import LongText from '../cmps/LongText.js'
 
 export default {
      props: ['mail'],
@@ -9,8 +8,7 @@ export default {
                <input type="checkbox" />
                <i class="fa-regular fa-star"></i>
                <p>{{formatUsername}}</p>
-               <!-- <p>{{mail.body}}</p> -->
-               <LongTxt :txt="mail.body" :length="length"/>
+               <p class="mail-body">{{mail.body}}</p>
                <p>{{formatTime}}</p>
                <div class="hover-buttons flex"> 
                     <button @click.prevent="remove(mail.id)"><i class="fa-regular fa-trash-can"></i></button>
@@ -25,6 +23,7 @@ export default {
                username:null,
                read:true,
                unread:true,
+               length:10,
           }
      },
      methods: {
@@ -33,25 +32,28 @@ export default {
            },
            changeIsRead(isRead,mailId){
                this.$emit('changeIsRead',isRead, mailId)
-           }
+           },
+          
      },
      computed: {
           formatUsername(){
                const username = this.mail.from.split("@")[0]
                return this.username=username
+               
           },
           formatTime(){
                return i18Service.formatTime(this.mail.sentAt)
           },
           formatReadMail(){
                return {'read': !this.mail.isRead }
-          }
+          },
+          
      },
      created() {
-
+          
      },
+     
      components: {
           i18Service,
-          LongText
      },
 }

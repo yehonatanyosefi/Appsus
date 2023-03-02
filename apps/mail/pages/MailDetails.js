@@ -14,7 +14,7 @@ export default {
           </div>
           <p class="mail-from">&lt;{{mail.from}}></p>
           <p class="mail-body">{{mail.body}}</p>
-          <!-- <pre>{{mail}}</pre> -->
+          <pre>{{mail}}</pre>
      </section>
 `,
      data() {

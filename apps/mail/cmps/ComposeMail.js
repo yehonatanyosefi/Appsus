@@ -16,7 +16,6 @@ export default {
 
             <form action="" @submit="send">
             <main class="mail-text">
-                <!-- why does the email pattern doesnt work?? -->
                 <input v-model="recipient" class="recipient" type="email" placeholder="Recipient"  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
 
                 <input v-model="subject" class="mail-subject" type="text" placeholder="Subject"/>
@@ -41,6 +40,7 @@ export default {
             this.isOpen = false
             setTimeout(()=> {
                 this.$emit('closeCompose')
+                this.$emit('addMail', this.subject,this.body ,this.recipient,false)
             },1500)
         },
         send() {
