@@ -71,3 +71,6 @@
 .striked {
 	text-decoration: line-through;
 }
+.todo-item {
+	height: fit-content;
+}

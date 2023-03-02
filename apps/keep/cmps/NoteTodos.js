@@ -1,8 +1,9 @@
+import { utilService } from "../../../services/util.service.js"
 export default {
-     props: ['note'], //TODO: fix striked class
+     props: ['note'],
      template: `
           <ul class="clean-list">
-               <li v-for="todo,idx in note.info.todos" key="idx" class="flex">
+               <li v-for="todo,idx in note.info.todos" key="idx" class="flex todo-item">
                          <button @click="toggleTodoCheck(idx)"  title="Check Todo">
                               <i class="fa-regular fa-square-check" v-if="todo.doneAt"></i>
                               <i class="fa-regular fa-square" v-else></i>
@@ -25,15 +26,21 @@ export default {
           }
      },
      methods: {
-          updateNote(idx) {
-               this.resizeTA(idx)
-               this.$emit('updateNote', this.note)
-          },
           resizeTA(idx) {
                const elName = 'textArea' + idx
                const element = this.$refs[elName]
+               if (!element || !element[0]) return
                element[0].style.height = '45px'
-               element[0].style.height = element.scrollHeight + 10 + 'px'
+               element[0].style.height = element[0].scrollHeight + 15 + 'px'
+          },
+          resizeAllTA() {
+               this.note.info.todos.forEach((todo, idx) => {
+                    this.resizeTA(idx)
+               })
+          },
+          updateNote(idx) {
+               this.resizeTA(idx)
+               this.$emit('updateNote', this.note)
           },
           deleteTodo(idx) {
                this.$emit('deleteTodo', this.note.id, idx)
@@ -46,19 +53,26 @@ export default {
           },
      },
      computed: {
+          debouncedResizeAllTA() {
+               return utilService.debounce(this.resizeAllTA, 250)
+          },
+     },
+     watch: {
+          'note.info.todos'() {
+               setTimeout(() => {
+                    this.resizeAllTA()
+               }, 0)
+          }
      },
      mounted() {
-          this.note.info.todos.forEach((todo, idx) => {
-               this.resizeTA(idx)
-               window.addEventListener("resize", this.resizeTA(idx))
-          })
-
+          this.resizeAllTA()
+          window.addEventListener("resize", this.debouncedResizeAllTA)
      },
      unmounted() {
           this.note.info.todos.forEach((todo, idx) => {
                const elName = 'textArea' + idx
                const element = this.$refs[elName]
-               if (element[0]) window.removeEventListener('resize', this.resizeTA(idx))
+               if (element[0]) window.removeEventListener('resize', this.debouncedResizeAllTA)
           })
      },
      components: {
