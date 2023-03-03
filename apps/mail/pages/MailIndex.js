@@ -29,6 +29,7 @@ export default {
           v-if="isOpen"
           @closeCompose="closeModal"
           @addMail="addMail"
+          @removeMail="removeMail"
           />
           <!-- <p>Unread: {{UnreadCount}}</p> -->
           <button class ="inbox-btn" @click="setFilter='inbox'">Inbox <span>({{UnreadCount}})</span></button>
@@ -66,11 +67,13 @@ export default {
     closeModal() {
       this.isOpen = false
     },
-    addMail(subject, body, recipient, isSent) {
+    addMail(subject, body, recipient, isSent,id) {
       mailService
-        .addMail(subject, body, recipient, isSent)
+        .addMail(subject, body, recipient, isSent,id)
         .then((updatedMail) => {
-          this.mails.push(updatedMail)
+          const idx = this.mails.findIndex((mail) => mail.id === updatedMail.id)
+          if (idx<0)  this.mails.push(updatedMail)
+          else this.mails.splice(idx,1,updatedMail)
           isSent
             ? showSuccessMsg('Mail sent')
             : showSuccessMsg('Saved to drafts')

@@ -16,10 +16,10 @@ export default {
 
             <form action="" @submit="send">
             <main class="mail-text">
-                <input @input="saveDraft" v-model="recipient" class="recipient" type="email" placeholder="Recipient"  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
+                <input v-model="recipient" class="recipient" type="email" placeholder="Recipient"  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
 
-                <input @input="saveDraft" v-model="subject" class="mail-subject" type="text" placeholder="Subject"/>
-                <textarea @input="saveDraft" v-model="body" name="" id="" cols="30" rows="10"></textarea>
+                <input v-model="subject" class="mail-subject" type="text" placeholder="Subject"/>
+                <textarea v-model="body" name="" id="" cols="30" rows="10"></textarea>
             </main>
 
             <section class="send-mail flex justify-between">
@@ -40,34 +40,38 @@ export default {
             this.isOpen = false
             setTimeout(()=> {
                 this.$emit('closeCompose')
-                this.$emit('addMail', this.subject,this.body ,this.recipient,false)
-                clearInterval(this.intervalId)
+                console.log('this.newMail.id',this.newMail.id)
+                if (!this.recipient && !this.subject && !this.body) this.$emit( 'removeMail',this.newMail.id)
+                // this.$emit('addMail', this.subject,this.body ,this.recipient,false)
+                // clearInterval(this.intervalId)
             },1500)
         },
         saveDraft(){
             this.intervalId = setInterval(()=> {
-                if (!this.recipient && !this.subject && !this.body) {
-                clearInterval(this.intervalId)
-                //todo:/send remove emit to parent
-                // mailService.remove(this.emptyMail.id)
-                }else{
-                //todo:send save emit to parent
-                // mailService.save(this.emptyMail.id)
-                  
-                }
+                if (!this.recipient && !this.subject && !this.body) return
+                //send remove emit to parent
+                //send save emit to parent
+                console.log('newMail.id',this.newMail.id)
+                this.$emit('addMail', this.subject,this.body ,this.recipient,false,this.newMail.id)
             },5000)
         },
         send() {
                 this.$emit('addMail', this.subject,this.body ,this.recipient)
-                // this.close()
                 this.$emit('closeCompose')
 
-          },
-          resetVars(){
+        },
+        resetVars(){
             this.recipient=''
             this.subject=''
             this.body=''
-          }
+        },
+        makeNewEmptyMail(){
+            mailService.getEmptyMail()
+                .then(mail=>{
+                    this.newMail=mail
+                    console.log('newMail',this.newMail)
+                })
+        },
     },
     components: {
         mailService,
@@ -75,8 +79,9 @@ export default {
     },
     created() {
         setTimeout(() => this.isOpen = true, 0)
-        this.emptyMail= mailService.getEmptyMail()
-
+        this.makeNewEmptyMail()
+        this.saveDraft()
+        // this.emptyMail= mailService.getEmptyMail()
     },
     data() {
         return {
@@ -85,8 +90,12 @@ export default {
             subject:'',
             body:'',
             intervalId:'',
-            emptyMail:null,
+            newMail:null,
 
         }
+    },
+    unmounted(){
+        clearInterval(this.intervalId)
+        if (!this.recipient && !this.subject && !this.body) this.$emit( 'removeMail',this.newMail.id)
     }
 }

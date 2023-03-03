@@ -51,9 +51,9 @@ function changeIsRead(isRead,mailId){
           })
 }
 
-function addMail(newSubject,newBody,newTo,isSent=true){
+function addMail(newSubject,newBody,newTo,isSent=true,newId=''){
   const newMail = {
-    id: null,
+    id: newId,
     subject: newSubject,
     body: newBody,
     isRead: true,
@@ -62,6 +62,7 @@ function addMail(newSubject,newBody,newTo,isSent=true){
     from: 'user@appsus.com',
     to: newTo,
   }
+  console.log('newMail',newMail)
   return save(newMail)
 }
 
@@ -69,7 +70,8 @@ function addMail(newSubject,newBody,newTo,isSent=true){
 function getEmptyMail(){
   //getEmptyMail()=> empty mail with id -- when compose is created()
 const emptyMail= {
-  id: utilService.makeId() ,
+  // return {
+  id: utilService.makeId(),
   subject: '',
   body: '',
   isRead: false,
@@ -79,13 +81,6 @@ const emptyMail= {
   to: '', }
   return save(emptyMail)
 }
-
-// function saveDraft(mail){
-// //start interval when @input if no interval is present, clear if text is null(after savedraft one more time) --COMPOSE
-// //if subject, body, to all present, save ELSE remove
-// //NO RETURN needed
-// save(mail)
-// }
 
 function _createDemo() {
   let mails = utilService.loadFromStorage(MAIL_KEY)
