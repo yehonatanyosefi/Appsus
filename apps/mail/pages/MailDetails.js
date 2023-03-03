@@ -3,8 +3,10 @@ import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.servic
 
 
 export default {
+     props:['mailId'],
      template: `
      <section className="mail-details" v-if="mail">
+          <button class="arrow-btn" @click="back"><i class="fa-solid fa-arrow-left"></i></button>
           <h1 class="subject">{{mail.subject}}</h1>
           <h3 class="username">{{formatUsername}} </h3>
           <div className="mail-details-buttons">
@@ -36,6 +38,10 @@ export default {
                     showErrorMsg('Could not delete mail')
                    })
            },
+           back(){
+               this.$emit('back')
+
+           }
      },
      computed: {
           formatUsername(){
@@ -50,9 +56,9 @@ export default {
           }
      },
      created() {
-          const {mailId} = this.$route.params
-        if (mailId) {
-            mailService.get(mailId)
+          // const {mailId} = this.$route.params
+        if (this.mailId) {
+            mailService.get(this.mailId)
                 .then(mail => {
                     // this.$emit('changeIsRead',true, mailId)
                     // mail.isRead=true
