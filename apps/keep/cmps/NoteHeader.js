@@ -32,7 +32,7 @@ export default {
                routes: [
                     { path: '/', title: 'Home', img: '../../../assets/img/logo.png' },
                     { path: '/mail', title: 'Mail', img: '../../../assets/img/gmail.png' },
-                    { path: '/note', title: 'Note', img: '../../../assets/img/keep.png' },
+                    { path: '/notes', title: 'Notes', img: '../../../assets/img/keep.png' },
                     // { path: '/book', title: 'Book', img: '../../../assets/img/book.svg' },
                     { path: '/about', title: 'About Us', img: '../../../assets/img/dornatan.jpg' },
                ],
@@ -50,11 +50,14 @@ export default {
                this.$emit('set-route', route)
           },
           toggleIsNav() {
-               this.isNav = !this.isNav
-               if (this.isNav) setTimeout(() => this.$refs.navModal.focus(), 100)
+               if (!this.isNav) {
+                    this.isNav = true
+                    setTimeout(() => this.$refs.navModal.focus(), 150)
+               }
+               else this.isNav = false
           },
           closeNav() {
-               setTimeout(() => this.isNav = false, 140)
+               setTimeout(() => this.isNav = false, 150)
           },
      },
      computed: {

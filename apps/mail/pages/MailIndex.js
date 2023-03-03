@@ -99,13 +99,13 @@ export default {
     closeModal() {
       this.isOpen = false
     },
-    addMail(subject, body, recipient, isSent,id) {
+    addMail(subject, body, recipient, isSent, id) {
       mailService
-        .addMail(subject, body, recipient, isSent,id)
+        .addMail(subject, body, recipient, isSent, id)
         .then((updatedMail) => {
           const idx = this.mails.findIndex((mail) => mail.id === updatedMail.id)
-          if (idx<0)  this.mails.push(updatedMail)
-          else this.mails.splice(idx,1,updatedMail)
+          if (idx < 0) this.mails.push(updatedMail)
+          else this.mails.splice(idx, 1, updatedMail)
           isSent
             ? showSuccessMsg('Mail sent')
             : showSuccessMsg('Saved to drafts')
@@ -130,23 +130,23 @@ export default {
       this.filterBy = filterBy
     },
     changeIsRead(isRead, mailId) {
-     this.currMailId= mailId
+      this.currMailId = mailId
       mailService.changeIsRead(isRead, mailId).then((updatedMail) => {
         const idx = this.mails.findIndex((mail) => mail.id === updatedMail.id)
         this.mails[idx] = updatedMail
       })
     },
-    back(){
-     this.currMailId=null
+    back() {
+      this.currMailId = null
     },
-    setFilter(filterBy){
-     console.log('filterBy',filterBy)
-         this.setFilterVal=filterBy
-         if (this.currMailId) this.currMailId=null
+    setFilter(filterBy) {
+      console.log('filterBy', filterBy)
+      this.setFilterVal = filterBy
+      if (this.currMailId) this.currMailId = null
     },
     getSvg(iconName) {
-     return svgService.getNoteSvg(iconName)
-},
+      return svgService.getNoteSvg(iconName)
+    },
   },
   computed: {
     UnreadCount() {
@@ -158,7 +158,7 @@ export default {
       return this.unread
     },
     filteredMails() {
-     if (!this.mails) return
+      if (!this.mails) return
       let filteredMails = this.mails
       if (this.setFilterVal === 'inbox')
         filteredMails = filteredMails.filter(
@@ -203,7 +203,6 @@ closeNav() {
   created() {
     mailService.query().then((mails) => {
       this.mails = mails
-      console.log('this.mails', this.mails)
     })
   },
   mounted() {
