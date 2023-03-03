@@ -17,7 +17,7 @@ export default {
                          </button >
                </li >
                     <li>
-                         <button @click.stop="addTodo" title="Add New Todo">
+                         <button v-if="!isPreview" @click.stop="addTodo" title="Add New Todo">
                          <i class="fa-solid fa-plus"></i>
                     </button>
                </li >
