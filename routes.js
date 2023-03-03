@@ -25,7 +25,7 @@ const routerOptions = {
 			component: MailDetails
 		},
 		{
-			path: '/note',
+			path: '/notes',
 			component: NotesIndex
 		},
 		{
