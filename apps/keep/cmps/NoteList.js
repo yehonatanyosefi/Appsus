@@ -212,7 +212,7 @@ export default {
                          this.notes[senderIdx] = updatedReceiver
                          this.notes[receiverIdx] = updatedSender
                     })
-                    .catch(err => showErrorMsg(`Both notes needs the same pin status`))
+                    .catch(err => showErrorMsg(`Both notes need the same pin status`))
           },
      },
      computed: {

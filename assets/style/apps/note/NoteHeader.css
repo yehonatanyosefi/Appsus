@@ -39,13 +39,3 @@
 .notes-header nav button:hover {
 	background-color: var(--notes-nav-hover);
 }
-.header-nav {
-	position: absolute;
-	left: 75%;
-	top: 10%;
-	width: 300px;
-	border-radius: 0.5em;
-	height: 100px;
-	background-color: #fff;
-	display: grid;
-}
