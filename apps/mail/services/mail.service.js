@@ -9,7 +9,8 @@ export const mailService = {
   remove,
   save,
   addMail,
-  changeIsRead
+  changeIsRead,
+  getEmptyMail,
 }
 
 function query(filterBy = {}) {
@@ -63,6 +64,28 @@ function addMail(newSubject,newBody,newTo,isSent=true){
   }
   return save(newMail)
 }
+
+
+function getEmptyMail(){
+  //getEmptyMail()=> empty mail with id -- when compose is created()
+const emptyMail= {
+  id: utilService.makeId() ,
+  subject: '',
+  body: '',
+  isRead: false,
+  sentAt: null,
+  removedAt: null,
+  from:'',
+  to: '', }
+  return save(emptyMail)
+}
+
+// function saveDraft(mail){
+// //start interval when @input if no interval is present, clear if text is null(after savedraft one more time) --COMPOSE
+// //if subject, body, to all present, save ELSE remove
+// //NO RETURN needed
+// save(mail)
+// }
 
 function _createDemo() {
   let mails = utilService.loadFromStorage(MAIL_KEY)
