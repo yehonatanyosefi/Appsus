@@ -17,11 +17,21 @@ export default {
           <section class="toggle-logo flex">
                <button class="toggle-menu x fa-solid fa-bars" @click="isShow=!isShow"> </button>
                <a><img src="../../../assets/img/logo.png" alt="Appsus" class="logo" /> </a>
-               <p>Appsus</p>
+               <p>Mail</p>
           </section >
           <MailFilter @filter="setFilterBy" />
           <section class="navUser flex" >
-               <nav><button v-html="getSvg('navigator')"></button></nav>
+               <nav><button v-html="getSvg('navigator')" @click="toggleIsNav"></button></nav>
+
+               <nav class="header-nav" v-if="isNav" tabindex="0" @blur="closeNav" ref="navModal">
+                         <RouterLink v-for="({path, title, img}, idx) in routes" :to="path" :title="title" :key="idx">
+                              <div class="nav-card">
+                                   <img :src="img" :title="title" :class="{'profile-nav':path==='/about'}"/>
+                                   <p>{{title}}</p>
+                              </div>
+                         </RouterLink>
+                    </nav>
+
                <img class="user-profile" src="../../../assets/img/dor.jfif">
           </section>
      </header>
@@ -72,6 +82,14 @@ export default {
       setFilterVal: 'inbox',
       currMailId:'',
       isShow:true,
+      isNav: false,
+               routes: [
+                    { path: '/', title: 'Home', img: '../../../assets/img/logo.png' },
+                    { path: '/mail', title: 'Mail', img: '../../../assets/img/gmail.png' },
+                    { path: '/notes', title: 'Notes', img: '../../../assets/img/keep.png' },
+                    // { path: '/book', title: 'Book', img: '../../../assets/img/book.svg' },
+                    { path: '/about', title: 'About Us', img: '../../../assets/img/dornatan.jpg' },
+               ],
     }
   },
   methods: {
@@ -171,6 +189,16 @@ export default {
           regexByName.test(mail.body)
       )
     },
+    setRoute(route) {
+     this.$emit('set-route', route)
+},
+toggleIsNav() {
+     this.isNav = !this.isNav
+     if (this.isNav) setTimeout(() => this.$refs.navModal.focus(), 100)
+},
+closeNav() {
+     setTimeout(() => this.isNav = false, 140)
+},
   },
   created() {
     mailService.query().then((mails) => {

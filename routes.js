@@ -25,9 +25,9 @@ const routerOptions = {
 			component: MailDetails
 		},
 		{
-			path: '/note',
+			path: '/notes',
 			component: NotesIndex
-		},
+	   },
 		{
 			path: '/about',
 			component: AboutUs,

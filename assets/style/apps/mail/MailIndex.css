@@ -19,8 +19,9 @@
     padding: 1em;
 	height: 75px;
     display: grid;
-    grid-template-columns: 230px 1fr 10vw;
+    grid-template-columns: 230px 1fr auto;
     gap: 2em;
+    font-size: 18px;
 
 }
 

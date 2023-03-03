@@ -6,7 +6,7 @@ export default {
      <section  class="mail-preview" :class="formatReadMail" @click.prevent >
           <!-- <div :class="formatReadMail"> -->
                <input type="checkbox" />
-               <i class="fa-regular fa-star"></i>
+               <button><i class="fa-regular fa-star"></i></button> 
                <p>{{formatUsername}}</p>
                <p class="mail-body">{{mail.body}}</p>
                <p>{{formatTime}}</p>
