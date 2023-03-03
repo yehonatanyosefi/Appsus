@@ -3,7 +3,7 @@
 	min-width: 240px;
 	min-height: 125px;
 	border-radius: 0.5em;
-	border: 1px solid var(--clr3);
+	border: 1px solid var(--border-clr);
 	transition: box-shadow 250ms opacity 100ms;
 	break-inside: avoid;
 	margin-block-end: 2rem;
@@ -11,7 +11,24 @@
 .note-card input,
 .note-card textarea {
 	padding: var(--note-card-pad);
+	padding-block-start: 1rem;
 	width: 100%;
+}
+.note-card:hover .button-container {
+	opacity: 1;
+}
+.note-card input[type='color'] {
+	width: var(--note-btn-size);
+	height: var(--note-btn-size);
+	opacity: 0;
+	overflow: hidden;
+	cursor: pointer;
+}
+.note-card:hover {
+	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
+}
+.note-card .note-title {
+	user-select: none;
 }
 .button-container {
 	opacity: 0;
@@ -29,16 +46,6 @@
 	width: var(--note-btn-size);
 	height: var(--note-btn-size);
 	font-size: var(--note-btn-size);
-}
-.note-card:hover .button-container {
-	opacity: 1;
-}
-.note-card input[type='color'] {
-	width: var(--note-btn-size);
-	height: var(--note-btn-size);
-	opacity: 0;
-	overflow: hidden;
-	cursor: pointer;
 }
 .upload-btn {
 	color: var(--clr5);
@@ -60,19 +67,12 @@
 	padding: 0;
 }
 
-.note-card:hover {
-	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
-}
-
 .note-title {
 	padding: var(--note-card-pad);
 	font-size: 1.25rem;
 	color: var(--clr5);
 }
 
-.note-card .note-title {
-	user-select: none;
-}
 .striked {
 	text-decoration: line-through;
 }
@@ -83,4 +83,14 @@
 	padding: var(--note-card-pad);
 	width: 100%;
 	user-select: none;
+}
+
+.note-card .preview-txt {
+	font: inherit;
+	color: inherit;
+	user-select: none;
+	padding: var(--note-card-pad);
+	padding-block-start: 1rem;
+	width: 100%;
+	height: fit-content;
 }

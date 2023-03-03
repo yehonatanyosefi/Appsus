@@ -4,6 +4,7 @@
 	--clr3: rgb(155, 155, 155);
 	--clr4: rgb(96, 96, 96);
 	--clr5: rgb(21, 21, 21);
+	--clr6: rgb(69, 69, 69);
 
 	--base-clr: #759cffc5;
 	--secondary-clr0: #d2e2fc;
@@ -13,4 +14,5 @@
 	--clr-star: orange;
 	--note-btn-size: 1.2rem;
 	--note-card-pad: 0.8rem;
+	--border-clr: #e0e0e0;
 }

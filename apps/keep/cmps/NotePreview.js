@@ -42,12 +42,22 @@ export default {
                <button class="" v-if="note.type !== 'NoteImg'" @click.stop="toggleTodos" title="Checklist Toggle">
                     <i class="fa-regular fa-square-check note-btn"></i>
                </button>
-               <button @click.stop="duplicateNote" title="Duplicate Note">
-                    <i class="fa-regular fa-clone"></i>
-               </button>
-               <button @click.stop="deleteNote" title="Delete Note" class="note-btn">
-                    <i class="fa-solid fa-trash note-btn"></i>
-               </button>
+               <template v-if="!note.isDeleted">
+                    <button @click.stop="duplicateNote" title="Duplicate">
+                         <i class="fa-regular fa-clone"></i>
+                    </button>
+                    <button @click.stop="deleteNote" title="Delete" class="note-btn">
+                         <i class="fa-solid fa-trash note-btn"></i>
+                    </button>
+               </template>
+               <template v-else>
+                    <button @click.stop="restoreNote" title="Restore">
+                         <i class="fa-solid fa-trash-can-arrow-up"></i>
+                    </button>
+                    <button @click.stop="deleteNote" title="Delete Forever" class="note-btn">
+                         <i class="fa-solid fa-ban"></i>
+                    </button>
+               </template>
           </div>
      </div>
      `,
@@ -59,13 +69,6 @@ export default {
      methods: {
           upload(ev) {
                uploadService.onImgInput(ev, this.note)
-               // .then(res => console.log(`res:`, res))
-               // setTimeout(() => {
-               //      const img = uploadService.getImg()
-               //      this.note.type = 'NoteImg'
-               //      this.note.info.url = img.src
-               //      this.updateInternal()
-               // }, 100);
           },
           updateTitle() {
                this.updateInternal()
@@ -81,6 +84,9 @@ export default {
           },
           deleteNote() {
                this.$emit('deleteNote', this.note.id)
+          },
+          restoreNote() {
+               this.$emit('restoreNote', this.note.id)
           },
           deleteTodo(noteId, idx) {
                this.$emit('deleteTodo', noteId, idx)

@@ -1,6 +1,6 @@
 import { utilService } from "../../../services/util.service.js"
 export default {
-     props: ['note', 'isPreview'],
+     props: ['note', 'isPreview', 'isFocus'],
      template: `
           <ul class="clean-list note-component">
                <li v-for="todo,idx in note.info.todos" key="idx" class="flex todo-item">
@@ -33,9 +33,10 @@ export default {
                const element = this.$refs[elName]
                if (!element || !element[0]) return
                element[0].style.height = '45px'
-               element[0].style.height = element[0].scrollHeight + 12 + 'px'
+               element[0].style.height = element[0].scrollHeight + 6 + 'px'
           },
           resizeAllTA() {
+               if (this.note.type !== "NoteTodos") return
                this.note.info.todos.forEach((todo, idx) => {
                     this.resizeTA(idx)
                })
@@ -59,7 +60,7 @@ export default {
           },
      },
      watch: {
-          'note.info.todos'() {
+          'note.info.todos.length'() {
                setTimeout(() => {
                     this.resizeAllTA()
                }, 0)
@@ -70,10 +71,10 @@ export default {
                this.resizeAllTA()
                window.addEventListener("resize", this.debouncedResizeAllTA)
           }
+          if (this.isFocus) this.$refs.textArea0[0].focus()
      },
      unmounted() {
-
-          if (!this.isPreview) {
+          if (!this.isPreview && this.note.type === "NoteTodos") {
                this.note.info.todos.forEach((todo, idx) => {
                     const elName = 'textArea' + idx
                     const element = this.$refs[elName]

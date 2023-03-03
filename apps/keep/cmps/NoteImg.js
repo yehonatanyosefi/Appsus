@@ -1,8 +1,12 @@
+import NoteTxt from "./NoteTxt.js"
 export default {
      props: ['note', 'isPreview'],
      template: `
-     <div class="flex justify-center align-center">
-          <img :src="note.info.url" style="max-width:150px;">
+     <div class="NoteImg">
+          <div class="flex justify-center align-center">
+               <img :src="note.info.url" style="max-width:150px;">
+          </div>
+          <NoteTxt v-if="!isPreview || note.info.txt" :note="note" :isPreview="isPreview" :isFocus="false" @updatedNote="updateNote"/>
      </div>
 `,
      data() {
@@ -11,7 +15,9 @@ export default {
           }
      },
      methods: {
-
+          updateNote(note) {
+               this.$emit('updateNote', this.note)
+          }
      },
      computed: {
 
@@ -20,6 +26,6 @@ export default {
 
      },
      components: {
-
+          NoteTxt,
      },
 }

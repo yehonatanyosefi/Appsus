@@ -1,6 +1,23 @@
 .notes-sidebar-container {
-	display: grid;
-	width: 200px;
-	height: 90vh;
-	border: 1px solid red;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex-direction: column;
+	height: 100%;
+	position: sticky;
+	gap: 1rem;
+	padding-left: 1rem;
+}
+.notes-sidebar-container button,
+.notes-sidebar-container i {
+	width: 1.5rem;
+	font-size: 1.5rem;
+}
+
+.notes-sidebar-container button:hover {
+	background: #5f6368;
+}
+
+.notes-sidebar-container .side-selected {
+	background-color: #feefc3;
 }

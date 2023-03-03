@@ -5,9 +5,9 @@ export default {
      props: [],
      template: `
      <main class="notes-index">
-          <!-- <section class="notes-sidebar-container">
+          <section class="notes-sidebar-container">
                <NoteSideBar />
-          </section> -->
+          </section>
           <section class="notes-container">
                <NoteList />
           </section>

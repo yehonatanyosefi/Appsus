@@ -1,27 +1,28 @@
-/* .notes-index button {
+.notes-index button,
+.upload-btn i {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: var(--clr4);
+	color: var(--clr6);
 	transition: filter 100ms;
 	background-blend-mode: overlay;
 	border-radius: 50%;
 }
-.notes-index button:hover {
-	color: var(--clr5);
-	filter: drop-shadow(0 0 0.75rem rgb(172, 172, 172));
-} */
-/* .notes-index {
+.notes-index {
 	display: grid;
-	grid-template-columns: 'sidebar main main';
+	grid-template-areas: 'sidebar main';
 }
 .notes-container {
 	grid-area: main;
+	width: 95vw;
 }
 .notes-sidebar-container {
 	grid-area: sidebar;
-} */
-
+	width: 5vw;
+}
+.notes-index textarea {
+	padding-block-start: 1rem;
+}
 /* 'search search' */
 
 .notes-container p {

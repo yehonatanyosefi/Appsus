@@ -1,17 +1,56 @@
 import { noteService } from "../services/note.service.js"
 import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
+import { eventBus } from '../../../services/event-bus.service.js'
 import NotePreview from "./NotePreview.js"
 import NoteAdd from "./NoteAdd.js"
 import NoteDetails from "./NoteDetails.js"
 export default {
      props: [],
      template: `
-          <NoteAdd @addNote="addNote"/>
+          <NoteAdd @addNote="addNote" />
           <div class="notes-list">
-               <div class="notes-container-title">PINNED</div>
-               <div class="main-notes">
+               <template v-if="!filterBy.deleted">
+                    <template v-if="arePinned">
+                         <div class="notes-container-title">PINNED</div>
+                         <div class="main-notes">
+                              <template v-for="note,idx in notes" :key="idx">
+                                   <NotePreview v-if="note.isPinned && !note.isDeleted" :note="note"
+                                        @updateNote="updateNote"
+                                        @deleteNote="deleteNote"
+                                        @duplicateNote="duplicateNote"
+                                        @deleteTodo="deleteTodo"
+                                        @addTodo="addTodo"
+                                        @toggleTodos="toggleTodos"
+                                        @togglePin="togglePin"
+                                        @toggleTodoCheck="toggleTodoCheck"
+                                        @openNote="openNote" />
+                              </template>
+                         </div>
+                    </template>
+                    <template v-if="areUnpinned">
+                         <div class="notes-container-title">OTHERS</div>
+                         <div class="main-notes">
+                              <template v-for="note,idx in notes" :key="idx">
+                                   <NotePreview v-if="!note.isPinned && !note.isDeleted" :note="note"
+                                        @updateNote="updateNote"
+                                        @deleteNote="deleteNote"
+                                        @duplicateNote="duplicateNote"
+                                        @deleteTodo="deleteTodo"
+                                        @addTodo="addTodo"
+                                        @toggleTodos="toggleTodos"
+                                        @togglePin="togglePin"
+                                        @toggleTodoCheck="toggleTodoCheck"
+                                        @openNote="openNote" />
+                              </template>
+                         </div>
+                    </template>
+                    <div v-else-if="!arePinned" class="notes-container-title">NO NOTES</div>
+               </template>
+               <template v-else>
+                    <div class="notes-container-title">TRASH</div>
+                    <div class="main-notes">
                     <template v-for="note,idx in notes" :key="idx">
-                         <NotePreview v-if="note.isPinned" :note="note"
+                         <NotePreview v-if="note.isDeleted" :note="note"
                               @updateNote="updateNote"
                               @deleteNote="deleteNote"
                               @duplicateNote="duplicateNote"
@@ -20,24 +59,11 @@ export default {
                               @toggleTodos="toggleTodos"
                               @togglePin="togglePin"
                               @toggleTodoCheck="toggleTodoCheck"
-                              @openNote="openNote" />
-                    </template>
-               </div>
-               <div class="notes-container-title">OTHERS</div>
-               <div class="main-notes">
-                    <template v-for="note,idx in notes" :key="idx">
-                         <NotePreview v-if="!note.isPinned" :note="note"
-                              @updateNote="updateNote"
-                              @deleteNote="deleteNote"
-                              @duplicateNote="duplicateNote"
-                              @deleteTodo="deleteTodo"
-                              @addTodo="addTodo"
-                              @toggleTodos="toggleTodos"
-                              @togglePin="togglePin"
-                              @toggleTodoCheck="toggleTodoCheck"
-                              @openNote="openNote" />
-                    </template>
-               </div>
+                              @openNote="openNote"
+                              @restoreNote="restoreNote" />
+                         </template>
+                    </div>
+               </template>
           </div>
           <NoteDetails v-if="showDetails" :note="showNote"
                     @updateNote="updateNote"
@@ -47,7 +73,8 @@ export default {
                     @addTodo="addTodo"
                     @toggleTodos="toggleTodos"
                     @togglePin="togglePin"
-                    @toggleTodoCheck="toggleTodoCheck" />
+                    @toggleTodoCheck="toggleTodoCheck"
+                    @restoreNote="restoreNote" />
           <div class="note-screen" @click="toggleScreen" v-if="showDetails"></div>
      `,
      data() {
@@ -55,6 +82,7 @@ export default {
                notes: null,
                showDetails: false,
                showId: null,
+               filterBy: { deleted: false, },
           }
      },
      methods: {
@@ -66,14 +94,23 @@ export default {
                     })
           },
           updateNote(updatedNote) {
-               // console.log(`updatedNote:`, updatedNote)
-               // const currNote = this.notes.find(note => note.id === updatedNote.id)
-               // console.log(`currNote:`, currNote)
-               // if (currNote === updatedNote) return
-               noteService.save(updatedNote) //TODO: refactor with event bus
-               // .then(res => console.log(`res:`, res))
+               noteService.save(updatedNote)
           },
           deleteNote(noteId) {
+               if (this.notes.find(note => note.id === noteId).isDeleted === true) {
+                    this.removeNote(noteId)
+                    return
+               }
+               this.showDetails = false
+               noteService.deleteNote(noteId)
+                    .then(res => {
+                         const idx = this.notes.findIndex(note => note.id === noteId)
+                         this.notes[idx].isDeleted = true
+                         showSuccessMsg('Moved to trash')
+                    })
+                    .catch(err => showErrorMsg('Move to trash failed'))
+          },
+          removeNote(noteId) {
                this.showDetails = false
                noteService.remove(noteId)
                     .then(res => {
@@ -83,12 +120,23 @@ export default {
                     })
                     .catch(err => showErrorMsg('Note delete failed'))
           },
+          restoreNote(noteId) {
+               this.showDetails = false
+               noteService.restoreNote(noteId)
+                    .then(res => {
+                         const idx = this.notes.findIndex(note => note.id === noteId)
+                         this.notes[idx].isDeleted = false
+                         showSuccessMsg('Note Restored')
+                    })
+                    .catch(err => showErrorMsg('Note Restore failed'))
+
+          },
           duplicateNote(noteId) {
                noteService.duplicateNote(noteId)
                     .then(newNotes => this.notes = newNotes)
           },
-          addNote(txt) {
-               noteService.addNote(txt)
+          addNote(note) {
+               noteService.addNote(note)
                     .then(newNote => {
                          this.notes.push(newNote)
                          showSuccessMsg('Note added')
@@ -135,15 +183,28 @@ export default {
                this.showDetails = true
                this.showId = noteId
           },
+          setFilterBy(filterBy) {
+               const { val, setVal } = filterBy
+               this.filterBy[val] = setVal
+          }
      },
      computed: {
           showNote() {
                return this.notes.filter(note => note.id === this.showId)[0]
           },
+          arePinned() {
+               if (!this.notes) return false
+               return this.notes.some(note => note.isPinned && !note.isDeleted)
+          },
+          areUnpinned() {
+               if (!this.notes) return false
+               return this.notes.some(note => !note.isPinned && !note.isDeleted)
+          },
      },
      created() {
           noteService.query()
                .then(notes => this.notes = notes)
+          eventBus.on('setFilterBy', this.setFilterBy)
      },
      components: {
           NotePreview,
