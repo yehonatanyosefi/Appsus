@@ -11,6 +11,9 @@
     /* width: fit-content; */
     column-gap: 1em;
     padding: 2em;
+    height: max-content;
+    background-color: white;
+    border-radius: 10px;
 }
 
 .mail-details h1.subject{
