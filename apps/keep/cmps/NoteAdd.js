@@ -11,8 +11,8 @@ export default {
      template: `
           <div v-if="!isMaking" class="flex justify-center align-center note-add">
                <div class="flex justify-center align-center note-add-container">
-                    <input placeholder="Take a note..." v-model="note.info.txt" @focus="startNote">
-                    <button @click="startTodos">
+                    <input v-model="placeholderTxt" @focus="startNote" class="note-placeholder">
+                    <button @click="startTodos" title="Todo List">
                          <i class="fa-regular fa-square-check"></i>
                     </button>
                     <label for="newNote" class="upload-btn" title="Upload Image" @click.stop>
@@ -27,11 +27,11 @@ export default {
                     </label>
                </div>
           </div>
-          <div v-else class="flex justify-center align-center note-add">
-          <div class="note-add-card" :style="'backgroundColor:'+note.style.backgroundColor+';'">
+          <!-- <div v-else class="flex justify-center align-center note-add"> -->
+          <div v-else class="note-add-card" :style="'backgroundColor:'+note.style.backgroundColor+';'">
                <div class="flex justify-between align-center">
                     <textarea v-model="note.info.title" class="note-title"
-                    placeholder="Title" ref="textAreaTitle" @blur="blurred" @focused="focused"></textarea>
+                    placeholder="Title" ref="textAreaTitle"></textarea>
                     <button @click.stop="togglePin" title="Toggle Pinned Items">
                          <i v-if="note.isPinned" class="fa-solid fa-thumbtack"></i>
                          <div v-else v-html="getSvg('pinEmpty')"></div>
@@ -60,27 +60,21 @@ export default {
                     <button class="" v-if="note.type !== 'NoteImg'" @click.stop="toggleTodos" title="Checklist Toggle">
                          <i class="fa-regular fa-square-check note-btn"></i>
                     </button>
-                    <button @click.stop="addNote">
+                    <button @click.stop="addNote" title="Save & Close">
                          <i class="fa-solid fa-xmark"></i>
                     </button>
                </div>
-          </div>
-</div>
+          <!-- </div> -->
+     </div>
           `,
-     //TODO @blur="blurred" tabindex = "0" ref = "noteMaker
      data() {
           return {
                isMaking: false,
                note: null,
+               placeholderTxt: 'Take a note...',
           }
      },
      methods: {
-          focused() { //TODO
-               // console.log(`focused`)
-          },
-          blurred() {
-               // console.log(`blurred`)
-          },
           addNote() {
                const { txt, title, url, todos } = this.note.info
                if (title || txt || url || (todos && todos.length && todos.some(todo => todo.txt))) this.$emit('addNote', this.note)
@@ -99,11 +93,7 @@ export default {
           startNote() {
                this.isMaking = true
                window.addEventListener("resize", this.debouncedResizeTA)
-               setTimeout(() => {
-                    this.resizeTA()
-                    //TODO const elNote = this.$refs.noteMaker
-                    // elNote.focus()
-               }, 0)
+               setTimeout(() => this.resizeTA, 0)
           },
           resetNote() {
                window.removeEventListener('resize', this.debouncedResizeTA)
@@ -155,7 +145,7 @@ export default {
           },
           getSvg(iconName) {
                return svgService.getNoteSvg(iconName)
-          }
+          },
      },
      computed: {
           debouncedResizeTA() {
@@ -170,4 +160,6 @@ export default {
           NoteTxt,
           NoteImg,
      },
+     watch: {
+     }
 }

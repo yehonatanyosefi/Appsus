@@ -3,6 +3,7 @@ import NoteTxt from "./NoteTxt.js"
 import NoteImg from "./NoteImg.js"
 import { uploadService } from "../../../services/upload.service.js"
 import { utilService } from "../../../services/util.service.js"
+import { svgService } from "../../../services/svg.service.js"
 
 export default {
      props: ['note'],
@@ -15,7 +16,8 @@ export default {
                <textarea v-model="note.info.title" @input="updateTitle" class="note-title"
                placeholder="Title" ref="textAreaTitle"></textarea>
                <button @click="togglePin" title="Toggle Pinned Items" :class="isHidden">
-                    <i class="fa-solid fa-thumbtack"></i>
+                         <i v-if="note.isPinned" class="fa-solid fa-thumbtack"></i>
+                         <div v-else v-html="getSvg('pinEmpty')"></div>
                </button>
           </div>
           <component  class="note-component" :is="note.type" :note="note" :isPreview="false"
@@ -107,6 +109,9 @@ export default {
           },
           restoreNote() {
                this.$emit('restoreNote', this.note.id)
+          },
+          getSvg(iconName) {
+               return svgService.getNoteSvg(iconName)
           },
      },
      watch: {

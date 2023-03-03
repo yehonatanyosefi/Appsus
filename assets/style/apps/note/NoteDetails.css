@@ -5,7 +5,7 @@
 	left: 50%;
 	translate: -50% -50%;
 	width: 50vw;
-	max-height: 50vh;
+	max-height: 90vh;
 	border-radius: 0.5em;
 	transition: box-shadow 250ms opacity 100ms;
 	break-inside: avoid;
@@ -30,7 +30,7 @@
 	overflow-x: hidden;
 }
 .note-details .note-component {
-	max-height: 34vh;
+	max-height: 74vh;
 	overflow: auto;
 	overflow-x: hidden;
 }

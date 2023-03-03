@@ -2,10 +2,10 @@ import { setFilterBy } from "../../../services/event-bus.service.js"
 export default {
      props: [],
      template: `
-          <button @click="setFilter('notes')" :class="{ 'side-selected': isSelected(1) }">
+          <button @click="setFilter('notes')" :class="{ 'side-selected': isSelected(1) }" title="Notes">
                <i class="fa-regular fa-lightbulb"></i>
           </button>
-          <button @click="setFilter('deleted')" :class="{ 'side-selected': isSelected(2) }">
+          <button @click="setFilter('deleted')" :class="{ 'side-selected': isSelected(2) }" title="Trash Bin">
                <i class="fa-solid fa-trash"></i>
           </button>
 `,

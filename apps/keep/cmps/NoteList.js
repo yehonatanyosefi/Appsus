@@ -11,10 +11,10 @@ export default {
           <div class="notes-list">
                <template v-if="!filterBy.deleted">
                     <template v-if="arePinned">
-                         <div class="notes-container-title">PINNED</div>
+                         <div class="notes-container-title" v-if="areUnpinned">PINNED</div>
                          <div class="main-notes">
                               <template v-for="note,idx in notes" :key="idx">
-                                   <NotePreview v-if="note.isPinned && !note.isDeleted" :note="note"
+                                   <NotePreview v-if="note.isPinned && !note.isDeleted && isUnfiltered(note)" :note="note"
                                         @updateNote="updateNote"
                                         @deleteNote="deleteNote"
                                         @duplicateNote="duplicateNote"
@@ -28,10 +28,10 @@ export default {
                          </div>
                     </template>
                     <template v-if="areUnpinned">
-                         <div class="notes-container-title">OTHERS</div>
+                         <div class="notes-container-title" v-if="arePinned">OTHERS</div>
                          <div class="main-notes">
                               <template v-for="note,idx in notes" :key="idx">
-                                   <NotePreview v-if="!note.isPinned && !note.isDeleted" :note="note"
+                                   <NotePreview v-if="!note.isPinned && !note.isDeleted && isUnfiltered(note)" :note="note"
                                         @updateNote="updateNote"
                                         @deleteNote="deleteNote"
                                         @duplicateNote="duplicateNote"
@@ -47,10 +47,11 @@ export default {
                     <div v-else-if="!arePinned" class="notes-container-title">NO NOTES</div>
                </template>
                <template v-else>
-                    <div class="notes-container-title">TRASH</div>
+                    <div v-if="areDeleted" class="notes-container-title">TRASH</div>
+                    <div v-else class="notes-container-title">NO TRASH</div>
                     <div class="main-notes">
                     <template v-for="note,idx in notes" :key="idx">
-                         <NotePreview v-if="note.isDeleted" :note="note"
+                         <NotePreview v-if="note.isDeleted && isUnfiltered(note)" :note="note"
                               @updateNote="updateNote"
                               @deleteNote="deleteNote"
                               @duplicateNote="duplicateNote"
@@ -82,7 +83,7 @@ export default {
                notes: null,
                showDetails: false,
                showId: null,
-               filterBy: { deleted: false, },
+               filterBy: { deleted: false, search: '', },
           }
      },
      methods: {
@@ -186,6 +187,15 @@ export default {
           setFilterBy(filterBy) {
                const { val, setVal } = filterBy
                this.filterBy[val] = setVal
+          },
+          isUnfiltered(note) {
+               if (!note) return true
+               const currNote = note.info
+               const regexByName = new RegExp(this.filterBy.search, 'i')
+               if (regexByName.test(currNote.title)) return true
+               if (note.type === 'NoteTxt') return regexByName.test(currNote.txt)
+               if (note.type === 'NoteTodos') return currNote.todos.some(todo => regexByName.test(todo.txt))
+               return false
           }
      },
      computed: {
@@ -199,6 +209,10 @@ export default {
           areUnpinned() {
                if (!this.notes) return false
                return this.notes.some(note => !note.isPinned && !note.isDeleted)
+          },
+          areDeleted() {
+               if (!this.notes) return false
+               return this.notes.some(note => note.isDeleted)
           },
      },
      created() {

@@ -10,20 +10,30 @@
 }
 .notes-index {
 	display: grid;
-	grid-template-areas: 'sidebar main';
+	grid-template-areas:
+		'header header'
+		'sidebar main';
+}
+.notes-header {
+	grid-area: header;
+	width: 100vw;
+	height: 75px;
 }
 .notes-container {
 	grid-area: main;
 	width: 95vw;
+	position: relative;
+	display: grid;
 }
 .notes-sidebar-container {
 	grid-area: sidebar;
+	top: 0;
+	position: sticky;
 	width: 5vw;
 }
 .notes-index textarea {
 	padding-block-start: 1rem;
 }
-/* 'search search' */
 
 .notes-container p {
 	margin: 0;

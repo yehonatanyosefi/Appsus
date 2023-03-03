@@ -3,6 +3,7 @@ import NoteTxt from "./NoteTxt.js"
 import NoteImg from "./NoteImg.js"
 import { uploadService } from "../../../services/upload.service.js"
 import { utilService } from "../../../services/util.service.js"
+import { svgService } from "../../../services/svg.service.js"
 
 export default {
      props: ['note'],
@@ -17,7 +18,8 @@ export default {
                     <span v-if="!note.info.title">Title</span>
                </p>
                <button @click.stop="togglePin" title="Toggle Pinned Items" :class="isHidden">
-                    <i class="fa-solid fa-thumbtack"></i>
+                         <i v-if="note.isPinned" class="fa-solid fa-thumbtack"></i>
+                         <div v-else v-html="getSvg('pinEmpty')"></div>
                </button>
           </div>
           <component :is="note.type" :note="note" isPreview="true"
@@ -105,6 +107,9 @@ export default {
           },
           openNote() {
                this.$emit('openNote', this.note.id)
+          },
+          getSvg(iconName) {
+               return svgService.getNoteSvg(iconName)
           },
      },
      watch: {

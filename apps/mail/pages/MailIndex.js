@@ -84,7 +84,6 @@ export default {
       mailService
         .remove(mailId)
         .then(() => {
-          console.log('hi')
           const idx = this.mails.findIndex((mail) => mail.id === mailId)
           this.mails.splice(idx, 1)
           showSuccessMsg('Mail deleted successfully')
