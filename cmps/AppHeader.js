@@ -1,12 +1,12 @@
 export default {
     template: `
-        <header class="app-header">
+        <!-- <header class="app-header">
             <h1>AppSus</h1>
                 <nav>
                     <RouterLink v-for="({path, title}, idx) in routes" :to="path" :title="title"
                     class="">{{title}}</RouterLink>
                 </nav>
-        </header>
+        </header> -->
     `,
     data() {
         return {

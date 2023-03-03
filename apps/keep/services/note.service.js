@@ -17,6 +17,9 @@ export const noteService = {
      togglePin,
      toggleTodoCheck,
      addImg,
+     getEmptyNote,
+     deleteNote,
+     restoreNote,
 }
 
 function query(filterBy = {}) {
@@ -35,7 +38,6 @@ function query(filterBy = {}) {
 
 function get(noteId) {
      return storageService.get(NOTES_KEY, noteId)
-     // .then(_setNextPrevnoteId)
 }
 
 function remove(noteId) {
@@ -50,9 +52,9 @@ function save(note) {
      }
 }
 
-function addNote(txt) {
-     const newNote = { id: null, createdAt: Date.now(), type: 'NoteTxt', isPinned: false, style: { backgroundColor: '#ffffff' }, info: { title: '', txt: txt || '' } }
-     return save(newNote)
+function addNote(note) {
+     note.createdAt = Date.now()
+     return save(note)
 }
 
 function duplicateNote(noteId) {
@@ -64,10 +66,18 @@ function duplicateNote(noteId) {
           })
 }
 
-function deleteTodo(noteId, idx) {
+function deleteNote(noteId) {
      return get(noteId)
           .then(note => {
-               note.info.todos.splice(idx, 1)
+               note.isDeleted = true
+               return save(note)
+          })
+}
+
+function restoreNote(noteId) {
+     return get(noteId)
+          .then(note => {
+               note.isDeleted = false
                return save(note)
           })
 }
@@ -76,6 +86,14 @@ function addTodo(noteId) {
      return get(noteId)
           .then(note => {
                note.info.todos.push({ txt: '', doneAt: null })
+               return save(note)
+          })
+}
+
+function deleteTodo(noteId, idx) {
+     return get(noteId)
+          .then(note => {
+               note.info.todos.splice(idx, 1)
                return save(note)
           })
 }
@@ -125,26 +143,38 @@ function addImg(img, note) {
      return save(note)
 }
 
+function getEmptyNote() {
+     return {
+          id: '',
+          createdAt: null,
+          type: 'NoteTxt',
+          isPinned: false,
+          isDelted: false,
+          style: { backgroundColor: '#ffffff' },
+          info: { title: '', txt: '' }
+     }
+}
+
 function _createDemo() {
      let notes = utilService.loadFromStorage(NOTES_KEY)
      if (!notes || !notes.length) {
           notes = [
-               { id: 'n101', createdAt: 1112325, type: 'NoteTxt', isPinned: true, style: { backgroundColor: '#ffff6b' }, info: { title: 'Notes from Yaron', txt: 'Throw away my code' } },
+               { id: 'n101', createdAt: 1112325, type: 'NoteTxt', isPinned: true, isDeleted: true, style: { backgroundColor: '#ffff6b' }, info: { title: 'Notes from Yaron', txt: 'Throw away my code' } },
                {
-                    id: 'n102', createdAt: 1112222, type: 'NoteTxt', isPinned: false, style: { backgroundColor: '#ccffd9' }, info: {
+                    id: 'n102', createdAt: 1112222, type: 'NoteTxt', isPinned: false, isDeleted: false, style: { backgroundColor: '#ccffd9' }, info: {
                          title: `Poem`, txt: `Eran leads with patience and care,
 His students' progress, his utmost prayer,
 Through lines of code and tech despair,
 He guides them to the finish line, fair and square.` }
                },
                {
-                    id: 'n103', createdAt: 1112567, type: 'NoteTodos', isPinned: false, style: { backgroundColor: '#fffff1' }, info: {
+                    id: 'n103', createdAt: 1112567, type: 'NoteTodos', isPinned: false, isDeleted: true, style: { backgroundColor: '#fffff1' }, info: {
                          title: 'TODO: Laugh', todos: [{ txt: 'Call Islam', doneAt: null },
                          { txt: 'Say Aloo', doneAt: 187111111 }]
                     }
                },
-               { id: 'n104', createdAt: 1112434, type: 'NoteImg', isPinned: true, style: { backgroundColor: '#bdffff' }, info: { title: 'My Favorite Book', url: `https://m.media-amazon.com/images/I/81iqZ2HHD-L._AC_UF1000,1000_QL80_.jpg` } },
-               { id: 'n105', createdAt: 1112552, type: 'NoteTodos', isPinned: false, style: { backgroundColor: '#fff5f5' }, info: { title: 'To do', todos: [{ txt: 'Finish CSS', doneAt: null }, { txt: 'Get CR', doneAt: 187111111 }] } },
+               { id: 'n104', createdAt: 1112434, type: 'NoteImg', isPinned: true, isDeleted: false, style: { backgroundColor: '#bdffff' }, info: { title: 'My Favorite Book', url: `https://m.media-amazon.com/images/I/81iqZ2HHD-L._AC_UF1000,1000_QL80_.jpg` } },
+               { id: 'n105', createdAt: 1112552, type: 'NoteTodos', isPinned: false, isDeleted: false, style: { backgroundColor: '#fff5f5' }, info: { title: 'To do', todos: [{ txt: 'Finish CSS', doneAt: null }, { txt: 'Get CR', doneAt: 187111111 }] } },
 
           ]
           utilService.saveToStorage(NOTES_KEY, notes)

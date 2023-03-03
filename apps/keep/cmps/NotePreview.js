@@ -3,6 +3,7 @@ import NoteTxt from "./NoteTxt.js"
 import NoteImg from "./NoteImg.js"
 import { uploadService } from "../../../services/upload.service.js"
 import { utilService } from "../../../services/util.service.js"
+import { svgService } from "../../../services/svg.service.js"
 
 export default {
      props: ['note'],
@@ -17,7 +18,8 @@ export default {
                     <span v-if="!note.info.title">Title</span>
                </p>
                <button @click.stop="togglePin" title="Toggle Pinned Items" :class="isHidden">
-                    <i class="fa-solid fa-thumbtack"></i>
+                         <i v-if="note.isPinned" class="fa-solid fa-thumbtack"></i>
+                         <div v-else v-html="getSvg('pinEmpty')"></div>
                </button>
           </div>
           <component :is="note.type" :note="note" isPreview="true"
@@ -42,12 +44,22 @@ export default {
                <button class="" v-if="note.type !== 'NoteImg'" @click.stop="toggleTodos" title="Checklist Toggle">
                     <i class="fa-regular fa-square-check note-btn"></i>
                </button>
-               <button @click.stop="duplicateNote" title="Duplicate Note">
-                    <i class="fa-regular fa-clone"></i>
-               </button>
-               <button @click.stop="deleteNote" title="Delete Note" class="note-btn">
-                    <i class="fa-solid fa-trash note-btn"></i>
-               </button>
+               <template v-if="!note.isDeleted">
+                    <button @click.stop="duplicateNote" title="Duplicate">
+                         <i class="fa-regular fa-clone"></i>
+                    </button>
+                    <button @click.stop="deleteNote" title="Delete" class="note-btn">
+                         <i class="fa-solid fa-trash note-btn"></i>
+                    </button>
+               </template>
+               <template v-else>
+                    <button @click.stop="restoreNote" title="Restore">
+                         <i class="fa-solid fa-trash-can-arrow-up"></i>
+                    </button>
+                    <button @click.stop="deleteNote" title="Delete Forever" class="note-btn">
+                         <i class="fa-solid fa-ban"></i>
+                    </button>
+               </template>
           </div>
      </div>
      `,
@@ -59,13 +71,6 @@ export default {
      methods: {
           upload(ev) {
                uploadService.onImgInput(ev, this.note)
-               // .then(res => console.log(`res:`, res))
-               // setTimeout(() => {
-               //      const img = uploadService.getImg()
-               //      this.note.type = 'NoteImg'
-               //      this.note.info.url = img.src
-               //      this.updateInternal()
-               // }, 100);
           },
           updateTitle() {
                this.updateInternal()
@@ -81,6 +86,9 @@ export default {
           },
           deleteNote() {
                this.$emit('deleteNote', this.note.id)
+          },
+          restoreNote() {
+               this.$emit('restoreNote', this.note.id)
           },
           deleteTodo(noteId, idx) {
                this.$emit('deleteTodo', noteId, idx)
@@ -99,6 +107,9 @@ export default {
           },
           openNote() {
                this.$emit('openNote', this.note.id)
+          },
+          getSvg(iconName) {
+               return svgService.getNoteSvg(iconName)
           },
      },
      watch: {

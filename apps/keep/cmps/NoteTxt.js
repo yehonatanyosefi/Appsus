@@ -1,10 +1,11 @@
 import { utilService } from "../../../services/util.service.js"
 export default {
-     props: ['note', 'isPreview'],
+     props: ['note', 'isPreview', 'isFocus'],
      template: `
-     <p v-if="isPreview" class="preview-text">{{note.info.txt}}</p>
+     <p v-if="isPreview && note.info.txt" v-html="previewTxt" class="preview-txt"></p>
+     <p v-else-if="isPreview && !note.info.txt" class="preview-txt">text</p>
      <textarea
-          v-else
+          v-else-if="!isPreview"
           v-model="note.info.txt"
           @input="updateNote"
           ref="textArea"
@@ -21,14 +22,17 @@ export default {
                this.$emit('updateNote', this.note)
           },
           resizeTA() {
-               let element = this.$refs.textArea
+               const element = this.$refs.textArea
                element.style.height = '20px'
-               element.style.height = element.scrollHeight + 12 + 'px'
+               element.style.height = element.scrollHeight + 6 + 'px'
           },
      },
      computed: {
           debouncedResizeTA() {
                return utilService.debounce(this.resizeTA, 250)
+          },
+          previewTxt() {
+               return this.note.info.txt.replaceAll('\n', '<br>')
           },
      },
      mounted() {
@@ -36,6 +40,7 @@ export default {
                window.addEventListener("resize", this.debouncedResizeTA)
                setTimeout(() => this.resizeTA(), 0)
           }
+          if (this.isFocus) this.$refs.textArea.focus()
      },
      unmounted() {
           if (!this.isPreview) window.removeEventListener('resize', this.debouncedResizeTA)

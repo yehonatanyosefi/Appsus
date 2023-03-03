@@ -1,6 +1,12 @@
 .notes-list {
 }
 
+.notes-list button:hover,
+.upload-btn i:hover {
+	color: var(--clr5);
+	filter: drop-shadow(0 0 0.75rem rgb(172, 172, 172));
+}
+
 .main-notes {
 	padding-left: 3rem;
 	padding-right: 3rem;
