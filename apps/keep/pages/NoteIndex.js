@@ -6,9 +6,7 @@ export default {
      props: [],
      template: `
      <main class="notes-index">
-          <section class="notes-header">
-               <NoteHeader />
-          </section>
+          <NoteHeader @set-route="setRoute"/>
           <section class="notes-sidebar-container">
                <NoteSideBar />
           </section>
@@ -22,6 +20,9 @@ export default {
           }
      },
      methods: {
+          setRoute(route) {
+               this.$emit('set-route', route)
+          },
      },
      computed: {
 

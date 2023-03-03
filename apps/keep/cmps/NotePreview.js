@@ -4,6 +4,7 @@ import NoteImg from "./NoteImg.js"
 import { uploadService } from "../../../services/upload.service.js"
 import { utilService } from "../../../services/util.service.js"
 import { svgService } from "../../../services/svg.service.js"
+import ColorPicker from "./ColorPicker.js"
 
 export default {
      props: ['note'],
@@ -11,7 +12,12 @@ export default {
      <div class="note-card" :style="'backgroundColor:'+note.style.backgroundColor+';'"
           @mouseover="isHover = true"
           @mouseleave="isHover = false"
-          @click="openNote">
+          @click="openNote"
+          draggable="true" droppable="true"
+          @dragstart="dragStart($event,note.id)"
+          @drop="onDrop($event,note.id)"
+          @dragenter.prevent
+          @dragover.prevent>
           <div class="flex justify-between align-center">
                <p class="note-title">
                     {{note.info.title}}
@@ -28,9 +34,6 @@ export default {
                @addTodo="addTodo"
                @toggleTodoCheck="toggleTodoCheck" />
           <div class="button-container">
-               <div class="color-wrapper">
-                    <input @click.stop type="color" v-model="note.style.backgroundColor" @input="updateInternal"  title="Change Background Color">
-               </div>
                <label :for="note.id" class="upload-btn" title="Upload Image" @click.stop>
                     <input @click.stop
                          class="upload-btn"
@@ -41,6 +44,9 @@ export default {
                          hidden />
                     <i class="fa-regular fa-image upload-btn"></i>
                </label>
+               <button class="color-wrapper" @click.stop="toggleColorPick" title="Background color">
+                    <i class="fa-solid fa-palette"></i>
+               </button>
                <button class="" v-if="note.type !== 'NoteImg'" @click.stop="toggleTodos" title="Checklist Toggle">
                     <i class="fa-regular fa-square-check note-btn"></i>
                </button>
@@ -61,11 +67,13 @@ export default {
                     </button>
                </template>
           </div>
+          <ColorPicker v-if="isColorPicking" @chooseColor="chooseColor" @exitColorPicker="exitColorPicker" />
      </div>
      `,
      data() {
           return {
                isHover: false,
+               isColorPicking: false,
           }
      },
      methods: {
@@ -111,6 +119,26 @@ export default {
           getSvg(iconName) {
                return svgService.getNoteSvg(iconName)
           },
+          chooseColor(val) {
+               this.note.style.backgroundColor = val
+               this.updateInternal()
+          },
+          exitColorPicker() {
+               setTimeout(() => this.isColorPicking = false, 100)
+          },
+          toggleColorPick() {
+               this.isColorPicking = !this.isColorPicking
+          },
+          dragStart(ev, noteId) {
+               ev.dataTransfer.dropEffect = 'move'
+               ev.dataTransfer.effectAllowed = 'move'
+               ev.dataTransfer.setData('noteId', noteId)
+          },
+          onDrop(ev, noteId) {
+               const noteIdSender = ev.dataTransfer.getData('noteId')
+               const exchangeInfo = { senderId: noteIdSender, receiverId: noteId }
+               this.$emit('exchangeNotes', exchangeInfo)
+          }
      },
      watch: {
      },
@@ -127,5 +155,6 @@ export default {
           NoteTodos,
           NoteTxt,
           NoteImg,
+          ColorPicker,
      },
 }

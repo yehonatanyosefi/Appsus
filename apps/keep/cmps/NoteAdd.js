@@ -6,6 +6,8 @@ import { noteService } from "../services/note.service.js"
 import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
 import { utilService } from "../../../services/util.service.js"
 import { svgService } from "../../../services/svg.service.js"
+import ColorPicker from "./ColorPicker.js"
+
 export default {
      props: [],
      template: `
@@ -27,7 +29,6 @@ export default {
                     </label>
                </div>
           </div>
-          <!-- <div v-else class="flex justify-center align-center note-add"> -->
           <div v-else class="note-add-card" :style="'backgroundColor:'+note.style.backgroundColor+';'">
                <div class="flex justify-between align-center">
                     <textarea v-model="note.info.title" class="note-title"
@@ -44,9 +45,6 @@ export default {
                     @addTodo="addTodo"
                     @toggleTodoCheck="toggleTodoCheck" />
                <div class="button-container">
-                    <div class="color-wrapper">
-                         <input @click.stop type="color" v-model="note.style.backgroundColor"  title="Change Background Color">
-                    </div>
                     <label for="newNote" class="upload-btn" title="Upload Image" @click.stop>
                          <input @click.stop
                               class="upload-btn"
@@ -57,6 +55,9 @@ export default {
                               hidden />
                          <i class="fa-regular fa-image upload-btn"></i>
                     </label>
+                    <button class="color-wrapper" @click.stop="toggleColorPick" title="Background color">
+                         <i class="fa-solid fa-palette"></i>
+                    </button>
                     <button class="" v-if="note.type !== 'NoteImg'" @click.stop="toggleTodos" title="Checklist Toggle">
                          <i class="fa-regular fa-square-check note-btn"></i>
                     </button>
@@ -64,7 +65,7 @@ export default {
                          <i class="fa-solid fa-xmark"></i>
                     </button>
                </div>
-          <!-- </div> -->
+          <ColorPicker v-if="isColorPicking" @chooseColor="chooseColor" @exitColorPicker="exitColorPicker" />
      </div>
           `,
      data() {
@@ -72,6 +73,7 @@ export default {
                isMaking: false,
                note: null,
                placeholderTxt: 'Take a note...',
+               isColorPicking: false,
           }
      },
      methods: {
@@ -146,6 +148,16 @@ export default {
           getSvg(iconName) {
                return svgService.getNoteSvg(iconName)
           },
+          chooseColor(val) {
+               this.note.style.backgroundColor = val
+               this.updateInternal()
+          },
+          exitColorPicker() {
+               setTimeout(() => this.isColorPicking = false, 100)
+          },
+          toggleColorPick() {
+               this.isColorPicking = !this.isColorPicking
+          },
      },
      computed: {
           debouncedResizeTA() {
@@ -159,6 +171,7 @@ export default {
           NoteTodos,
           NoteTxt,
           NoteImg,
+          ColorPicker,
      },
      watch: {
      }

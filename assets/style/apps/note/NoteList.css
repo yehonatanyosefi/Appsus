@@ -8,8 +8,8 @@
 }
 
 .main-notes {
-	padding-left: 3rem;
-	padding-right: 3rem;
+	padding-left: var(--note-side-padding);
+	padding-right: var(--note-side-padding);
 	columns: auto 220px;
 	column-gap: 1.5rem;
 	margin-bottom: 3rem;

@@ -4,7 +4,7 @@
 	min-height: 125px;
 	border-radius: 0.5em;
 	border: 1px solid var(--border-clr);
-	transition: box-shadow 250ms opacity 100ms;
+	transition: background-color 250ms ease, box-shadow 300ms, opacity 100ms;
 	break-inside: avoid;
 	margin-block-end: 2rem;
 }
@@ -60,9 +60,6 @@
 .color-wrapper {
 	height: var(--note-btn-size);
 	width: var(--note-btn-size);
-	background-image: url(../../../svg/color-picker.svg);
-	background-repeat: no-repeat;
-	background-size: contain;
 	margin: 0;
 	padding: 0;
 }

@@ -23,7 +23,8 @@ export default {
                                         @toggleTodos="toggleTodos"
                                         @togglePin="togglePin"
                                         @toggleTodoCheck="toggleTodoCheck"
-                                        @openNote="openNote" />
+                                        @openNote="openNote"
+                                        @exchangeNotes="exchangeNotes" />
                               </template>
                          </div>
                     </template>
@@ -40,7 +41,8 @@ export default {
                                         @toggleTodos="toggleTodos"
                                         @togglePin="togglePin"
                                         @toggleTodoCheck="toggleTodoCheck"
-                                        @openNote="openNote" />
+                                        @openNote="openNote"
+                                        @exchangeNotes="exchangeNotes" />
                               </template>
                          </div>
                     </template>
@@ -61,7 +63,8 @@ export default {
                               @togglePin="togglePin"
                               @toggleTodoCheck="toggleTodoCheck"
                               @openNote="openNote"
-                              @restoreNote="restoreNote" />
+                              @restoreNote="restoreNote"
+                              @exchangeNotes="exchangeNotes" />
                          </template>
                     </div>
                </template>
@@ -96,6 +99,10 @@ export default {
           },
           updateNote(updatedNote) {
                noteService.save(updatedNote)
+               // .then(newNote => {
+               //      const noteIdx = this.notes.findIndex(note => note.id === noteId)
+               //      this.notes[noteIdx] = newNote
+               // })
           },
           deleteNote(noteId) {
                if (this.notes.find(note => note.id === noteId).isDeleted === true) {
@@ -107,6 +114,7 @@ export default {
                     .then(res => {
                          const idx = this.notes.findIndex(note => note.id === noteId)
                          this.notes[idx].isDeleted = true
+                         this.notes[idx].isPinned = false
                          showSuccessMsg('Moved to trash')
                     })
                     .catch(err => showErrorMsg('Move to trash failed'))
@@ -196,7 +204,16 @@ export default {
                if (note.type === 'NoteTxt') return regexByName.test(currNote.txt)
                if (note.type === 'NoteTodos') return currNote.todos.some(todo => regexByName.test(todo.txt))
                return false
-          }
+          },
+          exchangeNotes(exchangeInfo) {
+               noteService.exchangeNotes(exchangeInfo)
+                    .then((exchangeNoteInfo) => {
+                         const { senderIdx, updatedSender, receiverIdx, updatedReceiver } = exchangeNoteInfo
+                         this.notes[senderIdx] = updatedReceiver
+                         this.notes[receiverIdx] = updatedSender
+                    })
+                    .catch(err => showErrorMsg(`Both notes needs the same pin status`))
+          },
      },
      computed: {
           showNote() {

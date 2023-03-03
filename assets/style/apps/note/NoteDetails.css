@@ -12,7 +12,7 @@
 	margin-block-end: 2rem;
 	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
 	scale: 0.6;
-	transition: scale 250ms;
+	transition: scale 250ms, background-color 250ms;
 }
 .note-details.show {
 	scale: 1;

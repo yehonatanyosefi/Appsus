@@ -22,5 +22,5 @@ export default {
         setRoute(route) {
             this.$emit('set-route', route)
         }
-    },
+    }
 }

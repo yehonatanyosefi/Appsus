@@ -2,6 +2,8 @@
 	display: flex;
 	justify-content: space-between;
 	border-bottom: 1px solid #dadce0;
+	position: relative;
+	padding-left: var(--note-header-side-padding);
 }
 .notes-header .logo-txt {
 	font-size: 1.5rem;
@@ -20,7 +22,7 @@
 	max-width: 800px;
 	border-radius: 0.5em;
 	border-color: inherit;
-	transition: background-color 500ms;
+	transition: background-color 250ms;
 	height: 3rem;
 }
 .notes-header input.notes-search:focus {
@@ -36,4 +38,14 @@
 
 .notes-header nav button:hover {
 	background-color: var(--notes-nav-hover);
+}
+.header-nav {
+	position: absolute;
+	left: 75%;
+	top: 10%;
+	width: 300px;
+	border-radius: 0.5em;
+	height: 100px;
+	background-color: #fff;
+	display: grid;
 }

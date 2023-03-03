@@ -23,6 +23,7 @@
 @import 'apps/mail/MailDetails.css';
 
 /* note */
+@import 'apps/note/ColorPicker.css';
 @import 'apps/note/NoteAdd.css';
 @import 'apps/note/NoteIndex.css';
 @import 'apps/note/NoteList.css';

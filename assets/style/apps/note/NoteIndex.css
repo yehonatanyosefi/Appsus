@@ -10,6 +10,8 @@
 }
 .notes-index {
 	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: auto 1fr;
 	grid-template-areas:
 		'header header'
 		'sidebar main';
@@ -21,7 +23,6 @@
 }
 .notes-container {
 	grid-area: main;
-	width: 95vw;
 	position: relative;
 	display: grid;
 }
@@ -29,7 +30,6 @@
 	grid-area: sidebar;
 	top: 0;
 	position: sticky;
-	width: 5vw;
 }
 .notes-index textarea {
 	padding-block-start: 1rem;
