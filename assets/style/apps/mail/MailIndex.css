@@ -5,7 +5,10 @@
     "filter list"
     ;
     grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr 9fr;
     column-gap: 1em;
+    height: 100vh;
+    background-color: var(--mail-bcg);
     /* padding-block-start: 1em; */
 }
 
@@ -25,6 +28,11 @@
 .mail-index .filter-bar{
     grid-area: filter;
     padding-inline: 1em;
+}
+
+.mail-index .filter-bar > * {
+    display: flex;
+    gap:.5em;
 }
 
 .mail-index .filter-bar > *{

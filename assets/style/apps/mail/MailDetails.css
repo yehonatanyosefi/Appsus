@@ -1,9 +1,10 @@
 .mail-details{
     display: grid;
     grid-template-areas: 
-    "subject btns"
-    "username from"
-    "body body"
+    /* "arrow arrow" */
+    " arrow subject subject btns"
+    "username from from from"
+    "body body body body"
     ;
     grid-template-columns: auto 1fr ;
     align-items: center;
@@ -23,6 +24,7 @@
 
 .mail-details .mail-from{
     grid-area: from;
+    grid-column: 2;
 }
 
 .mail-details .mail-body{
@@ -32,4 +34,12 @@
 .mail-details .mail-details-buttons{
     grid-area: btns;
     margin-inline-start: auto;
+}
+
+.mail-details .arrow-btn{
+    width: fit-content;
+    grid-area: arrow;
+    /* margin-inline-start: auto; */
+    grid-column: 1;
+    
 }

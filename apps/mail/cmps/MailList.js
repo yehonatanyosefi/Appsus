@@ -6,11 +6,12 @@ export default {
      props: ['mails'],
      template: `
      <section className="mail-list">
+          <h3 class="flex"><i class="fa-solid fa-inbox"></i> Primary</h3>
           <ul class="clean-list">
-               <li v-for="mail in mails" :key="mail.id">
-               <RouterLink :to="'/mail/'+mail.id" @click="changeIsRead(true,mail.id)">
-                    <MailPreview :mail="mail" @removeMail="remove" @click.stop @changeIsRead="changeIsRead"/>
-               </RouterLink> 
+               <li v-for="mail in mails" :key="mail.id" >
+               <!-- <RouterLink :to="'/mail/'+mail.id" @click="changeIsRead(true,mail.id)"> -->
+                    <MailPreview :mail="mail" @removeMail="remove" @click.stop @changeIsRead="changeIsRead" @click="changeIsRead(true,mail.id)"/>
+               <!-- </RouterLink>  -->
                </li>
           </ul>
      </section>

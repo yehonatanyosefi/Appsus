@@ -40,18 +40,13 @@ export default {
             this.isOpen = false
             setTimeout(()=> {
                 this.$emit('closeCompose')
-                console.log('this.newMail.id',this.newMail.id)
                 if (!this.recipient && !this.subject && !this.body) this.$emit( 'removeMail',this.newMail.id)
-                // this.$emit('addMail', this.subject,this.body ,this.recipient,false)
-                // clearInterval(this.intervalId)
+                
             },1500)
         },
         saveDraft(){
             this.intervalId = setInterval(()=> {
                 if (!this.recipient && !this.subject && !this.body) return
-                //send remove emit to parent
-                //send save emit to parent
-                console.log('newMail.id',this.newMail.id)
                 this.$emit('addMail', this.subject,this.body ,this.recipient,false,this.newMail.id)
             },5000)
         },
@@ -69,7 +64,6 @@ export default {
             mailService.getEmptyMail()
                 .then(mail=>{
                     this.newMail=mail
-                    console.log('newMail',this.newMail)
                 })
         },
     },
