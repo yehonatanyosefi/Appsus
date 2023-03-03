@@ -9,6 +9,7 @@
     column-gap: 1em;
     height: 100vh;
     background-color: var(--mail-bcg);
+    row-gap: 1em;
     /* padding-block-start: 1em; */
 }
 
@@ -17,6 +18,9 @@
     grid-area: header;
     padding: 1em;
 	height: 75px;
+    display: grid;
+    grid-template-columns: 230px 1fr 10vw;
+    gap: 2em;
 
 }
 
@@ -28,11 +32,12 @@
 	transition: background-color 500ms;
 	height: 3rem;
     border: none;
+    width: 100%;
 }
 .mail-header .navUser,.toggle-logo{
     height: 40px;
     gap: 1.2rem;
-    align-items: baseline;
+    align-items: center;
 }
 
 .mail-header .navUser,.toggle-logo p{
@@ -50,7 +55,12 @@
     height: 40px;
 }
 
-.mail-header nav:hover{
+.mail-header nav button{
+    display: flex;
+    align-items: center;
+
+}
+.mail-header nav button:hover{
     border-radius: 50%;
 	background-color: var(--notes-nav-hover);
 
