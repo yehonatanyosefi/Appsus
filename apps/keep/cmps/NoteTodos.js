@@ -49,6 +49,12 @@ export default {
           },
           addTodo() {
                this.$emit('addTodo', this.note.id)
+               setTimeout(() => {
+                    const idx = this.note.info.todos.length - 1
+                    const elName = 'textArea' + idx
+                    const element = this.$refs[elName][0]
+                    element.focus()
+               }, 100)
           },
           toggleTodoCheck(idx) {
                this.$emit('toggleTodoCheck', this.note.id, idx)

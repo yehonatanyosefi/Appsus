@@ -12,7 +12,12 @@ export default {
      <div class="note-card" :style="'backgroundColor:'+note.style.backgroundColor+';'"
           @mouseover="isHover = true"
           @mouseleave="isHover = false"
-          @click="openNote">
+          @click="openNote"
+          draggable="true" droppable="true"
+          @dragstart="dragStart($event,note.id)"
+          @drop="onDrop($event,note.id)"
+          @dragenter.prevent
+          @dragover.prevent>
           <div class="flex justify-between align-center">
                <p class="note-title">
                     {{note.info.title}}
@@ -124,6 +129,16 @@ export default {
           toggleColorPick() {
                this.isColorPicking = !this.isColorPicking
           },
+          dragStart(ev, noteId) {
+               ev.dataTransfer.dropEffect = 'move'
+               ev.dataTransfer.effectAllowed = 'move'
+               ev.dataTransfer.setData('noteId', noteId)
+          },
+          onDrop(ev, noteId) {
+               const noteIdSender = ev.dataTransfer.getData('noteId')
+               const exchangeInfo = { senderId: noteIdSender, receiverId: noteId }
+               this.$emit('exchangeNotes', exchangeInfo)
+          }
      },
      watch: {
      },
