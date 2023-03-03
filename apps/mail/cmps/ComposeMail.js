@@ -16,10 +16,10 @@ export default {
 
             <form action="" @submit="send">
             <main class="mail-text">
-                <input v-model="recipient" class="recipient" type="email" placeholder="Recipient"  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
+                <input @input="saveDraft" v-model="recipient" class="recipient" type="email" placeholder="Recipient"  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" required>
 
-                <input v-model="subject" class="mail-subject" type="text" placeholder="Subject"/>
-                <textarea v-model="body" name="" id="" cols="30" rows="10"></textarea>
+                <input @input="saveDraft" v-model="subject" class="mail-subject" type="text" placeholder="Subject"/>
+                <textarea @input="saveDraft" v-model="body" name="" id="" cols="30" rows="10"></textarea>
             </main>
 
             <section class="send-mail flex justify-between">
@@ -41,7 +41,21 @@ export default {
             setTimeout(()=> {
                 this.$emit('closeCompose')
                 this.$emit('addMail', this.subject,this.body ,this.recipient,false)
+                clearInterval(this.intervalId)
             },1500)
+        },
+        saveDraft(){
+            this.intervalId = setInterval(()=> {
+                if (!this.recipient && !this.subject && !this.body) {
+                clearInterval(this.intervalId)
+                //todo:/send remove emit to parent
+                // mailService.remove(this.emptyMail.id)
+                }else{
+                //todo:send save emit to parent
+                // mailService.save(this.emptyMail.id)
+                  
+                }
+            },5000)
         },
         send() {
                 this.$emit('addMail', this.subject,this.body ,this.recipient)
@@ -61,6 +75,8 @@ export default {
     },
     created() {
         setTimeout(() => this.isOpen = true, 0)
+        this.emptyMail= mailService.getEmptyMail()
+
     },
     data() {
         return {
@@ -68,6 +84,8 @@ export default {
             recipient:'',
             subject:'',
             body:'',
+            intervalId:'',
+            emptyMail:null,
 
         }
     }
