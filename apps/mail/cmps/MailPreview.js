@@ -3,7 +3,7 @@ import { i18Service } from "../../../services/i18n.service.js"
 export default {
      props: ['mail'],
      template: `
-     <section  class="mail-preview" :class="formatReadMail">
+     <section  class="mail-preview" :class="formatReadMail" @click.prevent >
           <!-- <div :class="formatReadMail"> -->
                <input type="checkbox" />
                <i class="fa-regular fa-star"></i>
@@ -43,9 +43,13 @@ export default {
                return i18Service.formatTime(this.mail.sentAt)
           },
           formatReadMail(){
-               return {'read': !this.mail.isRead }
+               return {'read': !this.mail.isRead ,
+                         'unread':this.mail.isRead
+          }
           },
-          
+          // read(){
+          //      return {'read-mail': this.mail.isRead}
+          // }
      },
      created() {
           

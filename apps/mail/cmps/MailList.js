@@ -9,16 +9,14 @@ export default {
           <h3 class="flex"><i class="fa-solid fa-inbox"></i> Primary</h3>
           <ul class="clean-list">
                <li v-for="mail in mails" :key="mail.id" >
-               <!-- <RouterLink :to="'/mail/'+mail.id" @click="changeIsRead(true,mail.id)"> -->
                     <MailPreview :mail="mail" @removeMail="remove" @click.stop @changeIsRead="changeIsRead" @click="changeIsRead(true,mail.id)"/>
-               <!-- </RouterLink>  -->
                </li>
           </ul>
      </section>
      `,
      data() {
           return {
-               mail: null,
+               // mail: null,
           }
      },
      methods: { 
@@ -30,11 +28,11 @@ export default {
            }
      },
      computed: {
-
+          
      },
      created() {
-          mailService.query()
-               .then(mail => this.mail = mail)
+          // mailService.query()
+          //      .then(mail => this.mail = mail)
 
      },
      components: {

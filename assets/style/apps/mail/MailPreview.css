@@ -12,6 +12,10 @@
     font-family: ROBOTO-bold;
 }
 
+.unread{
+    background-color: var(--mail-bcg);
+}
+
 .mail-preview h2 ,.mail-preview p{
     margin: 0;
 }
@@ -20,11 +24,14 @@
     position: absolute;
     right: 0;
     opacity: 0;
+    /* display: none; */
 } 
 .mail-preview:hover .hover-buttons {
     position: absolute;
     right: 0;
     opacity: 1;
+    padding-inline: 1em;
+    /* display: inline; */
 }
 
 .hover-buttons button{

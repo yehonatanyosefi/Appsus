@@ -7,21 +7,26 @@ import {
   showSuccessMsg,
   showErrorMsg,
 } from '../../../services/event-bus.service.js'
+import { svgService } from "../../../services/svg.service.js"
+
 
 export default {
   template: `
      <section className="mail-index">
      <header class="mail-header flex justify-between">
-          <button class="toggle-menu x fa-solid fa-bars" @click="isShow=!isShow"> </button>
-          <div className="logo fa-duotone fa-m">SusMail</div>
-          <!-- <button class="logo fa-duotone fa-m">SusMail</button> -->
-          <!-- <input type="text" placeholder="🔎 Search Mail"/> -->
+          <section class="toggle-logo flex">
+               <button class="toggle-menu x fa-solid fa-bars" @click="isShow=!isShow"> </button>
+               <a><img src="../../../assets/img/logo.png" alt="Appsus" class="logo" /> </a>
+               <p>Appsus</p>
+          </section >
           <MailFilter @filter="setFilterBy" />
-          <div className="menu-buttons">
-               <button class="apps-menu">apps menu</button>
-               <button class="user">User</button>
-          </div>
+          <section class="navUser flex" >
+               <nav><button v-html="getSvg('navigator')"></button></nav>
+               <img class="user-profile" src="../../../assets/img/dor.jfif">
+          </section>
      </header>
+
+     
 
      <section class="filter-bar flex flex-column align-center">
           <button class="compose-btn" @click="openModal" ><i class="fa-regular fa-pen-to-square" ></i> <span v-show="isShow">Compose</span></button>
@@ -63,7 +68,6 @@ export default {
       mails: null,
       isOpen: false,
       unread: 0,
-      // filterBy: {read:true , unread:true},
       filterBy: {},
       setFilterVal: 'inbox',
       currMailId:'',
@@ -93,7 +97,6 @@ export default {
         })
     },
     removeMail(mailId) {
-      //when deleting fix unread count
       mailService
         .remove(mailId)
         .then(() => {
@@ -122,7 +125,10 @@ export default {
      console.log('filterBy',filterBy)
          this.setFilterVal=filterBy
          if (this.currMailId) this.currMailId=null
-    }
+    },
+    getSvg(iconName) {
+     return svgService.getNoteSvg(iconName)
+},
   },
   computed: {
     UnreadCount() {
@@ -164,10 +170,6 @@ export default {
           regexByName.test(mail.from.split('@')[0]) ||
           regexByName.test(mail.body)
       )
-
-      // console.log('this.setFilter',this.setFilter)
-      // console.log('mails[0][this.setFilter]',this.mails[0][this.setFilter])
-      // return this.mails.filter(mail => (this.filterBy[this.setFilter]===mail[this.setFilter]))
     },
   },
   created() {

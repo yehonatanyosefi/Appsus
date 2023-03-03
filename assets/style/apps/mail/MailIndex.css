@@ -5,7 +5,7 @@
     "filter list"
     ;
     grid-template-columns: auto 1fr;
-    grid-template-rows: 1fr 9fr;
+    grid-template-rows: auto 9fr;
     column-gap: 1em;
     height: 100vh;
     background-color: var(--mail-bcg);
@@ -16,13 +16,50 @@
     align-items: center;
     grid-area: header;
     padding: 1em;
+	height: 75px;
+
 }
 
 .mail-header input{
-    border-radius: 7px;
-    padding: .5em;
-    /* border: gray 2; */
-    border: 1px solid rgba(128, 128, 128, 0.403);
+    padding: 10px;
+	background-color: #f1f3f4;
+	border-radius: 0.5em;
+	border-color: inherit;
+	transition: background-color 500ms;
+	height: 3rem;
+    border: none;
+}
+.mail-header .navUser,.toggle-logo{
+    height: 40px;
+    gap: 1.2rem;
+    align-items: baseline;
+}
+
+.mail-header .navUser,.toggle-logo p{
+    font-family: ROBOTO;
+    font-size: 30px;
+    margin: 0;
+}
+
+.mail-header input:focus{
+    background-color: var(--clr1);
+	filter: drop-shadow(rgba(149, 157, 165, 0.35) 0px 1px 3px);
+}
+
+.mail-header a img.logo{
+    height: 40px;
+}
+
+.mail-header nav:hover{
+    border-radius: 50%;
+	background-color: var(--notes-nav-hover);
+
+}
+
+.mail-index header.mail-header img.user-profile {
+	border-radius: 50%;
+	height: 100%;
+	filter: drop-shadow(rgba(149, 157, 165, 0.35) 0px 1px 3px);
 }
 
 .mail-index .filter-bar{
