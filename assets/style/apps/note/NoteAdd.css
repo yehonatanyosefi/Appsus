@@ -30,12 +30,15 @@
 	height: 1.5rem;
 	font-size: 1.5rem;
 }
-.note-add-container button:hover,
-.note-add-container i:hover {
+.note-add-container button {
+	color: var(--clr3);
+}
+.note-add-container button:hover {
 	color: var(--clr5);
 	filter: drop-shadow(0 0 0.75rem rgb(172, 172, 172));
 }
 .note-add-card {
+	transition: background-color 250ms;
 	justify-self: center;
 	padding-left: 1.5rem;
 	padding-right: 1.5rem;
@@ -58,6 +61,10 @@
 	padding: var(--note-card-pad);
 	padding-block-start: 1rem;
 	width: 100%;
+}
+.note-add-card button:hover {
+	color: var(--clr5);
+	filter: drop-shadow(0 0 0.75rem rgb(172, 172, 172));
 }
 
 .note-add-card .button-container {

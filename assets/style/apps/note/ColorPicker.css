@@ -1,0 +1,26 @@
+.color-picker {
+	position: absolute;
+	background-color: var(--clr1);
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+	border-radius: 0.4em;
+	padding: 0.5rem;
+	gap: 0.5rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 30px);
+	grid-auto-flow: dense;
+	width: 240px;
+	justify-content: space-between;
+	align-items: center;
+}
+.color-div:first-child {
+	border: 1px solid var(--clr3);
+}
+.color-div {
+	border-radius: 50%;
+	cursor: pointer;
+	height: 30px;
+	width: 30px;
+}
+.color-div:hover {
+	border: 1px solid black;
+}

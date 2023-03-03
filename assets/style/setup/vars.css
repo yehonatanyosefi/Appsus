@@ -14,6 +14,8 @@
 	--clr-star: orange;
 	--note-btn-size: 1.2rem;
 	--note-card-pad: 0.8rem;
+	--note-side-padding: 3rem;
+	--note-header-side-padding: 1rem;
 	--border-clr: #e0e0e0;
 	--notes-nav-hover: rgba(60, 64, 67, 0.08);
 }
