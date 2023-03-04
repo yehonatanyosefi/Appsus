@@ -147,6 +147,16 @@ export default {
     getSvg(iconName) {
       return svgService.getNoteSvg(iconName)
     },
+    toggleIsNav() {
+     if (!this.isNav) {
+          this.isNav = true
+          setTimeout(() => this.$refs.navModal.focus(), 150)
+     }
+     else this.isNav = false
+},
+closeNav() {
+     setTimeout(() => this.isNav = false, 150)
+},
   },
   computed: {
     UnreadCount() {
@@ -192,13 +202,7 @@ export default {
     setRoute(route) {
      this.$emit('set-route', route)
 },
-toggleIsNav() {
-     this.isNav = !this.isNav
-     if (this.isNav) setTimeout(() => this.$refs.navModal.focus(), 100)
-},
-closeNav() {
-     setTimeout(() => this.isNav = false, 140)
-},
+
   },
   created() {
     mailService.query().then((mails) => {

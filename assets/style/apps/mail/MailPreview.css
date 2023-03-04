@@ -8,6 +8,16 @@
     padding-block: 10px;
 }
 
+.mail-preview .star-btn{
+    min-width: 18px;
+    padding: 0;
+    color: var(--clr4);
+}
+
+.mail-preview .star-btn:hover{
+    color: gold;
+}
+
 .read{
     font-family: ROBOTO-bold;
 }
@@ -35,7 +45,7 @@
 }
 
 .hover-buttons button{
-    background-color: white;
+    background-color:rgb(255, 255, 255);
     height: 90%;
 }
 

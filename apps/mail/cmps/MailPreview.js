@@ -6,7 +6,14 @@ export default {
      <section  class="mail-preview" :class="formatReadMail" @click.prevent >
           <!-- <div :class="formatReadMail"> -->
                <input type="checkbox" />
-               <button><i class="fa-regular fa-star"></i></button> 
+
+               <button class="star-btn" v-on:mouseover="hover = true" v-on:mouseout="hover = false">
+                    <i class="fa-regular fa-star" v-if="!hover"></i> 
+                    <i class="fa-solid fa-star" v-else></i> 
+
+               </button>
+               <!-- <button class="star-btn"><i class="fa-regular fa-star"></i></button>  -->
+
                <p>{{formatUsername}}</p>
                <p class="mail-body">{{mail.body}}</p>
                <p>{{formatTime}}</p>
@@ -24,6 +31,7 @@ export default {
                read:true,
                unread:true,
                length:10,
+               hover: false,
           }
      },
      methods: {
