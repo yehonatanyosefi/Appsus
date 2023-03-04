@@ -47,6 +47,7 @@
    position: absolute;
    right: 10%;
    font-family: Gloock;
+   max-height: 75vh;
 
   }
 

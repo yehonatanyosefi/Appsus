@@ -4,6 +4,7 @@ export default {
   template: `
         <section class="home-page">
             <section class="butns">
+            <!-- <RouterLink :to="'/mail"><button  @mouseover="animateBtn('mail')" ref="mail" class="mail">Mail</button></RouterLink> -->
                 <button  @mouseover="animateBtn('mail')" ref="mail" class="mail">Mail</button>
                 <button @mouseover="animateBtn('notes')" ref="notes" class="notes">Notes</button>
                 <button @mouseover="animateBtn('books')" ref="books" class="books">Books</button>
