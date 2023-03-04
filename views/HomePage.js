@@ -66,7 +66,7 @@ export default {
         return
       }
       const btn = this.btns[this.currAnimation]
-      utilService.animateCSS(this.$refs[btn], 'pulse')
+      // utilService.animateCSS(this.$refs[btn], 'pulse')
       this.currAnimation++
       if (this.currAnimation >= 6) this.currAnimation = 0
     }
