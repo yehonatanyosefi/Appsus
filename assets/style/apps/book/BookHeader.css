@@ -4,9 +4,10 @@
 	justify-content: space-between;
 	padding: 1em;
 	height: 75px;
-	border-bottom: 1px solid var(--clr6);
+	border-bottom: 1px solid var(--clr2);
 }
 .book-header .user-profile {
+	margin-inline-start: 10px;
 	border-radius: 50%;
 	height: 36px;
 	filter: drop-shadow(rgba(149, 157, 165, 0.35) 0px 1px 3px);

@@ -3,10 +3,11 @@ import NoteTxt from "./NoteTxt.js"
 import NoteImg from "./NoteImg.js"
 import { uploadService } from "../../../services/upload.service.js"
 import { noteService } from "../services/note.service.js"
-import { showErrorMsg, showSuccessMsg } from "../../../services/event-bus.service.js"
+import { sendMailToNote, sendNoteToMail } from "../../../services/event-bus.service.js"
 import { utilService } from "../../../services/util.service.js"
 import { svgService } from "../../../services/svg.service.js"
 import ColorPicker from "./ColorPicker.js"
+import NoteAudio from "./NoteAudio.js"
 
 export default {
      props: [],
@@ -27,6 +28,7 @@ export default {
                               hidden />
                          <i class="fa-regular fa-image upload-btn"></i>
                     </label>
+                    <!-- <NoteAudio/> -->
                </div>
           </div>
           <div v-else class="note-add-card" :style="'backgroundColor:'+note.style.backgroundColor+';'">
@@ -168,6 +170,15 @@ export default {
                this.note.info.todos[senderIdx] = todos[receiverIdx]
                this.note.info.todos[receiverIdx] = originalSender
           },
+          receiveNote(mailInfo) {
+               this.startNote()
+               const { title, txt } = mailInfo
+               this.note.title = title
+               this.note.txt = txt
+          },
+          sendNoteToMail(noteInfo) {
+               sendNoteToMail(noteInfo)
+          },
      },
      computed: {
           debouncedResizeTA() {
@@ -176,13 +187,13 @@ export default {
      },
      created() {
           this.resetNote()
+          // eventBus.on('sendMailToNote', this.receiveNote)
      },
      components: {
           NoteTodos,
           NoteTxt,
           NoteImg,
           ColorPicker,
+          NoteAudio,
      },
-     watch: {
-     }
 }

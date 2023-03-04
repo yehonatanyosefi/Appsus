@@ -1,0 +1,35 @@
+.about-page {
+	background-image: url(../../img/aboutbg.jfif);
+	height: 100vh;
+}
+.about-img {
+	width: 250px;
+	border-radius: 50%;
+	padding: 5px;
+	border: 6px solid rgba(255, 255, 255, 0.742);
+	margin-block-end: 10px;
+	margin: 50px;
+}
+
+.about-card-container .about-card {
+	background: rgba(255, 255, 255, 0.35);
+	box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.146);
+	backdrop-filter: blur(2.5px);
+	-webkit-backdrop-filter: blur(2.5px);
+	border-radius: 10px;
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	margin-inline-start: 30px;
+	margin-inline-end: 30px;
+}
+.about-card.yehonatan {
+	background: rgba(115, 222, 255, 0.35);
+}
+.about-card.dor {
+	background: rgba(194, 115, 255, 0.35);
+}
+.about-nav {
+	position: fixed;
+	top: 30px;
+	background-color: inherit;
+	right: 50px;
+}

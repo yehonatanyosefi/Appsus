@@ -26,7 +26,6 @@ export default {
                          <RouterLink v-for="({path, title, img}, idx) in routes" :to="path" :title="title" :key="idx">
                               <div class="nav-card">
                                    <img :src="img" :title="title" :class="{'profile-nav':path==='/about'}"/>
-                                   <p>{{title}}</p>
                               </div>
                          </RouterLink>
                     </nav>
@@ -87,7 +86,7 @@ export default {
         { path: '/', title: 'Home', img: '../../../assets/img/logo.png' },
         { path: '/mail', title: 'Mail', img: '../../../assets/img/gmail.png' },
         { path: '/notes', title: 'Notes', img: '../../../assets/img/keep.png' },
-        // { path: '/book', title: 'Book', img: '../../../assets/img/book.svg' },
+        { path: '/book', title: 'Book', img: '../../../assets/img/book.svg' },
         {
           path: '/about',
           title: 'About Us',
@@ -135,7 +134,7 @@ export default {
       this.filterBy = filterBy
     },
     changeIsRead(isRead, mailId) {
-     //  this.currMailId = mailId
+      //  this.currMailId = mailId
       mailService.changeIsRead(isRead, mailId).then((updatedMail) => {
         const idx = this.mails.findIndex((mail) => mail.id === updatedMail.id)
         this.mails[idx] = updatedMail
@@ -162,7 +161,7 @@ export default {
       setTimeout(() => (this.isNav = false), 150)
     },
     starMail(isStared, mailId) {
-     //  this.currMailId = mailId
+      //  this.currMailId = mailId
       mailService.changeIsStared(isStared, mailId).then((updatedMail) => {
         const idx = this.mails.findIndex((mail) => mail.id === updatedMail.id)
         this.mails[idx] = updatedMail

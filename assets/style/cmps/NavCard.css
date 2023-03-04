@@ -1,11 +1,11 @@
 .header-nav {
 	position: absolute;
 	top: 75px;
-	right: 2rem;
+	right: 1rem;
 	z-index: 1;
 	width: 300px;
 	border-radius: 0.5em;
-	height: 100px;
+	height: 75px;
 	background-color: #fff;
 	box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
 	display: grid;
@@ -16,9 +16,13 @@
 	grid-template-columns: repeat(auto-fit, 50px);
 	grid-auto-flow: dense;
 }
+
 .nav-card {
 	display: grid;
 	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .nav-card img {
@@ -26,9 +30,6 @@
 	height: 32px;
 }
 
-.nav-card p {
-	font-size: 1rem;
-}
 .profile-nav {
 	border-radius: 0.25em;
 }

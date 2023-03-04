@@ -1,0 +1,11 @@
+@media (max-width: 740px) {
+	.notes-header .logo-txt {
+		display: none;
+	}
+	.main-notes {
+		padding-left: 1rem;
+	}
+	.note-add-container {
+		width: 250px;
+	}
+}

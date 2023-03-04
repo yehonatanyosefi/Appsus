@@ -6,20 +6,22 @@ export default {
      template: `
                <header class="notes-header">
                     <div class="logo-container flex justify-between align-center">
-                         <img class="logo" src="../../../assets/img/keep.png">
+                         <img class="logo" src="../../../assets/img/keep.png" title="Notes">
                          <span class="logo-txt">Notes</span>
                     </div>
                     <div class="notes-search">
                          <input type="search" placeholder="Search" class="notes-search" v-model="searchVal" @input="search">
                     </div>
-                    <button v-html="getSvg('navigator')" @click="toggleIsNav"></button>
-                    <img class="user-profile" src="../../../assets/img/yehonatan.png" alt="Yehonatan Yosefi" title="Yehonatan Yosefi">
+                    <div class="flex">
+
+                         <button v-html="getSvg('navigator')" @click="toggleIsNav"></button>
+                         <img class="user-profile" src="../../../assets/img/yehonatan.png" alt="Yehonatan Yosefi" title="Yehonatan Yosefi">
+                    </div>
                
                     <nav class="header-nav" v-if="isNav" tabindex="0" @blur="closeNav" ref="navModal">
                          <RouterLink v-for="({path, title, img}, idx) in routes" :to="path" :title="title" :key="idx">
                               <div class="nav-card">
                                    <img :src="img" :title="title" :class="{'profile-nav':path==='/about'}"/>
-                                   <p>{{title}}</p>
                               </div>
                          </RouterLink>
                     </nav>
