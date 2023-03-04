@@ -24,6 +24,9 @@
 	/* font-family: Gloock; */
 }
 
+.home-page .home-img {
+	height: 50%;
+}
 .home-page .circle {
 	background-color: transparent;
 	box-shadow: 0 0 0 10px rgb(255 255 255 / 62%);
@@ -51,7 +54,7 @@
 	justify-content: center;
 	align-items: center;
 	border-radius: 50%;
-	font-size: 55px;
+	font-size: 25px;
 	width: 17vh;
 	height: 17vh;
 	color: whitesmoke;
