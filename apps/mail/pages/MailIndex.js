@@ -87,8 +87,13 @@ export default {
         { path: '/mail', title: 'Mail', img: '../../../assets/img/gmail.png' },
         { path: '/notes', title: 'Notes', img: '../../../assets/img/keep.png' },
         { path: '/book', title: 'Book', img: '../../../assets/img/book.svg' },
-        { path: '/about', title: 'About Us', img: '../../../assets/img/dornatan.jpg' },
+        {
+          path: '/about',
+          title: 'About Us',
+          img: '../../../assets/img/dornatan.jpg',
+        },
       ],
+      buttonSelected: 1,
     }
   },
   methods: {
@@ -150,19 +155,21 @@ export default {
       if (!this.isNav) {
         this.isNav = true
         setTimeout(() => this.$refs.navModal.focus(), 150)
-      }
-      else this.isNav = false
+      } else this.isNav = false
     },
     closeNav() {
-      setTimeout(() => this.isNav = false, 150)
+      setTimeout(() => (this.isNav = false), 150)
     },
     starMail(isStared, mailId) {
-      this.currMailId = mailId
+      //  this.currMailId = mailId
       mailService.changeIsStared(isStared, mailId).then((updatedMail) => {
         const idx = this.mails.findIndex((mail) => mail.id === updatedMail.id)
         this.mails[idx] = updatedMail
       })
-    }
+    },
+    isSelected(num) {
+      return this.buttonSelected === num
+    },
   },
   computed: {
     UnreadCount() {
@@ -213,7 +220,6 @@ export default {
     setRoute(route) {
       this.$emit('set-route', route)
     },
-
   },
   created() {
     mailService.query().then((mails) => {
