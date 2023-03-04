@@ -1,5 +1,6 @@
 .about-page {
 	background-image: url(../../img/aboutbg.jfif);
+	background-size: 100% 100%;
 	height: 100vh;
 }
 .about-img {
