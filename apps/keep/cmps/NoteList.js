@@ -224,7 +224,10 @@ export default {
           },
           saveCanvas(canvasImg) {
                noteService.saveCanvas(canvasImg)
-                    .then(note => this.notes.push(note))
+                    .then(note => {
+                         this.notes.push(note)
+                         showSuccessMsg('Drawing saved')
+                    })
           },
      },
      computed: {
