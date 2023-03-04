@@ -1,4 +1,4 @@
-// import { utilService } from '../../../services/util.service.js'
+import { utilService } from '../services/util.service.js'
 
 export default {
   template: `
@@ -57,7 +57,7 @@ export default {
       }, 30)
     },
     animateBtn(btn) {
-      // utilService.animateCSS(this.$refs[btn], 'flip')
+      utilService.animateCSS(this.$refs[btn], 'flip')
     },
     animateBtns() {
       if (!this.btns[this.currAnimation]) {
@@ -66,7 +66,7 @@ export default {
         return
       }
       const btn = this.btns[this.currAnimation]
-      // utilService.animateCSS(this.$refs[btn], 'pulse')
+      utilService.animateCSS(this.$refs[btn], 'pulse')
       this.currAnimation++
       if (this.currAnimation >= 6) this.currAnimation = 0
     }

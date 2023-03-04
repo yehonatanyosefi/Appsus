@@ -21,7 +21,7 @@ export default {
                          <button @click="startTodos" title="Todo List">
                               <i class="fa-regular fa-square-check"></i>
                          </button>
-                         <button @click="openCanvas = true">
+                         <button @click="openCanvas = true" title="Draw">
                               <i class="fa-solid fa-paintbrush"></i>
                          </button>
                          <label for="newNote" class="upload-btn" title="Upload Image" @click.stop>
