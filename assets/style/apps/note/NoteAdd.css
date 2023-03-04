@@ -80,3 +80,24 @@
 .note-add-container .note-placeholder {
 	color: var(--clr4);
 }
+.note-add-btns {
+	display: flex;
+	justify-content: space-between;
+	/* width: 60px; */
+	align-items: center;
+}
+
+.note-add-btns button {
+	margin: 0;
+}
+.note-add-btns button:nth-child(2) {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 18px;
+	width: 18px;
+	margin-left: 0px;
+}
+.upload-add {
+	width: 38px !important;
+}

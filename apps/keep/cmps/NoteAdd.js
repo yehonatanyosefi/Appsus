@@ -7,27 +7,34 @@ import { sendMailToNote, sendNoteToMail } from "../../../services/event-bus.serv
 import { utilService } from "../../../services/util.service.js"
 import { svgService } from "../../../services/svg.service.js"
 import ColorPicker from "./ColorPicker.js"
-import NoteAudio from "./NoteAudio.js"
+import NoteCanvas from "./NoteCanvas.js"
+// import NoteAudio from "./NoteAudio.js"
 
 export default {
      props: [],
      template: `
           <div v-if="!isMaking" class="flex justify-center align-center note-add">
+               <NoteCanvas v-if="openCanvas" @saveCanvas="saveCanvas"/>
                <div class="flex justify-center align-center note-add-container">
                     <input v-model="placeholderTxt" @focus="startNote" class="note-placeholder">
-                    <button @click="startTodos" title="Todo List">
-                         <i class="fa-regular fa-square-check"></i>
-                    </button>
-                    <label for="newNote" class="upload-btn" title="Upload Image" @click.stop>
-                         <input @click.stop
-                              class="upload-btn"
-                              type="file"
-                              id="newNote"
-                              name="newNote"
-                              @change="startImage"
-                              hidden />
-                         <i class="fa-regular fa-image upload-btn"></i>
-                    </label>
+                    <div class="note-add-btns">
+                         <button @click="startTodos" title="Todo List">
+                              <i class="fa-regular fa-square-check"></i>
+                         </button>
+                         <button @click="openCanvas = true">
+                              <i class="fa-solid fa-paintbrush"></i>
+                         </button>
+                         <label for="newNote" class="upload-btn" title="Upload Image" @click.stop>
+                              <input @click.stop
+                                   class="upload-btn"
+                                   type="file"
+                                   id="newNote"
+                                   name="newNote"
+                                   @change="startImage"
+                                   hidden />
+                              <i class="fa-regular fa-image upload-btn upload-add"></i>
+                         </label>
+                    </div>
                     <!-- <NoteAudio/> -->
                </div>
           </div>
@@ -77,6 +84,7 @@ export default {
                note: null,
                placeholderTxt: 'Take a note...',
                isColorPicking: false,
+               openCanvas: false,
           }
      },
      methods: {
@@ -179,6 +187,10 @@ export default {
           sendNoteToMail(noteInfo) {
                sendNoteToMail(noteInfo)
           },
+          saveCanvas(canvasImg) {
+               this.$emit('saveCanvas', canvasImg)
+               this.openCanvas = false
+          },
      },
      computed: {
           debouncedResizeTA() {
@@ -194,6 +206,7 @@ export default {
           NoteTxt,
           NoteImg,
           ColorPicker,
-          NoteAudio,
+          NoteCanvas,
+          // NoteAudio,
      },
 }

@@ -7,7 +7,7 @@ import NoteDetails from "./NoteDetails.js"
 export default {
      props: [],
      template: `
-          <NoteAdd @addNote="addNote" />
+          <NoteAdd @addNote="addNote" @saveCanvas="saveCanvas"/>
           <div class="notes-list">
                <template v-if="!filterBy.deleted">
                     <template v-if="arePinned">
@@ -220,6 +220,13 @@ export default {
                     .then((updatedNote) => {
                          const idx = this.notes.findIndex(note => note.id === updatedNote.id)
                          this.notes.splice(idx, 1, updatedNote)
+                    })
+          },
+          saveCanvas(canvasImg) {
+               noteService.saveCanvas(canvasImg)
+                    .then(note => {
+                         this.notes.push(note)
+                         showSuccessMsg('Drawing saved')
                     })
           },
      },

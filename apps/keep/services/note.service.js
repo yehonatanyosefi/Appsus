@@ -23,6 +23,7 @@ export const noteService = {
      restoreNote,
      exchangeNotes,
      exchangeTodos,
+     saveCanvas,
 }
 
 function query() {
@@ -45,6 +46,13 @@ function save(note) {
      } else {
           return storageService.post(NOTES_KEY, note)
      }
+}
+
+function saveCanvas(canvasImage) {
+     const note = getEmptyNote()
+     note.type = 'NoteImg'
+     note.info.url = canvasImage
+     return addNote(note)
 }
 
 function addNote(note) {
@@ -345,10 +353,15 @@ function _demoNotes() {
                               id: 't114',
                          },
                          {
-                              txt: 'Labels',
+                              txt: 'Canvas',
                               doneAt: null,
                               id: 't115',
-                         }
+                         },
+                         {
+                              txt: 'Long txt for todos and txt',
+                              doneAt: null,
+                              id: 't500',
+                         },
                     ]
                }
           },
