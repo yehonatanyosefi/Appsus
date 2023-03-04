@@ -47,7 +47,7 @@ export default {
   },
   mounted() {
     this.animateTitleNoMouse()
-    this.animInterval = setInterval(this.animateTitleNoMouse, 2500)
+    this.animInterval = setInterval(this.animateTitleNoMouse, 3500)
 
   },
   unmounted() {
