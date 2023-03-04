@@ -30,7 +30,9 @@ const routerOptions = {
 		},
 		{
 			path: '/notes',
-			component: NotesIndex
+			component: NotesIndex,
+			// name: 'mailDetails',
+            // props: true
 		},
 		{
 			path: '/about',
