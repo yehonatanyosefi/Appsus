@@ -63,14 +63,9 @@ export default {
      @removeMail="removeMail" 
      @changeIsRead="changeIsRead"
      @starMail="starMail"
+     @openMail="openMail"
      />
-     
-     
-
      </section>
-
-     
-
      `,
   data() {
     return {
@@ -80,7 +75,7 @@ export default {
       filterBy: {},
       setFilterVal: 'inbox',
       currMailId: '',
-      isShow: true,
+      isShow: false,
       isNav: false,
       routes: [
         { path: '/', title: 'Home', img: '../../../assets/img/logo.png' },
@@ -116,6 +111,13 @@ export default {
         })
         .catch((err) => {
           showErrorMsg('Could not send mail')
+        })
+    },
+    openMail(isRead, mailId) {
+      this.currMailId = mailId
+     mailService.changeIsRead(isRead, mailId).then((updatedMail) => {
+          const idx = this.mails.findIndex((mail) => mail.id === updatedMail.id)
+          this.mails[idx] = updatedMail
         })
     },
     removeMail(mailId) {
