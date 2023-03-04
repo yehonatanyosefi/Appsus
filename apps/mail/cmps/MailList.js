@@ -9,7 +9,7 @@ export default {
           <h3 class="flex"><i class="fa-solid fa-inbox"></i> Primary</h3>
           <ul class="clean-list">
                <li v-for="mail in mails" :key="mail.id" >
-                    <MailPreview :mail="mail" @removeMail="remove" @click.stop @changeIsRead="changeIsRead" @click="changeIsRead(true,mail.id)"/>
+                    <MailPreview @starMail="starMail" :mail="mail" @removeMail="remove" @click.stop @changeIsRead="changeIsRead" @click="changeIsRead(true,mail.id)"/>
                </li>
           </ul>
      </section>
@@ -25,6 +25,9 @@ export default {
            },
            changeIsRead(isRead,mailId){
                this.$emit('changeIsRead',isRead, mailId)
+           },
+           starMail(isStared,mailId){
+               this.$emit('starMail',isStared,mailId)
            }
      },
      computed: {

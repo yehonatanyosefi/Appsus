@@ -16,12 +16,12 @@ export default {
      <header class="mail-header flex justify-between">
           <section class="toggle-logo flex">
                <button class="toggle-menu x fa-solid fa-bars" @click="isShow=!isShow"> </button>
-               <a><img src="../../../assets/img/logo.png" alt="Appsus" class="logo" /> </a>
-               <p>Mail</p>
+               <a @click="setFilterVal = 'inbox'" class="logo"><img src="../../../assets/img/gmail.png" alt="Appsus" class="logo" /> </a>
+               <p @click="setFilterVal = 'inbox'" class="mail">Mail</p>
           </section >
           <MailFilter @filter="setFilterBy" />
           <section class="navUser flex" >
-               <nav><button v-html="getSvg('navigator')" @click="toggleIsNav"></button></nav>
+               <nav><button v-html="getSvg('navigator2')" @click="toggleIsNav"></button></nav>
 
                <nav class="header-nav" v-if="isNav" tabindex="0" @blur="closeNav" ref="navModal">
                          <RouterLink v-for="({path, title, img}, idx) in routes" :to="path" :title="title" :key="idx">
@@ -64,6 +64,7 @@ export default {
      v-if="mails && !currMailId"
      @removeMail="removeMail" 
      @changeIsRead="changeIsRead"
+     @starMail="starMail"
      />
      
      
@@ -157,6 +158,13 @@ export default {
 closeNav() {
      setTimeout(() => this.isNav = false, 150)
 },
+starMail(isStared,mailId){
+     this.currMailId = mailId
+     mailService.changeIsStared(isStared, mailId).then((updatedMail) => {
+       const idx = this.mails.findIndex((mail) => mail.id === updatedMail.id)
+       this.mails[idx] = updatedMail
+     })
+}
   },
   computed: {
     UnreadCount() {

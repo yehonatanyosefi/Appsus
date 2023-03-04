@@ -1,4 +1,6 @@
 import { i18Service } from "../../../services/i18n.service.js"
+import { svgService } from "../../../services/svg.service.js"
+
 
 export default {
      props: ['mail'],
@@ -7,17 +9,17 @@ export default {
           <!-- <div :class="formatReadMail"> -->
                <input type="checkbox" />
 
-               <button class="star-btn" v-on:mouseover="hover = true" v-on:mouseout="hover = false">
+               <button :class="formatStarMail" @click="star(!mail.isStared,mail.id)" class="star-btn" v-on:mouseover="hover = true" v-on:mouseout="hover = false">
                     <i class="fa-regular fa-star" v-if="!hover"></i> 
                     <i class="fa-solid fa-star" v-else></i> 
-
+                    <!-- v-html="getSvg('star-svg')"  -->
                </button>
                <!-- <button class="star-btn"><i class="fa-regular fa-star"></i></button>  -->
 
                <p>{{formatUsername}}</p>
                <p class="mail-body">{{mail.body}}</p>
-               <p>{{formatTime}}</p>
-               <div class="hover-buttons flex"> 
+               <p class="time">{{formatTime}}</p>
+               <div class="hover-buttons flex" > 
                     <button @click.prevent="remove(mail.id)"><i class="fa-regular fa-trash-can"></i></button>
                     <button v-if="mail.isRead" @click.prevent="changeIsRead(false,mail.id)"><i class="fa-regular fa-envelope"></i></button>
                     <button v-else><i class="fa-regular fa-envelope-open" @click.prevent="changeIsRead(true,mail.id)"></i></button>
@@ -32,6 +34,7 @@ export default {
                unread:true,
                length:10,
                hover: false,
+               stared:false
           }
      },
      methods: {
@@ -41,6 +44,12 @@ export default {
            changeIsRead(isRead,mailId){
                this.$emit('changeIsRead',isRead, mailId)
            },
+          star(isStared,mailId){
+               this.$emit('starMail',isStared,mailId)
+          },
+          getSvg(iconName) {
+               return svgService.getNoteSvg(iconName)
+             },
           
      },
      computed: {
@@ -55,9 +64,11 @@ export default {
                          'unread':this.mail.isRead
           }
           },
-          // read(){
-          //      return {'read-mail': this.mail.isRead}
-          // }
+          formatStarMail(){
+                if (this.mail.isStared) return this.stared=true
+                else return this.stared=true
+          },
+         
      },
      created() {
           
