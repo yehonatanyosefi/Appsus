@@ -6,17 +6,17 @@ export default {
             <section class="butns">
               <RouterLink :to="'/mail'">
                   <button  @mouseover="animateBtn('mail')" ref="mail" class="mail" title="Mail">
-                    <img class="home-img" src="./assets/img/gmail.png">
+                    <img class="home-img" src="../assets/img/gmail.png">
                   </button>
               </RouterLink>
               <RouterLink :to="'/notes'">
                   <button @mouseover="animateBtn('notes')" ref="notes" class="notes" title="Notes">
-                    <img class="home-img" src="./assets/img/keep.png">
+                    <img class="home-img" src="../assets/img/keep.png">
                   </button>
                   </RouterLink>
               <RouterLink :to="'/book'">
                   <button @mouseover="animateBtn('books')" ref="books" class="books" title="Book">
-                    <img class="home-img" src="./assets/img/book.svg">
+                    <img class="home-img" src="../assets/img/book.svg">
                   </button>
               </RouterLink>
             </section>
