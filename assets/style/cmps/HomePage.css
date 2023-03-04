@@ -24,6 +24,9 @@
 	/* font-family: Gloock; */
 }
 
+.home-page .home-img {
+	height: 50%;
+}
 .home-page .circle {
 	background-color: transparent;
 	box-shadow: 0 0 0 10px rgb(255 255 255 / 62%);
@@ -36,19 +39,6 @@
 	translate: -50%;
 }
 
-<<<<<<< HEAD
-  .home-page .butns {
-   display: flex;
-   flex-direction: column;
-   gap: 6em;
-   position: absolute;
-   right: 10%;
-   font-family: Gloock;
-   max-height: 75vh;
-   max-width: 75vh;
-
-  }
-=======
 .home-page .butns {
 	display: flex;
 	flex-direction: column;
@@ -58,14 +48,13 @@
 	font-family: Gloock;
 	max-height: 75vh;
 }
->>>>>>> 39763f4c70d90efd852333e5e298cefe4ad01e4b
 
 .home-page .butns button {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border-radius: 50%;
-	font-size: 55px;
+	font-size: 25px;
 	width: 17vh;
 	height: 17vh;
 	color: whitesmoke;
