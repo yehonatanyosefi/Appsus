@@ -4,19 +4,21 @@ export default {
   template: `
         <section class="home-page">
             <section class="butns">
-            <RouterLink :to="'/mail'">
-                <button  @mouseover="animateBtn('mail')" ref="mail" class="mail">Mail</button>
-            </RouterLink>
-            <RouterLink :to="'/notes'">
-
-                <button @mouseover="animateBtn('notes')" ref="notes" class="notes">Notes</button>
-                </RouterLink>
-
-            <RouterLink :to="'/book'">
-
-                <button @mouseover="animateBtn('books')" ref="books" class="books">Books</button>
-            </RouterLink>
-
+              <RouterLink :to="'/mail'">
+                  <button  @mouseover="animateBtn('mail')" ref="mail" class="mail" title="Mail">
+                    <img class="home-img" src="../assets/img/gmail.png">
+                  </button>
+              </RouterLink>
+              <RouterLink :to="'/notes'">
+                  <button @mouseover="animateBtn('notes')" ref="notes" class="notes" title="Notes">
+                    <img class="home-img" src="../assets/img/keep.png">
+                  </button>
+                  </RouterLink>
+              <RouterLink :to="'/book'">
+                  <button @mouseover="animateBtn('books')" ref="books" class="books" title="Book">
+                    <img class="home-img" src="../assets/img/book.svg">
+                  </button>
+              </RouterLink>
             </section>
             <div class="circle"></div>
             <h1 data-value="Appsus">{{ title }}</h1>
@@ -28,6 +30,9 @@ export default {
       letters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
       interval: null,
       animInterval: null,
+      btnInterval: null,
+      currAnimation: 0,
+      btns: ['mail', 'notes', 'books']
     }
   },
   methods: {
@@ -52,15 +57,23 @@ export default {
       }, 30)
     },
     animateBtn(btn) {
+      utilService.animateCSS(this.$refs[btn], 'flip')
+    },
+    animateBtns() {
+      const btn = this.btns[this.currAnimation]
       utilService.animateCSS(this.$refs[btn], 'pulse')
+      this.currAnimation++
+      if (this.currAnimation >= 6) this.currAnimation = 0
     }
   },
   mounted() {
     this.animateTitleNoMouse()
+    this.btnInterval = setInterval(this.animateBtns, 750)
     this.animInterval = setInterval(this.animateTitleNoMouse, 3500)
 
   },
   unmounted() {
+    clearInterval(this.btnInterval)
     clearInterval(this.animInterval)
   },
 }
