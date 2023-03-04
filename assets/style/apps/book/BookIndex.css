@@ -41,3 +41,6 @@
 	font: inherit;
 	filter: drop-shadow(rgba(0, 0, 0, 0.25) 1.5px 1.5px 1.5px);
 }
+.book-add form {
+	padding-inline-start: 3rem;
+}

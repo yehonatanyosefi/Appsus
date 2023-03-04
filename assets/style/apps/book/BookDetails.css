@@ -19,7 +19,9 @@
 .book-details button {
 	justify-self: end;
 }
-
+.book-details li.underline {
+	padding-inline-end: 2.5rem;
+}
 .red {
 	color: red;
 }
