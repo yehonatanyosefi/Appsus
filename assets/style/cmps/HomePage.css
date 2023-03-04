@@ -36,19 +36,6 @@
 	translate: -50%;
 }
 
-<<<<<<< HEAD
-  .home-page .butns {
-   display: flex;
-   flex-direction: column;
-   gap: 6em;
-   position: absolute;
-   right: 10%;
-   font-family: Gloock;
-   max-height: 75vh;
-   max-width: 75vh;
-
-  }
-=======
 .home-page .butns {
 	display: flex;
 	flex-direction: column;
@@ -58,7 +45,6 @@
 	font-family: Gloock;
 	max-height: 75vh;
 }
->>>>>>> 39763f4c70d90efd852333e5e298cefe4ad01e4b
 
 .home-page .butns button {
 	display: flex;
