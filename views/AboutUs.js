@@ -2,10 +2,10 @@ import { svgService } from "../services/svg.service.js"
 export default {
     template: `
         <section class="about-page grid">
-                <h1 class="center">About us</h1>
+                <!-- <h1 class="center">About us</h1> -->
                 <button v-html="getSvg('navigator')" @click="toggleIsNav" class="about-nav"></button>
                 
-                <h3 class="center">AppSus team:</h3>
+                <h3 class="center">AppSus team</h3>
                 <div class="about-card-container center">
                     <div class="about-card yehonatan center flex flex-column">
                         <img src="../assets/img/yehonatan.png" class="about-img" title="Yehonatan Yosefi">

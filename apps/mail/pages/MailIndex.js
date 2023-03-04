@@ -47,9 +47,10 @@ export default {
           
           <button :class="{ 'side-selected': isSelected(1) }" class ="inbox-btn" @click="setFilter('inbox')"><i class="fa-solid fa-inbox"></i><span v-show="isShow">Inbox ({{UnreadCount}})</span></button>
           <button :class="{ 'side-selected': isSelected(2) }" @click="setFilter('unread')"><i class="fa-regular fa-envelope"></i><span v-show="isShow">Unread</span></button>
-          <button :class="{ 'side-selected': isSelected(3) }" @click="setFilter('read')"><i class="fa-regular fa-envelope-open"></i><span v-show="isShow">read</span></button>
-          <button :class="{ 'side-selected': isSelected(4) }" @click="setFilter('sent')"><i class="fa-solid fa-arrow-right-from-bracket"></i><span v-show="isShow">sent</span></button>
-          <button :class="{ 'side-selected': isSelected(5) }" @click="setFilter('drafts')"><i class="fa-regular fa-file"></i><span v-show="isShow">drafts</span></button>
+          <button :class="{ 'side-selected': isSelected(3) }" @click="setFilter('read')"><i class="fa-regular fa-envelope-open"></i><span v-show="isShow">Read</span></button>
+          <button :class="{ 'side-selected': isSelected(4) }" @click="setFilter('sent')"><i class="fa-solid fa-arrow-right-from-bracket"></i><span v-show="isShow">Sent</span></button>
+          <button :class="{ 'side-selected': isSelected(5) }" @click="setFilter('drafts')"><i class="fa-regular fa-file"></i><span v-show="isShow">Drafts</span></button>
+          <button :class="{ 'side-selected': isSelected(6) }" @click="setFilter('trash')"><i class="fa-regular fa-trash-can"></i><span v-show="isShow">Trash</span></button>
      </section>
 
      <MailDetails  
@@ -66,6 +67,7 @@ export default {
      @changeIsRead="changeIsRead"
      @starMail="starMail"
      @openMail="openMail"
+     @changeIsDeleted="changeIsDeleted"
      />
      </section>
      `,
@@ -144,6 +146,12 @@ export default {
         this.mails[idx] = updatedMail
       })
     },
+    changeIsDeleted(isDeleted, mailId){
+     mailService.changeIsDeleted(isDeleted, mailId).then((updatedMail) => {
+          const idx = this.mails.findIndex((mail) => mail.id === updatedMail.id)
+          this.mails[idx] = updatedMail
+        })
+    },
     back() {
       this.currMailId = null
     },
@@ -187,9 +195,9 @@ export default {
     filteredMails() {
       if (!this.mails) return
       let filteredMails = this.mails
-      if (this.setFilterVal === 'inbox') {
+      if (this.setFilterVal === 'inbox' ) {
         filteredMails = filteredMails.filter(
-          (mail) => mail.from !== 'user@appsus.com'
+          (mail) => mail.from !== 'user@appsus.com' && !mail.isDeleted
         )
         this.buttonSelected = 1
       } else if (this.setFilterVal === 'read') {
@@ -202,15 +210,17 @@ export default {
         const isRead = false
         filteredMails = filteredMails.filter((mail) => mail.isRead === isRead)
         this.buttonSelected = 2
-      } else if (this.setFilterVal === 'sent') {
-        filteredMails = filteredMails.filter(
-          (mail) => mail.from === 'user@appsus.com' && mail.sentAt !== null
+      } else if (this.setFilterVal === 'sent' ) {
+        filteredMails = filteredMails.filter((mail) => mail.from === 'user@appsus.com' && mail.sentAt !== null 
         )
         this.buttonSelected = 4
       } else if (this.setFilterVal === 'drafts') {
         filteredMails = filteredMails.filter((mail) => mail.sentAt === null)
         this.buttonSelected = 5
-      }
+      }else if (this.setFilterVal === 'trash') {
+          filteredMails = filteredMails.filter((mail) => mail.isDeleted === true)
+          this.buttonSelected = 6
+        }
       if (!this.filterBy.mailTxt) {
         this.filterBy = { mailTxt: '' }
       }

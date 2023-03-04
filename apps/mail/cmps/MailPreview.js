@@ -38,7 +38,8 @@ export default {
      },
      methods: {
           remove(mailId) {
-               this.$emit('removeMail', mailId)
+               if (this.mail.isDeleted) this.$emit('removeMail', mailId)
+               else this.$emit('changeIsDeleted',true, mailId)
            },
            changeIsRead(isRead,mailId){
                this.$emit('changeIsRead',isRead, mailId)

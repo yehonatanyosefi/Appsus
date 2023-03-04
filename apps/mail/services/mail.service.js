@@ -11,7 +11,8 @@ export const mailService = {
   addMail,
   changeIsRead,
   getEmptyMail,
-  changeIsStared
+  changeIsStared,
+  changeIsDeleted
 }
 
 function query(filterBy = {}) {
@@ -52,6 +53,14 @@ function changeIsStared(isStared,mailId){
           })
 }
 
+function changeIsDeleted(isDeleted,mailId){
+  return get(mailId)
+          .then(mail=>{
+            mail.isDeleted=isDeleted
+            return save(mail)
+          })
+}
+
 function addMail(newSubject,newBody,newTo,isSent=true,newId=''){
   const newMail = {
     id: newId,
@@ -63,6 +72,7 @@ function addMail(newSubject,newBody,newTo,isSent=true,newId=''){
     from: 'user@appsus.com',
     to: newTo,
     isStared:false,
+    isDeleted:false
   }
   return save(newMail)
 }
@@ -79,6 +89,7 @@ const emptyMail= {
   from:'',
   to: '', 
   isStared:false,
+  isDeleted:false
 }
   return save(emptyMail)
 }
@@ -98,6 +109,7 @@ function _createDemo() {
         from: 'JohnD@momo.com',
         to: 'user@appsus.com',
         isStared:false,
+        isDeleted:false
       },
       {
         id: 'm102',
@@ -169,6 +181,7 @@ function _createDemo() {
         from: 'bogrim@technion-alumni.org.il',
         to: 'user@appsus.com',
         isStared:false,
+        isDeleted:false
       },
       {
         id: 'm104',
@@ -180,6 +193,7 @@ function _createDemo() {
         from: 'Apple@momo.com',
         to: 'user@appsus.com',
         isStared:false,
+        isDeleted:false
       },
       {
         id: 'm105',
@@ -191,6 +205,7 @@ function _createDemo() {
         from: '24-Hour-Fitness@momo.com',
         to: 'user@appsus.com',
         isStared:false,
+        isDeleted:false
       },
       {
         id: 'm106',
@@ -202,6 +217,7 @@ function _createDemo() {
         from: 'JohnD@momo.com',
         to: 'user@appsus.com',
         isStared:false,
+        isDeleted:false
       },
       {
         id: 'm107',
@@ -213,6 +229,7 @@ function _createDemo() {
         from: 'LinkedIn@momo.com',
         to: 'user@appsus.com',
         isStared:false,
+        isDeleted:false
       },
       {
         id: 'm108',
@@ -224,6 +241,7 @@ function _createDemo() {
         from: 'bogrim@technion-alumni.org.il',
         to: 'user@appsus.com',
         isStared:false,
+        isDeleted:false
       },
       {
         id: 'm109',
@@ -235,6 +253,7 @@ function _createDemo() {
         from: 'Apple@momo.com',
         to: 'user@appsus.com',
         isStared:false,
+        isDeleted:false
       },
       {
         id: 'm110',
@@ -246,6 +265,79 @@ function _createDemo() {
         from: '24-Hour-Fitness@momo.com',
         to: 'user@appsus.com',
         isStared:false,
+        isDeleted:false
+      },
+      {
+        id: 'm111',
+        subject: "New Year’s Special! 🎉 Start for just $1 down!",
+        body: 'Would love to catch up sometimes',
+        isRead: true,
+        sentAt: Date.now(),
+        removedAt: null,
+        to: '24-Hour-Fitness@momo.com',
+        from: 'user@appsus.com',
+        isStared:false,
+        isDeleted:false
+      },
+      {
+        id: 'm112',
+        subject: 'Madatech - National Museum of Science Technology and Space, Haifa is hiring: Student',
+        body: `Dragon Ball Z Pokemon Digimo Bayblades Medabot Teenage Ninja Mutant Turtles X-Men: The Animated Series / X-Men: Evolution/ Wolverine and the X-Men 
+        SmurfsMoomins
+        Fairly OddParents
+        Justice League
+        Samurai Jack
+        The Adventures of Jimmy Neutron, Boy Genius
+        Teen Titans
+        Tom and Jerry Tales / The Tom and Jerry Show
+        Batman: The Brave and the Bold
+        The Powerpuff Girls
+        Taz-Mania
+        Rugrats
+        Animaniacs
+        Kim Possible
+        Pinky and the Brain
+        Dexter's Laboratory 
+        Arthur
+        SpongeBob SquarePants
+        Superman: The Animated Series 
+        Southpark
+        Simpsons
+        Courage the Cowardly Dog
+        Ed, Edd n Eddy
+        Disney Movies
+        Family Guy
+        Futurama
+        Scooby Doo
+        The Magic School Bus
+        Yu-Gi-Oh!
+        Rick & Morty
+        Teletubbies
+        
+        Didn't watch -
+        Adventure Time
+        My Little Pony: Friendship Is Magic
+        1001 Nights
+        Avatar: The Last Airbender/The Legend of Korra
+        Phineas and Ferb
+        Tiny Toon Adventures 
+        Sonice the Hedgehog/Adventures of Sonic the Hedgehog
+        DreamWorks Dragons
+        Kung Fu Panda: Legends of Awesomeness
+        Tangled: Before Ever After 
+        Ultimate Spider-Man
+        Naruto
+        
+        Kids -
+        Bob the Builder
+        Dora the Explorer
+        Dragon Ball Z, Pokemon, Digimon, Bayblades, Medabots, Teenage Ninja Mutant Turtles, X-Men: The Animated Series / X-Men: Evolution/ Wolverine and the X-Men, Smurfs, Moomins, Fairly OddParents, Justice League, Samurai Jack, The Adventures of Jimmy Neutron, Boy Genius, Teen Titans, Tom and Jerry Tales / The Tom and Jerry Show, Batman: The Brave and the Bold, The Powerpuff Girls, Taz-Mania, Rugrats, Animaniacs, Kim Possible, Pinky and the Brain, Dexter's Laboratory, Arthur, SpongeBob SquarePants, Superman: The Animated Series, Southpark, Simpsons, Courage the Cowardly Dog, Ed, Edd n Eddy, Disney Movies, Family Guy, Futurama, Scooby Doo, The Magic School Bus, Yu-Gi-Oh!, Rick & Morty, Teletubbies, Adventure Time, My Little Pony: Friendship Is Magic, 1001 Nights, Avatar: The Last Airbender/The Legend of Korra, Phineas and Ferb, Tiny Toon Adventures, Sonice the Hedgehog/Adventures of Sonic the Hedgehog, DreamWorks Dragons, Kung Fu Panda: Legends of Awesomeness, Tangled: Before Ever After, Ultimate Spider-Man, Naruto, Bob the Builder, Dora the Explorer`,
+        isRead: false,
+        sentAt: Date.now(),
+        removedAt: null,
+        from: 'LinkedIn@momo.com',
+        to: 'user@appsus.com',
+        isStared:true,
       },
     ]
     utilService.saveToStorage(MAIL_KEY, mails)

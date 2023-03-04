@@ -17,6 +17,7 @@
 
 .mail-preview .star-btn:hover{
     color: gold;
+    z-index: 1;
 }
 
 .read{
