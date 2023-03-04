@@ -67,3 +67,39 @@
 .note-details .NoteImg {
 	overflow: auto;
 }
+
+.note-details button:hover,
+.note-details .button-container button:hover {
+	color: var(--clr5);
+	filter: drop-shadow(0 0 0.75rem rgb(172, 172, 172));
+}
+.note-index button:hover .pin-empty {
+	fill: var(--clr5);
+	filter: drop-shadow(0 0 0.75rem rgb(172, 172, 172));
+}
+.todo-item .drag-btn {
+	opacity: 0;
+	transition: opacity 50ms;
+	color: var(--clr4);
+}
+.todo-item .delete-todo-btn {
+	opacity: 0;
+	transition: opacity 50ms;
+}
+.todo-item:hover .drag-btn,
+.todo-item:hover .delete-todo-btn {
+	opacity: 1;
+}
+
+.todo-item .drag-btn:hover {
+	cursor: all-scroll;
+	color: var(--clr5);
+	filter: drop-shadow(0 0 0.75rem rgb(172, 172, 172));
+}
+.timestamp {
+	display: flex;
+	justify-content: end;
+	color: var(--clr4);
+	font-size: 0.8rem;
+	padding-inline-end: 0.8rem;
+}

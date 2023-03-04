@@ -25,7 +25,9 @@ export default {
                @updateNote="updateNote"
                @deleteTodo="deleteTodo"
                @addTodo="addTodo"
-               @toggleTodoCheck="toggleTodoCheck" />
+               @toggleTodoCheck="toggleTodoCheck"
+               @exchangeTodos="exchangeTodos" />
+               <p class="timestamp">Edited: {{formattedTime}}</p>
           <div class="button-container">
                <label :for="note.id" class="upload-btn" title="Upload Image">
                     <input
@@ -90,8 +92,8 @@ export default {
           deleteNote() {
                this.$emit('deleteNote', this.note.id)
           },
-          deleteTodo(noteId, idx) {
-               this.$emit('deleteTodo', noteId, idx)
+          deleteTodo(noteId, todoId) {
+               this.$emit('deleteTodo', noteId, todoId)
           },
           addTodo(noteId) {
                this.$emit('addTodo', noteId)
@@ -102,8 +104,11 @@ export default {
           togglePin() {
                this.$emit('togglePin', this.note.id)
           },
-          toggleTodoCheck(noteId, idx) {
-               this.$emit('toggleTodoCheck', noteId, idx)
+          toggleTodoCheck(noteId, todoId) {
+               this.$emit('toggleTodoCheck', noteId, todoId)
+          },
+          exchangeTodos(exchangeInfo) {
+               this.$emit('exchangeTodos', exchangeInfo)
           },
           resizeTA() {
                const element = this.$refs.textAreaTitle
@@ -135,6 +140,34 @@ export default {
           },
           debouncedResizeTA() {
                return utilService.debounce(this.resizeTA, 250)
+          },
+          formattedTime() {
+               const timestamp = this.note.createdAt
+               const now = Date.now()
+               const diff = now - timestamp
+               const minute = 60 * 1000
+               const hour = 60 * minute
+               const day = 24 * hour
+               const week = 7 * day
+
+               if (diff < minute) {
+                    return 'just now';
+               } else if (diff < hour) {
+                    const minutes = Math.floor(diff / minute)
+                    return `${minutes} minute${minutes === 1 ? '' : 's'} ago`
+               } else if (diff < day) {
+                    const hours = Math.floor(diff / hour)
+                    return `${hours} hour${hours === 1 ? '' : 's'} ago`
+               } else if (diff < week) {
+                    const days = Math.floor(diff / day)
+                    return `${days} day${days === 1 ? '' : 's'} ago`
+               } else {
+                    const date = new Date(timestamp)
+                    const day = date.getDate()
+                    const month = date.toLocaleString('default', { month: 'long' });
+                    const year = date.getFullYear()
+                    return `${day} ${month} ${year}`
+               }
           },
      },
      mounted() {

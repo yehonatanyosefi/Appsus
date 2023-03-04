@@ -84,7 +84,7 @@
 
 .note-card .preview-txt {
 	font: inherit;
-	color: inherit;
+	color: var(--clr5);
 	user-select: none;
 	padding: var(--note-card-pad);
 	padding-block-start: 1rem;

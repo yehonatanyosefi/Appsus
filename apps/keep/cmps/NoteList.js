@@ -78,7 +78,8 @@ export default {
                     @toggleTodos="toggleTodos"
                     @togglePin="togglePin"
                     @toggleTodoCheck="toggleTodoCheck"
-                    @restoreNote="restoreNote" />
+                    @restoreNote="restoreNote"
+                    @exchangeTodos="exchangeTodos" />
           <div class="note-screen" @click="toggleScreen" v-if="showDetails"></div>
      `,
      data() {
@@ -152,8 +153,8 @@ export default {
                     })
                     .catch(err => showErrorMsg('Note add failed'))
           },
-          deleteTodo(noteId, idx) {
-               noteService.deleteTodo(noteId, idx)
+          deleteTodo(noteId, todoId) {
+               noteService.deleteTodo(noteId, todoId)
                     .then(newNote => {
                          const noteIdx = this.notes.findIndex(note => note.id === noteId)
                          this.notes[noteIdx] = newNote
@@ -178,8 +179,8 @@ export default {
                     })
                     .catch(err => showErrorMsg('Note pin failed'))
           },
-          toggleTodoCheck(noteId, idx) {
-               noteService.toggleTodoCheck(noteId, idx)
+          toggleTodoCheck(noteId, todoId) {
+               noteService.toggleTodoCheck(noteId, todoId)
                     .then(newNote => {
                          const noteIdx = this.notes.findIndex(note => note.id === noteId)
                          this.notes[noteIdx] = newNote
@@ -213,6 +214,13 @@ export default {
                          this.notes[receiverIdx] = updatedSender
                     })
                     .catch(err => showErrorMsg(`Both notes need the same pin status`))
+          },
+          exchangeTodos(exchangeInfo) {
+               noteService.exchangeTodos(exchangeInfo)
+                    .then((updatedNote) => {
+                         const idx = this.notes.findIndex(note => note.id === updatedNote.id)
+                         this.notes.splice(idx, 1, updatedNote)
+                    })
           },
      },
      computed: {

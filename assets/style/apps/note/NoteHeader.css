@@ -39,3 +39,11 @@
 .notes-header nav button:hover {
 	background-color: var(--notes-nav-hover);
 }
+.nav-svg {
+	fill: #5f6368;
+}
+.nav-svg:hover {
+	background-color: var(--notes-nav-hover);
+	border-radius: 50%;
+	fill: var(--clr5);
+}

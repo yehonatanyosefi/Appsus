@@ -1,0 +1,61 @@
+.book-list ul {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+	gap: 10px;
+
+	padding: 10px;
+	background-color: var(--clr1);
+	list-style-type: none;
+}
+
+.book-list .book-card {
+	padding: 10px;
+	background-color: var(--clr1);
+	position: relative;
+	box-shadow: rgba(0, 0, 0, 0.24) 3px 3px 8px;
+	max-width: max-content;
+	cursor: pointer;
+	border-radius: 0.5em;
+}
+.book-preview {
+	display: grid;
+	height: 100%;
+	grid-template-rows: auto 1fr auto;
+}
+.book-img {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	width: 100%;
+	filter: drop-shadow(rgba(99, 99, 99, 0.2) 0px 2px 8px 0px);
+}
+.on-sale {
+	position: absolute;
+	width: 50%;
+	left: 0;
+	top: 0;
+}
+
+.book-card .delete-btn {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: -2%;
+	left: -2%;
+	width: 1.5em;
+	height: 1.5em;
+	background-color: var(--clr1);
+	color: var(--clr1);
+	border-radius: 1em;
+	box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+	opacity: 0;
+	transition: opacity 100ms;
+	pointer-events: none;
+}
+
+.book-card:hover .delete-btn {
+	opacity: 1;
+	pointer-events: initial;
+}

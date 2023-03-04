@@ -1,0 +1,43 @@
+.book-card i {
+	color: var(--clr5);
+}
+.book-container {
+	margin: 0;
+	display: grid;
+	grid-template-columns: 1fr clamp(85vw, 1100px, 97.5vh) 1fr;
+	grid-template-rows: repeat(auto-fit, fit-content);
+}
+
+.book-container > *:not(.full) {
+	grid-column: 2;
+}
+
+.book-container > .full {
+	grid-column: 1 / -1;
+}
+
+.book-container main {
+	min-height: calc(90vh);
+}
+
+.book-container button,
+.book-container a {
+	all: unset;
+	cursor: pointer;
+	filter: drop-shadow(rgba(0, 0, 0, 0.25) 1.5px 1.5px 1.5px);
+	transition: scale 250ms;
+}
+.book-container button:hover,
+.book-container a:hover {
+	scale: 1.025;
+}
+
+.book-container input {
+	/* all: unset; */
+	background-color: var(--clr1);
+	color: var(--clr1);
+	border-radius: 0.2em;
+	border: 1px solid var(--clr1);
+	font: inherit;
+	filter: drop-shadow(rgba(0, 0, 0, 0.25) 1.5px 1.5px 1.5px);
+}

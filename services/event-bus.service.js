@@ -36,3 +36,11 @@ export function showErrorMsg(txt) {
 export function setFilterBy(filterBy) {
     eventBus.emit('setFilterBy', filterBy)
 }
+
+export function sendMailToNote(mail) {
+    eventBus.emit('sendMailToNote', mail)
+}
+
+export function sendNoteToMail(note) {
+    eventBus.emit('sendNoteToMail', note)
+}
