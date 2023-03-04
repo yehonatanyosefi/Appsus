@@ -4,10 +4,19 @@ export default {
   template: `
         <section class="home-page">
             <section class="butns">
-            <!-- <RouterLink :to="'/mail"><button  @mouseover="animateBtn('mail')" ref="mail" class="mail">Mail</button></RouterLink> -->
+            <RouterLink :to="'/mail'">
                 <button  @mouseover="animateBtn('mail')" ref="mail" class="mail">Mail</button>
+            </RouterLink>
+            <RouterLink :to="'/notes'">
+
                 <button @mouseover="animateBtn('notes')" ref="notes" class="notes">Notes</button>
+                </RouterLink>
+
+            <RouterLink :to="'/book'">
+
                 <button @mouseover="animateBtn('books')" ref="books" class="books">Books</button>
+            </RouterLink>
+
             </section>
             <div class="circle"></div>
             <h1 data-value="Appsus">{{ title }}</h1>

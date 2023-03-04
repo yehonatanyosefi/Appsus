@@ -20,6 +20,7 @@
 	font-family: TiltPrism;
 	filter: drop-shadow(0 0 0 1rem rgba(0, 0, 0, 0.62));
 	cursor: default;
+    margin: 0;
 	/* font-family: Gloock; */
 }
 
@@ -28,8 +29,10 @@
 	box-shadow: 0 0 0 10px rgb(255 255 255 / 62%);
 	border-radius: 50%;
 
-	width: 80em;
-	height: 80em;
+	/* width: 80em;
+	height: 80em; */
+	width: calc(50vw + 50vh);
+	height: calc(50vw + 50vh);
 	position: absolute;
 	left: -30%;
 	/* translate: 30%; */
@@ -43,6 +46,7 @@
    right: 10%;
    font-family: Gloock;
    max-height: 75vh;
+   max-width: 75vh;
 
   }
 
