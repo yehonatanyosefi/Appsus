@@ -60,8 +60,10 @@ export default {
       utilService.animateCSS(this.$refs[btn], 'flip')
     },
     animateBtns() {
-      const btn = this.btns[this.currAnimation]
-      utilService.animateCSS(this.$refs[btn], 'pulse')
+      if (this.btns[this.currAnimation]) {
+        const btn = this.btns[this.currAnimation]
+        utilService.animateCSS(this.$refs[btn], 'pulse')
+      }
       this.currAnimation++
       if (this.currAnimation >= 6) this.currAnimation = 0
     }
