@@ -18,8 +18,7 @@
 .notes-header input.notes-search {
 	padding: 10px;
 	background-color: #f1f3f4;
-	min-width: 25vw;
-	max-width: 800px;
+	width: clamp(200px, 40vw, 800px);
 	border-radius: 0.5em;
 	border-color: inherit;
 	transition: background-color 250ms;
@@ -47,5 +46,8 @@
 	border-radius: 50%;
 	fill: var(--clr5);
 }
-
-
+.notes-header .logo-container .logo {
+	max-width: 48px;
+	height: 48px;
+	width: 48px;
+}

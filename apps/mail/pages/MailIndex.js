@@ -27,7 +27,6 @@ export default {
                          <RouterLink v-for="({path, title, img}, idx) in routes" :to="path" :title="title" :key="idx">
                               <div class="nav-card">
                                    <img :src="img" :title="title" :class="{'profile-nav':path==='/about'}"/>
-                                   <p>{{title}}</p>
                               </div>
                          </RouterLink>
                     </nav>
@@ -81,16 +80,16 @@ export default {
       unread: 0,
       filterBy: {},
       setFilterVal: 'inbox',
-      currMailId:'',
-      isShow:true,
+      currMailId: '',
+      isShow: true,
       isNav: false,
-               routes: [
-                    { path: '/', title: 'Home', img: '../../../assets/img/logo.png' },
-                    { path: '/mail', title: 'Mail', img: '../../../assets/img/gmail.png' },
-                    { path: '/notes', title: 'Notes', img: '../../../assets/img/keep.png' },
-                    // { path: '/book', title: 'Book', img: '../../../assets/img/book.svg' },
-                    { path: '/about', title: 'About Us', img: '../../../assets/img/dornatan.jpg' },
-               ],
+      routes: [
+        { path: '/', title: 'Home', img: '../../../assets/img/logo.png' },
+        { path: '/mail', title: 'Mail', img: '../../../assets/img/gmail.png' },
+        { path: '/notes', title: 'Notes', img: '../../../assets/img/keep.png' },
+        { path: '/book', title: 'Book', img: '../../../assets/img/book.svg' },
+        { path: '/about', title: 'About Us', img: '../../../assets/img/dornatan.jpg' },
+      ],
     }
   },
   methods: {
@@ -149,22 +148,22 @@ export default {
       return svgService.getNoteSvg(iconName)
     },
     toggleIsNav() {
-     if (!this.isNav) {
-          this.isNav = true
-          setTimeout(() => this.$refs.navModal.focus(), 150)
-     }
-     else this.isNav = false
-},
-closeNav() {
-     setTimeout(() => this.isNav = false, 150)
-},
-starMail(isStared,mailId){
-     this.currMailId = mailId
-     mailService.changeIsStared(isStared, mailId).then((updatedMail) => {
-       const idx = this.mails.findIndex((mail) => mail.id === updatedMail.id)
-       this.mails[idx] = updatedMail
-     })
-}
+      if (!this.isNav) {
+        this.isNav = true
+        setTimeout(() => this.$refs.navModal.focus(), 150)
+      }
+      else this.isNav = false
+    },
+    closeNav() {
+      setTimeout(() => this.isNav = false, 150)
+    },
+    starMail(isStared, mailId) {
+      this.currMailId = mailId
+      mailService.changeIsStared(isStared, mailId).then((updatedMail) => {
+        const idx = this.mails.findIndex((mail) => mail.id === updatedMail.id)
+        this.mails[idx] = updatedMail
+      })
+    }
   },
   computed: {
     UnreadCount() {
@@ -208,8 +207,8 @@ starMail(isStared,mailId){
       )
     },
     setRoute(route) {
-     this.$emit('set-route', route)
-},
+      this.$emit('set-route', route)
+    },
 
   },
   created() {

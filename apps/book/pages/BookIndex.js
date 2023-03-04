@@ -9,7 +9,7 @@ import BookHeader from '../cmps/BookHeader.js'
 export default {
     template: `
         <section class="book-index">
-            <BookHeader :isList="true"/>
+            <BookHeader :isList="true" @filter="setFilterBy"/>
             <BookList 
             v-if="books"
             :books="filteredBooks" 

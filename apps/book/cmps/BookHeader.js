@@ -8,14 +8,14 @@ export default {
                         <img class="logo" src="../../../assets/img/book.svg">
                         <div class="logo-txt">Miss Books</div>
                 </RouterLink>
-                <div v-if="isList" class="center"><BookFilter/></div>
+                <div v-if="isList" class="center"><BookFilter @filter="filter"/></div>
                 <div class="center"  v-if="isList">
                     <RouterLink v-for="({path, title}, idx) in route" :to="path" :title="title">{{title}}</RouterLink>
                 </div>
                 <div v-if="!isList" class="center book-home">
                     <RouterLink to="/book" title="books">Book Homepage</RouterLink>
                 </div>
-                <nav>
+                <nav class="center">
                     <button v-html="getSvg('navigator')" @click="toggleIsNav"></button>
                     <img class="user-profile" src="../../../assets/img/dornatan.jpg" alt="Yehonatan & Dor" title="Yehonatan & Dor">
                 </nav>
@@ -23,7 +23,6 @@ export default {
                     <RouterLink v-for="({path, title, img}, idx) in routes" :to="path" :title="title" :key="idx">
                         <div class="nav-card">
                             <img :src="img" :title="title" :class="{'profile-nav':path==='/about'}"/>
-                            <p>{{title}}</p>
                         </div>
                     </RouterLink>
                 </nav>
@@ -60,6 +59,9 @@ export default {
         },
         closeNav() {
             setTimeout(() => this.isNav = false, 150)
+        },
+        filter(filter) {
+            this.$emit('filter', filter)
         },
     },
     components: {

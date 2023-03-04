@@ -37,10 +37,10 @@ export function setFilterBy(filterBy) {
     eventBus.emit('setFilterBy', filterBy)
 }
 
-export function sendMailToNote(mail) {
-    eventBus.emit('sendMailToNote', mail)
+export function sendMailToNote(mailInfo) { //{title,txt:`recipient: ${recipient}\n${body}`}
+    eventBus.emit('sendMailToNote', mailInfo)
 }
 
-export function sendNoteToMail(note) {
-    eventBus.emit('sendNoteToMail', note)
+export function sendNoteToMail(noteInfo) { //{subject,body}
+    eventBus.emit('sendNoteToMail', noteInfo)
 }

@@ -11,6 +11,7 @@
 @import 'cmps/HomePage.css';
 @import 'cmps/AppHeader.css';
 @import 'cmps/UserMsg.css';
+@import 'cmps/AboutUs.css';
 
 /* Apps */
 
@@ -44,3 +45,5 @@
 /* Navigation */
 @import 'setup/screen.css';
 @import 'cmps/NavCard.css';
+
+@import 'setup/mq.css';

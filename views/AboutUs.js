@@ -1,12 +1,20 @@
 export default {
     template: `
-        <section class="about-page">
-            <h1>About us</h1>
-            <img src="../assets/img/dornatan.jpg" class="profile-nav">
-            <h5>We are exhausted</h5>
-            <h5>Dor Toledano built: Mail</h5>
-            <h5>Yehonatan Yosefi built: Notes</h5>
-            <h5>Built together: Books</h5>
+        <section class="about-page grid">
+                <h1 class="center">About us</h1>
+                <h3 class="center">AppSus team:</h3>
+                <div class="about-card-container center">
+                    <div class="about-card center flex flex-column">
+                        <img src="../assets/img/yehonatan.png" class="about-img" title="Yehonatan Yosefi">
+                        <h2>Yehonatan Yosefi</h2>
+                        <p>text..</p>
+                    </div>
+                    <div class="about-card center flex flex-column">
+                        <img src="../assets/img/dor.jfif" class="about-img" title="Dor Toledano">
+                        <h2>Dor Toledano</h2>
+                        <p>text..</p>
+                    </div>
+                </div>
         </section>
     `
 }

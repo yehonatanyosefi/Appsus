@@ -4,7 +4,7 @@
 	justify-content: space-between;
 	padding: 1em;
 	height: 75px;
-	border-bottom: 1px solid var(--clr6);
+	border-bottom: 1px solid var(--clr2);
 }
 .book-header .user-profile {
 	border-radius: 50%;
