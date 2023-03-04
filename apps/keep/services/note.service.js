@@ -18,9 +18,11 @@ export const noteService = {
      toggleTodoCheck,
      addImg,
      getEmptyNote,
+     getEmptyTodo,
      deleteNote,
      restoreNote,
      exchangeNotes,
+     exchangeTodos,
 }
 
 function query() {
@@ -37,6 +39,7 @@ function remove(noteId) {
 }
 
 function save(note) {
+     note.createdAt = Date.now()
      if (note.id) {
           return storageService.put(NOTES_KEY, note)
      } else {
@@ -95,17 +98,32 @@ function exchangeNotes(exchangeInfo) {
           })
 }
 
-function addTodo(noteId) {
+function exchangeTodos(exchangeInfo) {
+     const { noteId, senderId, receiverId } = exchangeInfo
      return get(noteId)
           .then(note => {
-               note.info.todos.push({ txt: '', doneAt: null })
+               const todos = note.info.todos
+               const senderIdx = todos.findIndex(todo => todo.id === senderId)
+               const receiverIdx = todos.findIndex(todo => todo.id === receiverId)
+               const originalSender = todos[senderIdx]
+               note.info.todos[senderIdx] = todos[receiverIdx]
+               note.info.todos[receiverIdx] = originalSender
                return save(note)
           })
 }
 
-function deleteTodo(noteId, idx) {
+function addTodo(noteId) {
      return get(noteId)
           .then(note => {
+               note.info.todos.push({ txt: '', doneAt: null, id: utilService.makeId() })
+               return save(note)
+          })
+}
+
+function deleteTodo(noteId, todoId) {
+     return get(noteId)
+          .then(note => {
+               const idx = note.info.todos.findIndex(todo => todo.id === todoId)
                note.info.todos.splice(idx, 1)
                return save(note)
           })
@@ -127,7 +145,7 @@ function toggleTodos(noteId) {
                          note.type = 'NoteTodos'
                          const todosSplitted = note.info.txt.split('\n')
                          note.info.todos = todosSplitted.map(todo => {
-                              return { txt: todo, doneAt: null, }
+                              return { txt: todo, doneAt: null, id: utilService.makeId() }
                          })
                          break
                }
@@ -141,12 +159,13 @@ function togglePin(noteId) {
                return save(note)
           })
 }
-function toggleTodoCheck(noteId, idx) {
+function toggleTodoCheck(noteId, todoId) {
      return get(noteId)
           .then(note => {
-               const currTodo = note.info.todos
-               if (currTodo[idx].doneAt) currTodo[idx].doneAt = null
-               else currTodo[idx].doneAt = Date.now()
+               const currTodos = note.info.todos
+               const idx = currTodos.findIndex(todo => todo.id === todoId)
+               if (currTodos[idx].doneAt) currTodos[idx].doneAt = null
+               else currTodos[idx].doneAt = Date.now()
                return save(note)
           })
 }
@@ -162,10 +181,14 @@ function getEmptyNote() {
           createdAt: null,
           type: 'NoteTxt',
           isPinned: false,
-          isDelted: false,
+          isDeleted: false,
           style: { backgroundColor: '#ffffff' },
           info: { title: '', txt: '' }
      }
+}
+
+function getEmptyTodo() {
+     return { txt: '', doneAt: null, id: utilService.makeId() }
 }
 
 function _createDemo() {
@@ -181,7 +204,7 @@ function _demoNotes() {
      return [
           {
                id: 'n101',
-               createdAt: 1112325,
+               createdAt: Date.now() - Math.random() * 1000000,
                type: 'NoteImg',
                isPinned: false,
                isDeleted: true,
@@ -196,7 +219,7 @@ function _demoNotes() {
           },
           {
                id: 'n103',
-               createdAt: 1112567,
+               createdAt: Date.now() - Math.random() * 1000000,
                type: 'NoteTodos',
                isPinned: false,
                isDeleted: true,
@@ -208,18 +231,20 @@ function _demoNotes() {
                     todos: [
                          {
                               txt: 'Call Islam',
-                              'doneAt': 1677870306730
+                              doneAt: 1677870306730,
+                              id: 't101',
                          },
                          {
                               txt: 'Say Aloo',
-                              'doneAt': 1677870307159
+                              doneAt: 1677870307159,
+                              id: 't102',
                          }
                     ]
                }
           },
           {
                id: 'n104',
-               createdAt: 1112434,
+               createdAt: Date.now() - Math.random() * 1000000,
                type: 'NoteImg',
                isPinned: true,
                isDeleted: false,
@@ -233,7 +258,7 @@ function _demoNotes() {
           },
           {
                id: 'n105',
-               createdAt: 1112552,
+               createdAt: Date.now() - Math.random() * 1000000,
                type: 'NoteTodos',
                isPinned: true,
                isDeleted: false,
@@ -245,25 +270,28 @@ function _demoNotes() {
                     todos: [
                          {
                               txt: 'Finish CSS',
-                              'doneAt': 1677869614220
+                              doneAt: 1677869614220,
+                              id: 't103',
                          },
                          {
                               txt: 'Finish Functionality',
-                              'doneAt': 1677870208958
+                              doneAt: 1677870208958,
+                              id: 't104',
                          },
                          {
                               txt: 'Get CR',
-                              'doneAt': null
+                              doneAt: null,
+                              id: 't105',
                          }
                     ]
                }
           },
           {
-               'id': 'uICHW',
-               'createdAt': 1677869728216,
-               'type': 'NoteTodos',
-               'isPinned': true,
-               'isDelted': false,
+               id: 'uICHW',
+               createdAt: Date.now() - Math.random() * 1000000,
+               type: 'NoteTodos',
+               isPinned: true,
+               isDeleted: false,
                style: {
                     backgroundColor: '#fff475'
                },
@@ -273,53 +301,63 @@ function _demoNotes() {
                     todos: [
                          {
                               txt: 'Add Note (Text/Todos/Image)',
-                              'doneAt': null
+                              doneAt: null,
+                              id: 't106',
                          },
                          {
                               txt: 'Duplicate/Move to Trash/Restore from Trash/Delete',
-                              'doneAt': null
+                              doneAt: null,
+                              id: 't107',
                          },
                          {
                               txt: 'Open to Edit - Dynamic Size, unlimited rows',
-                              'doneAt': null
+                              doneAt: null,
+                              id: 't108',
                          },
                          {
                               txt: 'Color Picker',
-                              'doneAt': null
+                              doneAt: null,
+                              id: 't109',
                          },
                          {
                               txt: 'Pin Handling',
-                              'doneAt': null
+                              doneAt: null,
+                              id: 't110',
                          },
                          {
                               txt: 'Search',
-                              'doneAt': null
+                              doneAt: null,
+                              id: 't111',
                          },
                          {
                               txt: 'UI & Animations',
-                              'doneAt': null
+                              doneAt: null,
+                              id: 't112',
                          },
                          {
-                              txt: 'Drag & Drop',
-                              'doneAt': null
+                              txt: 'Drag & Drop Notes + Todos',
+                              doneAt: null,
+                              id: 't113',
                          },
                          {
                               txt: 'Last Edited in modal',
-                              'doneAt': null
+                              doneAt: null,
+                              id: 't114',
                          },
                          {
                               txt: 'Labels',
-                              'doneAt': null
+                              doneAt: null,
+                              id: 't115',
                          }
                     ]
                }
           },
           {
-               'id': 'AzFfn',
-               'createdAt': 1677870493722,
-               'type': 'NoteTxt',
-               'isPinned': false,
-               'isDelted': false,
+               id: 'AzFfn',
+               createdAt: Date.now() - Math.random() * 1000000,
+               type: 'NoteTxt',
+               isPinned: false,
+               isDeleted: false,
                style: {
                     backgroundColor: '#e8eaed'
                },
@@ -329,11 +367,11 @@ function _demoNotes() {
                }
           },
           {
-               'id': 'GPg8r',
-               'createdAt': 1677870642316,
-               'type': 'NoteTxt',
-               'isPinned': false,
-               'isDelted': false,
+               id: 'GPg8r',
+               createdAt: Date.now() - Math.random() * 1000000,
+               type: 'NoteTxt',
+               isPinned: false,
+               isDeleted: false,
                style: {
                     backgroundColor: '#e6c9a8'
                },
@@ -343,11 +381,11 @@ function _demoNotes() {
                }
           },
           {
-               'id': 'JsM8f',
-               'createdAt': 1677870675730,
-               'type': 'NoteTodos',
-               'isPinned': false,
-               'isDelted': false,
+               id: 'JsM8f',
+               createdAt: Date.now() - Math.random() * 1000000,
+               type: 'NoteTodos',
+               isPinned: false,
+               isDeleted: false,
                style: {
                     backgroundColor: '#a7ffeb'
                },
@@ -357,17 +395,18 @@ function _demoNotes() {
                     todos: [
                          {
                               txt: 'Free time',
-                              'doneAt': null
+                              doneAt: null,
+                              id: 't130',
                          }
                     ]
                }
           },
           {
-               'id': 'oQ6Zf',
-               'createdAt': 1677870785062,
-               'type': 'NoteImg',
-               'isPinned': false,
-               'isDelted': false,
+               id: 'oQ6Zf',
+               createdAt: Date.now() - Math.random() * 1000000,
+               type: 'NoteImg',
+               isPinned: false,
+               isDeleted: false,
                style: {
                     backgroundColor: '#ccff90'
                },
@@ -378,11 +417,11 @@ function _demoNotes() {
                }
           },
           {
-               'id': 'ECqpc',
-               'createdAt': 1677870925733,
-               'type': 'NoteImg',
-               'isPinned': false,
-               'isDelted': false,
+               id: 'ECqpc',
+               createdAt: Date.now() - Math.random() * 1000000,
+               type: 'NoteImg',
+               isPinned: false,
+               isDeleted: false,
                style: {
                     backgroundColor: '#ffffff'
                },

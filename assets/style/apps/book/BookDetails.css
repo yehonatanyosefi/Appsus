@@ -1,0 +1,25 @@
+.book-details {
+	display: grid;
+
+	padding: 10px;
+	background-color: var(--clr1);
+	margin-block-start: 10px;
+}
+.book-details img {
+	max-width: 200px;
+	justify-self: center;
+}
+
+.book-details .book-img {
+	max-width: 200px;
+}
+.book-details button {
+	justify-self: end;
+}
+
+.red {
+	color: red;
+}
+.green {
+	color: green;
+}

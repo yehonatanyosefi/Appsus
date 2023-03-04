@@ -6,7 +6,7 @@ export default {
           <div class="flex justify-center align-center">
                <img :src="note.info.url" style="max-width:150px;">
           </div>
-          <NoteTxt v-if="!isPreview || note.info.txt" :note="note" :isPreview="isPreview" :isFocus="false" @updatedNote="updateNote"/>
+          <NoteTxt v-if="!isPreview || note.info.txt" :note="note" :isPreview="isPreview" :isFocus="false" @updateNote="updateNote"/>
      </div>
 `,
      data() {
@@ -15,9 +15,9 @@ export default {
           }
      },
      methods: {
-          updateNote(note) {
+          updateNote() {
                this.$emit('updateNote', this.note)
-          }
+          },
      },
      computed: {
 

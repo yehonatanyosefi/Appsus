@@ -43,7 +43,8 @@ export default {
                     :isFocus="true"
                     @deleteTodo="deleteTodo"
                     @addTodo="addTodo"
-                    @toggleTodoCheck="toggleTodoCheck" />
+                    @toggleTodoCheck="toggleTodoCheck"
+                    @exchangeTodos="exchangeTodos" />
                <div class="button-container">
                     <label for="newNote" class="upload-btn" title="Upload Image" @click.stop>
                          <input @click.stop
@@ -88,7 +89,7 @@ export default {
                this.startNote()
           },
           startTodos() {
-               this.note.info.todos = [{ txt: '', doneAt: null }]
+               this.note.info.todos = [noteService.getEmptyTodo()]
                this.note.type = 'NoteTodos'
                this.startNote()
           },
@@ -109,7 +110,7 @@ export default {
                this.note.info.todos.splice(idx, 1)
           },
           addTodo(noteId) {
-               this.note.info.todos.push({ txt: '', doneAt: null })
+               this.note.info.todos.push(noteService.getEmptyTodo())
           },
           toggleTodos() {
                switch (this.note.type) {
@@ -126,7 +127,7 @@ export default {
                          this.note.type = 'NoteTodos'
                          const todosSplitted = this.note.info.txt.split('\n')
                          this.note.info.todos = todosSplitted.map(todo => {
-                              return { txt: todo, doneAt: null, }
+                              return { txt: todo, doneAt: null, id: utilService.makeId() }
                          })
                          this.note.info.txt = null
                          break
@@ -157,6 +158,15 @@ export default {
           },
           toggleColorPick() {
                this.isColorPicking = !this.isColorPicking
+          },
+          exchangeTodos(exchangeInfo) {
+               const { senderId, receiverId } = exchangeInfo
+               const todos = this.note.info.todos
+               const senderIdx = todos.findIndex(todo => todo.id === senderId)
+               const receiverIdx = todos.findIndex(todo => todo.id === receiverId)
+               const originalSender = todos[senderIdx]
+               this.note.info.todos[senderIdx] = todos[receiverIdx]
+               this.note.info.todos[receiverIdx] = originalSender
           },
      },
      computed: {

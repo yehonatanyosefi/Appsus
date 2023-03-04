@@ -1,0 +1,11 @@
+.book-edit form {
+	display: grid;
+	justify-items: start;
+	gap: 10px;
+
+	padding: 10px;
+	background-color: var(--clr1);
+}
+.book-edit form button {
+	justify-self: end;
+}

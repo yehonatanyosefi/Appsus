@@ -32,7 +32,9 @@ export default {
                return utilService.debounce(this.resizeTA, 250)
           },
           previewTxt() {
-               return this.note.info.txt.replaceAll('\n', '<br>')
+               let txt = this.note.info.txt
+               if (txt.length > 499) txt = txt.substring(0, 500) + '...'
+               return txt.replaceAll('\n', '<br>')
           },
      },
      mounted() {

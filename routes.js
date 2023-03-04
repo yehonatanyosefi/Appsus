@@ -4,6 +4,10 @@ import MailIndex from './apps/mail/pages/MailIndex.js'
 
 import MailDetails from './apps/mail/pages/MailDetails.js'
 // import MailList from './apps/mail/cmps/MailList.js'
+import BookIndex from './apps/book/pages/BookIndex.js'
+import BookDetails from './apps/book/pages/BookDetails.js'
+import BookEdit from './apps/book/cmps/BookEdit.js'
+import BookAdd from './apps/book/cmps/BookAdd.js'
 
 import AboutUs from './views/AboutUs.js'
 
@@ -27,15 +31,34 @@ const routerOptions = {
 		{
 			path: '/notes',
 			component: NotesIndex
-	   },
+		},
 		{
 			path: '/about',
 			component: AboutUs,
 		},
-		// {
-		// 	path: '/note',
-		// 	component: NoteIndex
-		// },
+		{
+			path: '/book',
+			component: BookIndex
+		},
+		{
+			path: '/book/:bookId',
+			component: BookDetails,
+			name: 'details',
+			props: true
+		},
+		{
+			path: '/book/edit/:bookId',
+			component: BookEdit
+		},
+		{
+			path: '/book/add/',
+			component: BookAdd
+		},
+		// Last fallback if no route was matched:
+		{
+			path: '/:catchAll(.*)',
+			component: HomePage
+		}
 	],
 }
 

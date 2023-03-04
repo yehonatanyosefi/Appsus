@@ -3,19 +3,33 @@ export default {
      props: ['note', 'isPreview', 'isFocus'],
      template: `
           <ul class="clean-list note-component">
-               <li v-for="todo,idx in note.info.todos" key="idx" class="flex todo-item">
-                         <button @click.stop="toggleTodoCheck(idx)"  title="Check Todo">
+               <li v-for="todo,idx in formattedTodos" key="idx" class="flex todo-item"
+                    draggable="true" droppable="true"
+                    @dragstart="dragStart($event,todo.id)"
+                    @drop="onDrop($event,todo.id)"
+                    @dragenter.prevent
+                    @dragover.prevent>
+                         <button title="Drag me" v-if="!isPreview" class="drag-btn">
+                              <i class="fa-solid fa-grip-vertical"></i>
+                         </button>
+                         <button @click.stop="toggleTodoCheck(todo.id)"  title="Check Todo">
                               <i class="fa-regular fa-square-check" v-if="todo.doneAt"></i>
                               <i class="fa-regular fa-square" v-else></i>
                          </button>
                               
-                         <p v-if="isPreview" class="preview-text" :class="{'striked':todo.doneAt}">{{todo.txt}}<span v-if="!todo.txt">text</span></p>
-                         <textarea v-else v-model="todo.txt" @input="updateNote(idx),resizeTA(idx)"
+                         <p v-if="isPreview" class="preview-text" :class="{'striked':todo.doneAt}">{{todo.txt}}</p>
+                         <textarea v-else v-model="todo.txt" @input="updateNote(idx)"
                          placeholder="text" :class="{'striked':todo.doneAt}" :ref="'textArea'+idx"></textarea>
-                         <button v-if="!isPreview" @click="deleteTodo(idx)" title="Delete Todo">
+                         <button v-if="!isPreview" @click="deleteTodo(todo.id)" title="Delete Todo" class="delete-todo-btn">
                               <i class="fa-solid fa-xmark"></i>
                          </button >
                </li >
+               <li v-if="isLongList" class="flex todo-item">
+                         <button style="opacity:0;cursor:auto;">
+                              <i class="fa-regular fa-square"></i>
+                         </button>
+                    <p class="preview-text">...</p>
+               </li>
                     <li>
                          <button v-if="!isPreview" @click.stop="addTodo" title="Add New Todo">
                          <i class="fa-solid fa-plus"></i>
@@ -25,6 +39,7 @@ export default {
      `,
      data() {
           return {
+               isLongList: false,
           }
      },
      methods: {
@@ -41,11 +56,12 @@ export default {
                     this.resizeTA(idx)
                })
           },
-          updateNote() {
+          updateNote(idx) {
+               this.resizeTA(idx)
                this.$emit('updateNote', this.note)
           },
-          deleteTodo(idx) {
-               this.$emit('deleteTodo', this.note.id, idx)
+          deleteTodo(todoId) {
+               this.$emit('deleteTodo', this.note.id, todoId)
           },
           addTodo() {
                this.$emit('addTodo', this.note.id)
@@ -56,13 +72,31 @@ export default {
                     element.focus()
                }, 100)
           },
-          toggleTodoCheck(idx) {
-               this.$emit('toggleTodoCheck', this.note.id, idx)
+          toggleTodoCheck(todoId) {
+               this.$emit('toggleTodoCheck', this.note.id, todoId)
+          },
+          dragStart(ev, todoId) {
+               ev.dataTransfer.dropEffect = 'move'
+               ev.dataTransfer.effectAllowed = 'move'
+               ev.dataTransfer.setData('todoId', todoId)
+          },
+          onDrop(ev, todoId) {
+               const todoIdSender = ev.dataTransfer.getData('todoId')
+               const exchangeInfo = { noteId: this.note.id, senderId: todoIdSender, receiverId: todoId }
+               this.$emit('exchangeTodos', exchangeInfo)
+          },
+          previewNote() {
+               this.isLongList = true
+               return this.note.info.todos.slice(0, 7)
           },
      },
      computed: {
           debouncedResizeAllTA() {
                return utilService.debounce(this.resizeAllTA, 250)
+          },
+          formattedTodos() {
+               if (this.note.info.todos.length > 7 && this.isPreview) return this.previewNote()
+               return this.note.info.todos
           },
      },
      watch: {

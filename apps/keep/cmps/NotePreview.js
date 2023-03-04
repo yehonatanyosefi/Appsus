@@ -98,8 +98,8 @@ export default {
           restoreNote() {
                this.$emit('restoreNote', this.note.id)
           },
-          deleteTodo(noteId, idx) {
-               this.$emit('deleteTodo', noteId, idx)
+          deleteTodo(noteId, todoId) {
+               this.$emit('deleteTodo', noteId, todoId)
           },
           addTodo(noteId) {
                this.$emit('addTodo', noteId)
@@ -110,8 +110,8 @@ export default {
           togglePin() {
                this.$emit('togglePin', this.note.id)
           },
-          toggleTodoCheck(noteId, idx) {
-               this.$emit('toggleTodoCheck', noteId, idx)
+          toggleTodoCheck(noteId, todoId) {
+               this.$emit('toggleTodoCheck', noteId, todoId)
           },
           openNote() {
                this.$emit('openNote', this.note.id)

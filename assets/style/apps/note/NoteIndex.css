@@ -38,3 +38,7 @@
 .notes-container p {
 	margin: 0;
 }
+.notes-index textarea,
+.notes-index p {
+	color: var(--clr5);
+}
