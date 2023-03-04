@@ -90,6 +90,6 @@ export default {
     },
     unmounted(){
         clearInterval(this.intervalId)
-        if (!this.recipient && !this.subject && !this.body) this.$emit( 'removeMail',this.newMail.id)
+        if (this.isOpen && !this.recipient && !this.subject && !this.body) this.$emit( 'removeMail',this.newMail.id)
     }
 }
