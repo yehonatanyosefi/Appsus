@@ -10,7 +10,8 @@
 	color: #e8e8e8;
 	padding: 2rem;
 	filter: drop-shadow(0px 0px 5px #00000097);
-	z-index: 5;
+	user-select: none;
+	pointer-events: none;
 }
 .about-img {
 	width: 250px;
