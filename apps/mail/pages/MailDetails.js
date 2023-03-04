@@ -10,12 +10,16 @@ export default {
           <h1 class="subject">{{mail.subject}}</h1>
           <h3 class="username">{{formatUsername}} </h3>
           <div className="mail-details-buttons">
-               <button class="star" ><i class="fa-regular fa-star"></i></button>
 
-               <!-- <RouterLink :to="{name:'mailDetails', params:{notes}, query:{title:mail.subject,txt:mail.body,recipient:mail.to}}"> -->
-               <!-- <RouterLink :to="{name:'mailDetails', params:{notes}, query:{user:'unknown'}}"> -->
+               <!-- <button class="star" ><i class="fa-regular fa-star"></i></button> -->
+               <button  @click="star(mail.id)" class="star-btn" v-on:mouseover="hover = true" v-on:mouseout="hover = false">
+                    <i class="fa-regular fa-star" v-if="!hover && !mail.isStared"></i> 
+                    <i class="fa-solid fa-star" v-else-if="hover || mail.isStared"></i> 
+                    <!-- v-html="getSvg('star-svg')"  -->
+               </button>
+
                <!-- <RouterLink :to="{name:'mailDetails',params: {openMail:'openMail'}, query:{user:'Unknown'}}" class="book"> -->
-               <button title="save as a note"><i class="fa-solid fa-paper-plane"></i></button>
+               <!-- <button title="save as a note"><i class="fa-solid fa-paper-plane"></i></button> -->
                <!-- <RouterLink/> -->
 
                <button title="delete" @click="removeMail(mail.id)"><i class="fa-regular fa-trash-can"></i></button>
@@ -30,6 +34,8 @@ export default {
           return {
                mail:null,
                username:null,
+               hover: false,
+               stared:null
           }
      },
      methods: {
@@ -47,7 +53,17 @@ export default {
            back(){
                this.$emit('back')
 
-           }
+           },
+           star(mailId){
+               console.log('this.stared',this.stared)
+               this.stared = !this.stared
+               this.$emit('starMail',this.stared,mailId)
+          },
+     },
+     watch:{
+          stared: function() {
+               this.mail.isStared = this.stared
+             }
      },
      computed: {
           formatUsername(){
@@ -69,6 +85,7 @@ export default {
                     // this.$emit('changeIsRead',true, mailId)
                     // mail.isRead=true
                     this.mail = mail
+                    this.stared=this.mail.isStared
                })
         }
      },

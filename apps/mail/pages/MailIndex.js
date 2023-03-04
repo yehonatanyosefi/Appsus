@@ -55,7 +55,9 @@ export default {
      <MailDetails  
      v-if="currMailId" 
      :mailId="currMailId"
-     @back="back"/>
+     @back="back"
+     @starMail="starMail"
+     />
 
      <MailList class="mail-list-comp"
      :mails="filteredMails"
@@ -223,6 +225,7 @@ export default {
       this.$emit('set-route', route)
     },
   },
+  
   created() {
     mailService.query().then((mails) => {
       this.mails = mails
