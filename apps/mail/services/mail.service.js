@@ -62,15 +62,15 @@ function addMail(newSubject,newBody,newTo,isSent=true,newId=''){
     removedAt: null,
     from: 'user@appsus.com',
     to: newTo,
+    isStared:false,
   }
-  console.log('newMail',newMail)
   return save(newMail)
 }
 
 
 function getEmptyMail(){
 const emptyMail= {
-  id: utilService.makeId(),
+  // id: utilService.makeId(),
   subject: '',
   body: '',
   isRead: false,
@@ -157,7 +157,7 @@ function _createDemo() {
         removedAt: null,
         from: 'LinkedIn@momo.com',
         to: 'user@appsus.com',
-        isStared:false,
+        isStared:true,
       },
       {
         id: 'm103',

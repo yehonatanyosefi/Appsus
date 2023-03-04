@@ -79,7 +79,20 @@
 
 .mail-index .filter-bar{
     grid-area: filter;
+    /* padding-inline: 1em; */
+}
+
+.mail-index .filter-bar button{
     padding-inline: 1em;
+}
+
+.mail-index .filter-bar .side-selected {
+	/* background-color: #feefc3; */
+    background-color: var(--secondary-clr0);
+    padding: 1em;
+    border-start-end-radius: 10px;
+    border-end-end-radius: 10px;
+    margin-block-end: 1em;
 }
 
 .mail-index .filter-bar > * {

@@ -9,7 +9,8 @@ export default {
           <h3 class="flex"><i class="fa-solid fa-inbox"></i> Primary</h3>
           <ul class="clean-list">
                <li v-for="mail in mails" :key="mail.id" >
-                    <MailPreview @starMail="starMail" :mail="mail" @removeMail="remove" @click.stop @changeIsRead="changeIsRead" @click="changeIsRead(true,mail.id)"/>
+                    <MailPreview @starMail="starMail" :mail="mail" @removeMail="remove"  @changeIsRead="changeIsRead" @click="changeIsRead(true,mail.id)"/>
+                    <!-- <MailPreview @starMail="starMail" :mail="mail" @removeMail="remove"  @changeIsRead="changeIsRead" /> -->
                </li>
           </ul>
      </section>
