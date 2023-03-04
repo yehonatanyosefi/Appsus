@@ -34,6 +34,7 @@
 	height: 3rem;
     border: none;
     width: 100%;
+    font-size: 1em;
 }
 .mail-header .navUser,.toggle-logo{
     height: 40px;
@@ -61,10 +62,13 @@
     align-items: center;
 
 }
-.mail-header nav button:hover{
+
+.mail-header a.logo , .mail-header p.mail {
+    cursor: pointer;
+}
+.mail-index button:not(.filter-bar button,.hover-buttons button):hover, .mail-header nav button:hover{
     border-radius: 50%;
 	background-color: var(--notes-nav-hover);
-
 }
 
 .mail-index header.mail-header img.user-profile {
@@ -100,4 +104,12 @@
 
 .mail-index .inbox-btn span{
     font-family: ROBOTO-bold;
+}
+
+.nav2-svg{
+	fill: #5f6368;
+}
+
+.nav2-svg:hover{
+	fill: var(--clr5);
 }

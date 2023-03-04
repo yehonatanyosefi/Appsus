@@ -11,24 +11,17 @@ export const mailService = {
   addMail,
   changeIsRead,
   getEmptyMail,
+  changeIsStared
 }
 
 function query(filterBy = {}) {
   return storageService.query(MAIL_KEY).then((mails) => {
-    // if (filterBy.txt) {
-    //      const regex = new RegExp(filterBy.title, 'i')
-    //      mails = mails.filter(mail => regex.test(mail.title))
-    // }
-    // if (filterBy.price) {
-    //      mails = mails.filter(mail => mail.listPrice.amount >= filterBy.price)
-    // }
     return mails
   })
 }
 
 function get(mailId) {
   return storageService.get(MAIL_KEY, mailId)
-  // .then(_setNextPrevmailId)
 }
 
 function remove(mailId) {
@@ -51,6 +44,14 @@ function changeIsRead(isRead,mailId){
           })
 }
 
+function changeIsStared(isStared,mailId){
+  return get(mailId)
+          .then(mail=>{
+            mail.isStared=isStared
+            return save(mail)
+          })
+}
+
 function addMail(newSubject,newBody,newTo,isSent=true,newId=''){
   const newMail = {
     id: newId,
@@ -68,9 +69,7 @@ function addMail(newSubject,newBody,newTo,isSent=true,newId=''){
 
 
 function getEmptyMail(){
-  //getEmptyMail()=> empty mail with id -- when compose is created()
 const emptyMail= {
-  // return {
   id: utilService.makeId(),
   subject: '',
   body: '',
@@ -78,9 +77,12 @@ const emptyMail= {
   sentAt: null,
   removedAt: null,
   from:'',
-  to: '', }
+  to: '', 
+  isStared:false,
+}
   return save(emptyMail)
 }
+
 
 function _createDemo() {
   let mails = utilService.loadFromStorage(MAIL_KEY)
@@ -95,6 +97,7 @@ function _createDemo() {
         removedAt: null,
         from: 'JohnD@momo.com',
         to: 'user@appsus.com',
+        isStared:false,
       },
       {
         id: 'm102',
@@ -154,6 +157,7 @@ function _createDemo() {
         removedAt: null,
         from: 'LinkedIn@momo.com',
         to: 'user@appsus.com',
+        isStared:false,
       },
       {
         id: 'm103',
@@ -164,6 +168,7 @@ function _createDemo() {
         removedAt: null,
         from: 'bogrim@technion-alumni.org.il',
         to: 'user@appsus.com',
+        isStared:false,
       },
       {
         id: 'm104',
@@ -174,6 +179,7 @@ function _createDemo() {
         removedAt: null,
         from: 'Apple@momo.com',
         to: 'user@appsus.com',
+        isStared:false,
       },
       {
         id: 'm105',
@@ -184,6 +190,7 @@ function _createDemo() {
         removedAt: null,
         from: '24-Hour-Fitness@momo.com',
         to: 'user@appsus.com',
+        isStared:false,
       },
       {
         id: 'm106',
@@ -194,6 +201,7 @@ function _createDemo() {
         removedAt: null,
         from: 'JohnD@momo.com',
         to: 'user@appsus.com',
+        isStared:false,
       },
       {
         id: 'm107',
@@ -204,6 +212,7 @@ function _createDemo() {
         removedAt: null,
         from: 'LinkedIn@momo.com',
         to: 'user@appsus.com',
+        isStared:false,
       },
       {
         id: 'm108',
@@ -214,6 +223,7 @@ function _createDemo() {
         removedAt: null,
         from: 'bogrim@technion-alumni.org.il',
         to: 'user@appsus.com',
+        isStared:false,
       },
       {
         id: 'm109',
@@ -224,6 +234,7 @@ function _createDemo() {
         removedAt: null,
         from: 'Apple@momo.com',
         to: 'user@appsus.com',
+        isStared:false,
       },
       {
         id: 'm110',
@@ -234,6 +245,7 @@ function _createDemo() {
         removedAt: null,
         from: '24-Hour-Fitness@momo.com',
         to: 'user@appsus.com',
+        isStared:false,
       },
     ]
     utilService.saveToStorage(MAIL_KEY, mails)
