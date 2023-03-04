@@ -1,6 +1,18 @@
 @media (max-width: 740px) {
-	.notes-header .logo-txt {
+	.notes-header .logo-txt ,.mail-header .mail{
 		display: none;
+	}
+	.mail-index .mail-header {
+		grid-template-columns: auto 1fr auto;
+		gap: 0.5em;
+		height: fit-content;
+	}
+	.mail-index .mail-header .mail-filter{
+		grid-row: 2;
+		grid-column: 1/-1;
+	}
+	.mail-index .mail-header .navUser{
+		margin: auto;
 	}
 	.main-notes {
 		padding-left: 1rem;
@@ -8,4 +20,6 @@
 	.note-add-container {
 		width: 250px;
 	}
+
+
 }
