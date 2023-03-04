@@ -17,3 +17,12 @@
 	font-family: ROBOTO-medium;
 	src: url(../../fonts/Roboto-Medium.ttf);
 }
+@font-face {
+	font-family: TiltPrism;
+	src: url(../../fonts/TiltPrism-Regular-VariableFont_XROT\,YROT.ttf);
+}
+
+@font-face {
+	font-family: Gloock;
+	src: url(../../fonts/Gloock-Regular.ttf);
+}
