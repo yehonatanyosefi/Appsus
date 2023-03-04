@@ -9,63 +9,49 @@ export default {
                 <button @mouseover="animateBtn('books')" ref="books" class="books">Books</button>
             </section>
             <div class="circle"></div>
-            <h1  @mouseover="animateTitle" data-value="Appsus">{{ title }}</h1>
-
-            <a id="source-link" class="meta-link" href="https://kprverse.com" target="_blank">
-                <!-- <i class="fa-solid fa-link"></i>
-                <span>Source</span> -->
-            </a>
-
-            <!-- <a id="yt-link" class="meta-link" href="https://youtu.be/W5oawMJaXbU" target="_blank">
-            <i class="fa-brands fa-youtube"></i>
-            <span>2 min tutorial</span>
-            </a> -->
-
-
+            <h1 data-value="Appsus">{{ title }}</h1>
         </section>
     `,
-    data() {
-      return {
-        title: `Appsus`,
-        letters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-        interval: null,
-      };
-    },
-    methods: {
-      animateTitle(event) {
-        let iteration = 0;
-  
-        clearInterval(this.interval);
-  
-        this.interval = setInterval(() => {
-          this.title = this.title
-            .split("")
-            .map((letter, index) => {
-              if (index < iteration) {
-                return event.target.dataset.value[index];
-              }
-  
-              return this.letters[Math.floor(Math.random() * 26)];
-            })
-            .join("");
-  
-          if (iteration >= event.target.dataset.value.length) {
-            clearInterval(this.interval);
-          }
-  
-          iteration += 1 / 3;
-        }, 30);
-      },
-      animateBtn(btn){
-        //   utilService.animateCSS(this.$refs[btn], 'bounce')
-          utilService.animateCSS(this.$refs[btn], 'pulse')
-        //   utilService.animateCSS(this.$refs[btn], 'jackInTheBox')
-      }
-    },
-    mounted(){
-        setTimeout(this.animateTitle,300)
-        setTimeout(()=>clearInterval(this.interval),2000)
-
+  data() {
+    return {
+      title: `Appsus`,
+      letters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      interval: null,
+      animInterval: null,
     }
-  };
+  },
+  methods: {
+    animateTitleNoMouse() {
+      let iteration = 0
+      const word = 'Appsus'
+      clearInterval(this.interval)
+      this.interval = setInterval(() => {
+        this.title = this.title
+          .split('')
+          .map((letter, index) => {
+            if (index < iteration) {
+              return word[index]
+            }
+            return this.letters[Math.floor(Math.random() * 26)]
+          })
+          .join('')
+        if (iteration >= word) {
+          clearInterval(this.interval)
+        }
+        iteration += 1 / 3
+      }, 30)
+    },
+    animateBtn(btn) {
+      utilService.animateCSS(this.$refs[btn], 'pulse')
+    }
+  },
+  mounted() {
+    this.animateTitleNoMouse()
+    this.animInterval = setInterval(this.animateTitleNoMouse, 2500)
+
+  },
+  unmounted() {
+    clearInterval(this.animInterval)
+  },
+}
 
