@@ -11,7 +11,13 @@ export default {
           <h3 class="username">{{formatUsername}} </h3>
           <div className="mail-details-buttons">
                <button class="star" ><i class="fa-regular fa-star"></i></button>
+
+               <!-- <RouterLink :to="{name:'mailDetails', params:{notes}, query:{title:mail.subject,txt:mail.body,recipient:mail.to}}"> -->
+               <!-- <RouterLink :to="{name:'mailDetails', params:{notes}, query:{user:'unknown'}}"> -->
+               <!-- <RouterLink :to="{name:'mailDetails',params: {openMail:'openMail'}, query:{user:'Unknown'}}" class="book"> -->
                <button title="save as a note"><i class="fa-solid fa-paper-plane"></i></button>
+               <!-- <RouterLink/> -->
+
                <button title="delete" @click="removeMail(mail.id)"><i class="fa-regular fa-trash-can"></i></button>
           </div>
           <!-- <p class="mail-from">&lt;{{mail.from}}></p> -->
