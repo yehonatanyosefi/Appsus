@@ -1,25 +1,20 @@
 export default {
      props: [],
      template: `
-     <div class="color-picker" @blur="exitColorPicker" tabindex="0" @click.stop ref="colorPicker">
-          <div v-for="color in colorPicker" @click.stop="chooseColor(color.val)" class="color-div" :style="'Background-color: '+color.val+';'" :title="color.name"></div>
+     <div class="color-picker" @blur="exitColorPicker" tabindex="0" @click.stop ref="labelPicker">
+          <div v-for="color in colorPicker" @click.stop="chooseColor(color.val)" class="label-div" :style="'Background-color: '+color.val+';'" :title="color.name"></div>
      </div>
 `,
      data() {
           return {
                colorPicker: [
-                    { name: 'Default', val: '#ffffff' },
-                    { name: 'Critical', val: '#f28b82' },
-                    { name: 'Orange', val: '#fbbc04' },
-                    { name: 'Yellow', val: '#fff475' },
-                    { name: 'Green', val: '#ccff90' },
-                    { name: 'Teal', val: '#a7ffeb' },
-                    { name: 'Blue', val: '#cbf0f8' },
-                    { name: 'Dark blue', val: '#aecbfa' },
-                    { name: 'Purple', val: '#d7aefb' },
-                    { name: 'Pink', val: '#fdcfe8' },
-                    { name: 'Brown', val: '#e6c9a8' },
-                    { name: 'Gray', val: '#e8eaed' },
+                    { name: 'Critical', val: '#eb5a46' },
+                    { name: 'Family', val: '#0079bf' },
+                    { name: 'Work', val: '#61bd4f' },
+                    { name: 'Friends', val: '#f2d600' },
+                    { name: 'Spam', val: '#ff9f1a' },
+                    { name: 'Memories', val: '#c377e0' },
+                    { name: 'Romantic', val: '#0098b7' },
                ],
           }
      },
@@ -38,7 +33,7 @@ export default {
 
      },
      mounted() {
-          this.$refs.colorPicker.focus()
+          this.$refs.labelPicker.focus()
      },
      components: {
 
