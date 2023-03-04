@@ -3,12 +3,13 @@ import { showSuccessMsg, showErrorMsg } from "../../../services/event-bus.servic
 
 import BookFilter from '../cmps/BookFilter.js'
 import BookList from '../cmps/BookList.js'
+import BookHeader from '../cmps/BookHeader.js'
 
 
 export default {
     template: `
         <section class="book-index">
-            <BookFilter @filter="setFilterBy"/>
+            <BookHeader :isList="true"/>
             <BookList 
             v-if="books"
             :books="filteredBooks" 
@@ -52,7 +53,8 @@ export default {
             .then(books => this.books = books)
     },
     components: {
-        BookFilter,
         BookList,
+        BookFilter,
+        BookHeader,
     }
 }

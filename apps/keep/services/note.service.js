@@ -204,7 +204,7 @@ function _demoNotes() {
      return [
           {
                id: 'n101',
-               createdAt: Date.now() - Math.random() * 1000000,
+               createdAt: Date.now() - Math.random() * 1000000000,
                type: 'NoteImg',
                isPinned: false,
                isDeleted: true,
@@ -219,7 +219,7 @@ function _demoNotes() {
           },
           {
                id: 'n103',
-               createdAt: Date.now() - Math.random() * 1000000,
+               createdAt: Date.now() - Math.random() * 1000000000,
                type: 'NoteTodos',
                isPinned: false,
                isDeleted: true,
@@ -244,7 +244,7 @@ function _demoNotes() {
           },
           {
                id: 'n104',
-               createdAt: Date.now() - Math.random() * 1000000,
+               createdAt: Date.now() - Math.random() * 1000000000,
                type: 'NoteImg',
                isPinned: true,
                isDeleted: false,
@@ -258,7 +258,7 @@ function _demoNotes() {
           },
           {
                id: 'n105',
-               createdAt: Date.now() - Math.random() * 1000000,
+               createdAt: Date.now() - Math.random() * 1000000000,
                type: 'NoteTodos',
                isPinned: true,
                isDeleted: false,
@@ -288,7 +288,7 @@ function _demoNotes() {
           },
           {
                id: 'uICHW',
-               createdAt: Date.now() - Math.random() * 1000000,
+               createdAt: Date.now() - Math.random() * 1000000000,
                type: 'NoteTodos',
                isPinned: true,
                isDeleted: false,
@@ -354,7 +354,7 @@ function _demoNotes() {
           },
           {
                id: 'AzFfn',
-               createdAt: Date.now() - Math.random() * 1000000,
+               createdAt: Date.now() - Math.random() * 1000000000,
                type: 'NoteTxt',
                isPinned: false,
                isDeleted: false,
@@ -368,7 +368,7 @@ function _demoNotes() {
           },
           {
                id: 'GPg8r',
-               createdAt: Date.now() - Math.random() * 1000000,
+               createdAt: Date.now() - Math.random() * 1000000000,
                type: 'NoteTxt',
                isPinned: false,
                isDeleted: false,
@@ -382,7 +382,7 @@ function _demoNotes() {
           },
           {
                id: 'JsM8f',
-               createdAt: Date.now() - Math.random() * 1000000,
+               createdAt: Date.now() - Math.random() * 1000000000,
                type: 'NoteTodos',
                isPinned: false,
                isDeleted: false,
@@ -403,7 +403,7 @@ function _demoNotes() {
           },
           {
                id: 'oQ6Zf',
-               createdAt: Date.now() - Math.random() * 1000000,
+               createdAt: Date.now() - Math.random() * 1000000000,
                type: 'NoteImg',
                isPinned: false,
                isDeleted: false,
@@ -418,7 +418,7 @@ function _demoNotes() {
           },
           {
                id: 'ECqpc',
-               createdAt: Date.now() - Math.random() * 1000000,
+               createdAt: Date.now() - Math.random() * 1000000000,
                type: 'NoteImg',
                isPinned: false,
                isDeleted: false,

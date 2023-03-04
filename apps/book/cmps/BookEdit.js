@@ -1,14 +1,21 @@
 import { bookService } from "../services/book.service.js"
 import { showSuccessMsg, showErrorMsg } from "../../../services/event-bus.service.js"
+import BookHeader from "./BookHeader.js"
 
 export default {
     template: `
+        <BookHeader />
         <section class="book-edit" v-if="book">
             <form @submit.prevent="save">
                 <h2>Edit book</h2>
-                <input type="text" v-model="book.title" placeholder="Title">
-                <input type="number" v-model.number="book.listPrice.amount">
-                <button>Save <i class="fa-solid fa-floppy-disk"></i></button>
+
+                    <label for="txt">Title: 
+                        <input type="text" id="txt" v-model="book.title" placeholder="Title">
+                    </label>    
+                    <label  for="price">Price: 
+                        <input type="number" id="price" v-model.number="book.listPrice.amount">
+                    </label>    
+                    <button>Save <i class="fa-solid fa-floppy-disk"></i></button>
             </form>
         </section>
     `,
@@ -40,5 +47,8 @@ export default {
         bookId() {
             return this.$route.params.bookId
         },
+    },
+    components: {
+        BookHeader,
     },
 }

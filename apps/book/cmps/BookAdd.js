@@ -1,9 +1,11 @@
 import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.service.js'
 import { googleBookService } from '../services/googleBook.service.js'
 import { utilService } from '../../../services/util.service.js'
+import BookHeader from './BookHeader.js'
 
 export default {
     template: `
+        <BookHeader />
         <section class="book-add">
             <form @submit.prevent="">
                 <h2>Add a book</h2>
@@ -55,5 +57,8 @@ export default {
         },
     },
     created() {
+    },
+    components: {
+        BookHeader,
     },
 }

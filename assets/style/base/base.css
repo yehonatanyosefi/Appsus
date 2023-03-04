@@ -10,6 +10,7 @@ body {
 	color: var(--clr4);
 	background-color: var(--clr1);
 	font-family: ROBOTO, sans-serif;
+	overflow-x: hidden;
 }
 
 h1,
@@ -43,7 +44,7 @@ object {
 
 /* tap targets: */
 nav a,
-button{
+button {
 	min-width: 48px;
 	/* min-height: 48px; */
 	cursor: pointer;

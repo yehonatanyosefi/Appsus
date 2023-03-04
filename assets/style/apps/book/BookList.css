@@ -44,18 +44,23 @@
 	position: absolute;
 	top: -2%;
 	left: -2%;
-	width: 1.5em;
-	height: 1.5em;
+	min-height: 1.5rem !important;
+	min-width: 1.5rem !important;
+	width: 2rem;
+	height: 2rem;
 	background-color: var(--clr1);
 	color: var(--clr1);
-	border-radius: 1em;
+	border-radius: 50%;
 	box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
 	opacity: 0;
-	transition: opacity 100ms;
+	transition: opacity 100ms, scale 100ms;
 	pointer-events: none;
 }
 
 .book-card:hover .delete-btn {
 	opacity: 1;
 	pointer-events: initial;
+}
+.book-card .delete-btn:hover {
+	scale: 1.01;
 }
