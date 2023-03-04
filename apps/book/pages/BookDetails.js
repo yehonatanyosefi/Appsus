@@ -4,9 +4,11 @@ import AddReview from '../cmps/AddReview.js'
 import { i18Service } from '../../../services/i18n.service.js'
 import { bookService } from '../services/book.service.js'
 import { showSuccessMsg, showErrorMsg } from '../../../services/event-bus.service.js'
+import BookHeader from "../cmps/BookHeader.js"
 
 export default {
     template: `
+        <BookHeader/>
         <section v-if="book" class="book-details">
             <nav class="center">
                     <RouterLink :to="'/book/' + book.prevBookId"><i class="fa-solid fa-arrow-left"></i> Previous</RouterLink> |
@@ -101,6 +103,7 @@ export default {
         LongTxt,
         AddReview,
         ReviewList,
+        BookHeader,
     },
     watch: {
         bookId() {

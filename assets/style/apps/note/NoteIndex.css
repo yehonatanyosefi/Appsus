@@ -15,6 +15,7 @@
 	grid-template-areas:
 		'header header'
 		'sidebar main';
+	width: 100vw;
 }
 .notes-header {
 	grid-area: header;

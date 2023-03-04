@@ -12,7 +12,7 @@ export default {
                          <button title="Drag me" v-if="!isPreview" class="drag-btn">
                               <i class="fa-solid fa-grip-vertical"></i>
                          </button>
-                         <button @click.stop="toggleTodoCheck(todo.id)"  title="Check Todo">
+                         <button @click.stop="toggleTodoCheck(todo.id)" title="Toggle Todo">
                               <i class="fa-regular fa-square-check" v-if="todo.doneAt"></i>
                               <i class="fa-regular fa-square" v-else></i>
                          </button>

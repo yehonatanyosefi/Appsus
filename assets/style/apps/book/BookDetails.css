@@ -5,6 +5,9 @@
 	background-color: var(--clr1);
 	margin-block-start: 10px;
 }
+.book-details p {
+	text-align: center;
+}
 .book-details img {
 	max-width: 200px;
 	justify-self: center;

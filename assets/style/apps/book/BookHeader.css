@@ -1,0 +1,28 @@
+.book-header {
+	display: flex;
+	align-content: center;
+	justify-content: space-between;
+	padding: 1em;
+	height: 75px;
+	border-bottom: 1px solid var(--clr6);
+}
+.book-header .user-profile {
+	border-radius: 50%;
+	height: 36px;
+	filter: drop-shadow(rgba(149, 157, 165, 0.35) 0px 1px 3px);
+}
+.book-header .logo-container {
+	padding-right: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.book-header .logo {
+	height: 50px;
+}
+.book-header .logo-txt {
+	font-size: 1rem;
+}
+.book-header .book-home {
+	padding-inline-end: 6.5rem;
+}
