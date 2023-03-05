@@ -3,7 +3,7 @@
 	place-items: center;
 	height: 100vh;
 	/* background-color: black; */
-	background-image: url(../img/background1.png);
+	background-image: url(./img/background1.png);
 	background-size: 100% 100%;
 	margin: 0rem;
 	overflow: hidden;
