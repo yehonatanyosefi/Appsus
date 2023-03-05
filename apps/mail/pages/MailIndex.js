@@ -221,7 +221,10 @@ export default {
       } else if (this.setFilterVal === 'trash') {
         filteredMails = filteredMails.filter((mail) => mail.isDeleted === true)
         this.buttonSelected = 6
-      }
+      }else if (this.setFilterVal === 'stared') {
+          filteredMails = filteredMails.filter((mail) => mail.isStared === true)
+          this.buttonSelected = 7
+        }
       if (!this.filterBy.mailTxt) {
         this.filterBy = { mailTxt: '' }
       }
