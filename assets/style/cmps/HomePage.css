@@ -8,7 +8,7 @@
 	margin: 0rem;
 	overflow: hidden;
 }
-
+/* UPDATE */
 .home-page h1 {
 	font-family: 'Space Mono', monospace;
 	font-size: clamp(2rem, calc(7.5vw+5vh), 10rem);
