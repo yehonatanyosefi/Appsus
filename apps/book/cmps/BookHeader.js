@@ -5,7 +5,7 @@ export default {
     template: `
         <header class="book-header">
                 <RouterLink to="/book" class="logo-container" title="logo">
-                        <img class="logo" src="./assets/img/book.svg">
+                        <img class="logo" src="././assets/img/book.svg">
                         <div class="logo-txt">Miss Books</div>
                 </RouterLink>
                 <div v-if="isList" class="center"><BookFilter @filter="filter"/></div>
@@ -17,7 +17,7 @@ export default {
                 </div>
                 <nav class="center">
                     <button v-html="getSvg('navigator')" @click="toggleIsNav"></button>
-                    <img class="user-profile" src="./assets/img/dornatan.jpg" alt="Yehonatan & Dor" title="Yehonatan & Dor">
+                    <img class="user-profile" src="././assets/img/dornatan.jpg" alt="Yehonatan & Dor" title="Yehonatan & Dor">
                 </nav>
                 <nav class="header-nav" v-if="isNav" tabindex="0" @blur="closeNav" ref="navModal">
                     <RouterLink v-for="({path, title, img}, idx) in routes" :to="path" :title="title" :key="idx">
@@ -35,11 +35,11 @@ export default {
             ],
             isNav: false,
             routes: [
-                { path: '/', title: 'Home', img: './assets/img/logo.png' },
-                { path: '/mail', title: 'Mail', img: './assets/img/gmail.png' },
-                { path: '/notes', title: 'Notes', img: './assets/img/keep.png' },
-                { path: '/book', title: 'Book', img: './assets/img/book.svg' },
-                { path: '/about', title: 'About Us', img: './assets/img/dornatan.jpg' },
+                { path: '/', title: 'Home', img: '././assets/img/logo.png' },
+                { path: '/mail', title: 'Mail', img: '././assets/img/gmail.png' },
+                { path: '/notes', title: 'Notes', img: '././assets/img/keep.png' },
+                { path: '/book', title: 'Book', img: '././assets/img/book.svg' },
+                { path: '/about', title: 'About Us', img: '././assets/img/dornatan.jpg' },
             ],
         }
     },

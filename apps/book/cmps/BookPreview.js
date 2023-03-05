@@ -5,7 +5,7 @@ export default {
     template: `
         <article class="book-preview">
             <div class="book-img">
-                <img v-if="book.listPrice.isOnSale" src="./assets/img/sale.png" class="on-sale"/>
+                <img v-if="book.listPrice.isOnSale" src="././assets/img/sale.png" class="on-sale"/>
                 <img :src="book.thumbnail">
             </div>
             <h4 class="center">{{ book.title }}</h4>
