@@ -24,7 +24,7 @@ export default {
             <h1 data-value="Appsus">{{ title }}</h1>
         </section>
     `,
-  data() {
+  data() { //s
     return {
       title: `Appsus`,
       letters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",

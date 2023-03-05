@@ -31,11 +31,11 @@ export default {
         return {
             isNav: false,
             routes: [
-                { path: '/', title: 'Home', img: '../.././assets/img/logo.png' },
-                { path: '/mail', title: 'Mail', img: '../.././assets/img/gmail.png' },
-                { path: '/notes', title: 'Notes', img: '../.././assets/img/keep.png' },
-                { path: '/book', title: 'Book', img: '../.././assets/img/book.svg' },
-                { path: '/about', title: 'About Us', img: '../.././assets/img/dornatan.jpg' },
+                { path: '/', title: 'Home', img: './assets/img/logo.png' },
+                { path: '/mail', title: 'Mail', img: './assets/img/gmail.png' },
+                { path: '/notes', title: 'Notes', img: './assets/img/keep.png' },
+                { path: '/book', title: 'Book', img: './assets/img/book.svg' },
+                { path: '/about', title: 'About Us', img: './assets/img/dornatan.jpg' },
             ],
         }
     },
