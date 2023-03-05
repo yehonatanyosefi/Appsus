@@ -18,7 +18,7 @@ export default {
             <hr />
             <div class="center">
                 <div class="book-img">
-                    <img v-if="book.listPrice.isOnSale" src="../assets/img/sale.png" class="on-sale"/>
+                    <img v-if="book.listPrice.isOnSale" src="././assets/img/sale.png" class="on-sale"/>
                     <img :src="book.thumbnail">
                 </div>
             </div>

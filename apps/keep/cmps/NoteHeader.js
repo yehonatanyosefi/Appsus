@@ -6,7 +6,7 @@ export default {
      template: `
                <header class="notes-header">
                     <div class="logo-container flex justify-between align-center">
-                         <img class="logo" src="../../../assets/img/keep.png" title="Notes">
+                         <img class="logo" src="././assets/img/keep.png" title="Notes">
                          <span class="logo-txt">Notes</span>
                     </div>
                     <div class="notes-search">
@@ -15,7 +15,7 @@ export default {
                     <div class="flex">
 
                          <button v-html="getSvg('navigator')" @click="toggleIsNav"></button>
-                         <img class="user-profile" src="../../../assets/img/yehonatan.png" alt="Yehonatan Yosefi" title="Yehonatan Yosefi">
+                         <img class="user-profile" src="././assets/img/yehonatan.png" alt="Yehonatan Yosefi" title="Yehonatan Yosefi">
                     </div>
                
                     <nav class="header-nav" v-if="isNav" tabindex="0" @blur="closeNav" ref="navModal">
@@ -32,11 +32,11 @@ export default {
                searchVal: '',
                isNav: false,
                routes: [
-                    { path: '/', title: 'Home', img: '../../../assets/img/logo.png' },
-                    { path: '/mail', title: 'Mail', img: '../../../assets/img/gmail.png' },
-                    { path: '/notes', title: 'Notes', img: '../../../assets/img/keep.png' },
-                    { path: '/book', title: 'Book', img: '../../../assets/img/book.svg' },
-                    { path: '/about', title: 'About Us', img: '../../../assets/img/dornatan.jpg' },
+                    { path: '/', title: 'Home', img: '././assets/img/logo.png' },
+                    { path: '/mail', title: 'Mail', img: '././assets/img/gmail.png' },
+                    { path: '/notes', title: 'Notes', img: '././assets/img/keep.png' },
+                    { path: '/book', title: 'Book', img: '././assets/img/book.svg' },
+                    { path: '/about', title: 'About Us', img: '././assets/img/dornatan.jpg' },
                ],
           }
      },
