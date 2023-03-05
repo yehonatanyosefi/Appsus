@@ -24,7 +24,7 @@ function addBook(bookTitle, books) {
           description: info.description || 'No text available.',
           pageCount: info.pageCount || 0,
           categories: info.categories || [],
-          thumbnail: info.imageLinks.thumbnail || '../assets/img/default.png',
+          thumbnail: info.imageLinks.thumbnail || './assets/img/default.png',
           language: info.language || 'en',
           listPrice: {
                amount: utilService.getRandomIntInclusive(50, 190),

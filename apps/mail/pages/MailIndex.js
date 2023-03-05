@@ -15,7 +15,7 @@ export default {
      <header class="mail-header flex justify-between">
           <section class="toggle-logo flex">
                <button class="toggle-menu x fa-solid fa-bars" @click="isShow=!isShow"> </button>
-               <a @click="setFilterVal = 'inbox'" class="logo"><img src="../../../assets/img/gmail.png" alt="Appsus" class="logo" /> </a>
+               <a @click="setFilterVal = 'inbox'" class="logo"><img src="../.././assets/img/gmail.png" alt="Appsus" class="logo" /> </a>
                <p @click="setFilterVal = 'inbox'" class="mail">Mail</p>
           </section >
           <MailFilter @filter="setFilterBy" />
@@ -30,7 +30,7 @@ export default {
                          </RouterLink>
                     </nav>
 
-               <img class="user-profile" src="../../../assets/img/dor.jfif">
+               <img class="user-profile" src="../.././assets/img/dor.jfif">
           </section>
      </header>
 
@@ -82,14 +82,14 @@ export default {
       isShow: false,
       isNav: false,
       routes: [
-        { path: '/', title: 'Home', img: '../../../assets/img/logo.png' },
-        { path: '/mail', title: 'Mail', img: '../../../assets/img/gmail.png' },
-        { path: '/notes', title: 'Notes', img: '../../../assets/img/keep.png' },
-        { path: '/book', title: 'Book', img: '../../../assets/img/book.svg' },
+        { path: '/', title: 'Home', img: '../.././assets/img/logo.png' },
+        { path: '/mail', title: 'Mail', img: '../.././assets/img/gmail.png' },
+        { path: '/notes', title: 'Notes', img: '../.././assets/img/keep.png' },
+        { path: '/book', title: 'Book', img: '../.././assets/img/book.svg' },
         {
           path: '/about',
           title: 'About Us',
-          img: '../../../assets/img/dornatan.jpg',
+          img: '../.././assets/img/dornatan.jpg',
         },
       ],
       buttonSelected: 1,
@@ -119,10 +119,10 @@ export default {
     },
     openMail(isRead, mailId) {
       this.currMailId = mailId
-     mailService.changeIsRead(isRead, mailId).then((updatedMail) => {
-          const idx = this.mails.findIndex((mail) => mail.id === updatedMail.id)
-          this.mails[idx] = updatedMail
-        })
+      mailService.changeIsRead(isRead, mailId).then((updatedMail) => {
+        const idx = this.mails.findIndex((mail) => mail.id === updatedMail.id)
+        this.mails[idx] = updatedMail
+      })
     },
     removeMail(mailId) {
       mailService
@@ -146,11 +146,11 @@ export default {
         this.mails[idx] = updatedMail
       })
     },
-    changeIsDeleted(isDeleted, mailId){
-     mailService.changeIsDeleted(isDeleted, mailId).then((updatedMail) => {
-          const idx = this.mails.findIndex((mail) => mail.id === updatedMail.id)
-          this.mails[idx] = updatedMail
-        })
+    changeIsDeleted(isDeleted, mailId) {
+      mailService.changeIsDeleted(isDeleted, mailId).then((updatedMail) => {
+        const idx = this.mails.findIndex((mail) => mail.id === updatedMail.id)
+        this.mails[idx] = updatedMail
+      })
     },
     back() {
       this.currMailId = null
@@ -195,7 +195,7 @@ export default {
     filteredMails() {
       if (!this.mails) return
       let filteredMails = this.mails
-      if (this.setFilterVal === 'inbox' ) {
+      if (this.setFilterVal === 'inbox') {
         filteredMails = filteredMails.filter(
           (mail) => mail.from !== 'user@appsus.com' && !mail.isDeleted
         )
@@ -210,17 +210,17 @@ export default {
         const isRead = false
         filteredMails = filteredMails.filter((mail) => mail.isRead === isRead)
         this.buttonSelected = 2
-      } else if (this.setFilterVal === 'sent' ) {
-        filteredMails = filteredMails.filter((mail) => mail.from === 'user@appsus.com' && mail.sentAt !== null 
+      } else if (this.setFilterVal === 'sent') {
+        filteredMails = filteredMails.filter((mail) => mail.from === 'user@appsus.com' && mail.sentAt !== null
         )
         this.buttonSelected = 4
       } else if (this.setFilterVal === 'drafts') {
         filteredMails = filteredMails.filter((mail) => mail.sentAt === null)
         this.buttonSelected = 5
-      }else if (this.setFilterVal === 'trash') {
-          filteredMails = filteredMails.filter((mail) => mail.isDeleted === true)
-          this.buttonSelected = 6
-        }
+      } else if (this.setFilterVal === 'trash') {
+        filteredMails = filteredMails.filter((mail) => mail.isDeleted === true)
+        this.buttonSelected = 6
+      }
       if (!this.filterBy.mailTxt) {
         this.filterBy = { mailTxt: '' }
       }
@@ -235,7 +235,7 @@ export default {
       this.$emit('set-route', route)
     },
   },
-  
+
   created() {
     mailService.query().then((mails) => {
       this.mails = mails
