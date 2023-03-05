@@ -98,6 +98,7 @@
 .mail-index .filter-bar > * {
     display: flex;
     gap:.5em;
+    align-items: center
 }
 
 .mail-index .filter-bar > *{

@@ -46,6 +46,7 @@ export default {
           />
           
           <button :class="{ 'side-selected': isSelected(1) }" class ="inbox-btn" @click="setFilter('inbox')"><i class="fa-solid fa-inbox"></i><span v-show="isShow">Inbox ({{UnreadCount}})</span></button>
+          <button :class="{ 'side-selected': isSelected(7) }" class ="star-btn" @click="setFilter('starred')"><i class="fa-solid fa-star"></i><span v-show="isShow">Starred</span></button>
           <button :class="{ 'side-selected': isSelected(2) }" @click="setFilter('unread')"><i class="fa-regular fa-envelope"></i><span v-show="isShow">Unread</span></button>
           <button :class="{ 'side-selected': isSelected(3) }" @click="setFilter('read')"><i class="fa-regular fa-envelope-open"></i><span v-show="isShow">Read</span></button>
           <button :class="{ 'side-selected': isSelected(4) }" @click="setFilter('sent')"><i class="fa-solid fa-arrow-right-from-bracket"></i><span v-show="isShow">Sent</span></button>
@@ -220,6 +221,9 @@ export default {
       }else if (this.setFilterVal === 'trash') {
           filteredMails = filteredMails.filter((mail) => mail.isDeleted === true)
           this.buttonSelected = 6
+     }else if (this.setFilterVal === 'starred') {
+          filteredMails = filteredMails.filter((mail) => mail.isStared === true)
+          this.buttonSelected = 7
         }
       if (!this.filterBy.mailTxt) {
         this.filterBy = { mailTxt: '' }
